@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #dadada;
+  --foreground: #1b962b;
 }
 
 @theme inline {
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #fd6c6c;
     --foreground: #ededed;
   }
 }
@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.social-links li {
+  background-color: rgb(222, 221, 221);
+  border-radius: 50px;
+  border: solid 1px gray;
+  padding: 5px;
+}
+
+.social-links li:hover {
+  background-color: rgb(255, 255, 255);
+}
+
