@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,6 +20,7 @@ const navLinks = [
 ];
 export default function Header() {
   const pathName = usePathname();
+  const [open, setOpen] = useState(false);
   return (
     <header className="flex justify-between items-center p-5">
       <Link href="/">
@@ -65,7 +67,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsapp size={20}/>
+              <FaWhatsapp size={20} />
             </a>
           </li>
           <li>
@@ -74,7 +76,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram size={20}/>
+              <FaInstagram size={20} />
             </a>
           </li>
           <li>
@@ -83,7 +85,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size={20}/>
+              <FaFacebook size={20} />
             </a>
           </li>
           <li>
@@ -92,7 +94,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTelegram size={20}/>
+              <FaTelegram size={20} />
             </a>
           </li>
         </ul>
