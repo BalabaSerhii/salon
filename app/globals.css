@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+
+
+}
 html,
 body {
   height: 100%;
@@ -24,7 +31,6 @@ button {
 
 a {
   text-decoration: none;
-  color: inherit;
 }
 
 ul,
@@ -41,19 +47,13 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
   font-weight: inherit;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
+/* 
 :root {
   --background: #rgb(247, 246, 242);
-  --foreground: #1b962b;
+  --foreground: #64615a;
 }
 
 @theme inline {
@@ -84,4 +84,4 @@ body {
 
 .social-links li:hover {
   background-color: rgb(255, 255, 255);
-}
+} */

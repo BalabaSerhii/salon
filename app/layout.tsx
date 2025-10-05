@@ -50,7 +50,6 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        {/* Cookiebot Script - добавляется здесь */}
         <Script
           id="Cookiebot"
           src="https://consent.cookiebot.com/uc.js"

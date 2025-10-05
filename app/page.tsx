@@ -14,7 +14,7 @@ import Script from "next/script";
 export default function HomePage() {
   return (
     <main
-      className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50"
+      className="min-h-screen "
       itemScope
       itemType="https://schema.org/LocalBusiness"
     >
@@ -53,29 +53,27 @@ export default function HomePage() {
       />
 
       {/* === HERO SECTION === */}
-      <header
-        className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-r from-[#62733f] to-green-700 text-white text-center"
-        role="banner"
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
+      <header className="relative text-[#64615a] text-center" role="banner">
+        <div className="bg-[#f8f7f4] pt-7 pb-10 text-center">
           <h1
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5 "
             itemProp="name"
           >
-            Apparative Lymphdrainage-Massage{" "}
-            <span className="block text-green-200 mt-2">(Pressotherapie)</span>
+            Professionelle Entspannungsmassage in{" "}<br />
+            <span className="font-semibold text-[#5c6d2f] ">
+              63695 Glauburg-Stockheim
+            </span>
           </h1>
 
           <p
-            className="text-xl md:text-2xl lg:text-3xl mb-8 text-green-100 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl sm:w-1/2 md:text-2xl lg:text-3xl mx-auto leading-relaxed w-4/5 pt-5 border-t pb-5 border-gray-300"
             itemProp="description"
           >
-            Professionelle Entspannungsmassage in{" "}
-            <span className="font-semibold text-white">
-              63695 Glauburg-Stockheim
-            </span>
+            Apparative Lymphdrainage-Massage <span>(Pressotherapie)</span>
           </p>
+        </div>
 
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="w-24 h-1 bg-green-300 mx-auto rounded-full mb-8"></div>
 
           {/* USP (Уникальные преимущества) */}
@@ -166,7 +164,7 @@ export default function HomePage() {
             >
               Unsere Räumlichkeiten
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-[#62733f] to-green-600 mx-auto rounded-full mb-6"></div>
+            <div className="w-20 h-1 mx-auto rounded-full mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Entdecken Sie unsere entspannende Atmosphäre – designed für Ihr
               Wohlbefinden.
@@ -177,10 +175,7 @@ export default function HomePage() {
       </section>
 
       {/* === ABOUT US === */}
-      <section
-        className="py-16 md:py-20 bg-gradient-to-br from-green-50 to-emerald-50"
-        aria-labelledby="about-title"
-      >
+      <section className="py-16 md:py-20 " aria-labelledby="about-title">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2
             id="about-title"
@@ -207,7 +202,7 @@ export default function HomePage() {
 
       {/* === CONTACT === */}
       <section
-        className="py-16 md:py-20 bg-gradient-to-r from-[#62733f] to-green-700 text-white"
+        className="py-16 md:py-20  text-white"
         aria-labelledby="contact-title"
       >
         <div className="container mx-auto px-4 max-w-6xl">
