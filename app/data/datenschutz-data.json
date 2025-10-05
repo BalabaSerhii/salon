@@ -1,0 +1,249 @@
+{
+  "sections": [
+    {
+      "id": "allgemeines",
+      "title": "§ 1 ALLGEMEINES",
+      "icon": "📋",
+      "content": [
+        {
+          "type": "text",
+          "text": "Ihre personenbezogenen Daten (z. B. Anrede, Name, Anschrift, E-Mail-Adresse, Telefonnummer) werden von uns nur gemäß den Bestimmungen des deutschen Datenschutzrechts und des Datenschutzrechts der Europäischen Union (EU) verarbeitet. Die nachfolgenden Vorschriften informieren Sie neben den Verarbeitungszwecken, Rechtsgrundlagen, Empfängern, Speicherfristen auch über Ihre Rechte und den Verantwortlichen für Ihre Datenverarbeitung. Diese Datenschutzerklärung bezieht sich nur auf unsere Websites. Falls Sie über Links auf unseren Seiten auf andere Seiten weitergeleitet werden, informieren Sie sich bitte dort über den jeweiligen Umgang mit Ihren Daten."
+        }
+      ]
+    },
+    {
+      "id": "kontaktaufnahme",
+      "title": "§ 2 KONTAKTAUFNAHME",
+      "icon": "📞",
+      "content": [
+        {
+          "type": "text",
+          "subtitle": "(1) Verarbeitungszweck",
+          "text": "Ihre personenbezogenen Daten, die Sie uns per E-Mail, Kontaktformular etc. zur Verfügung stellen, verarbeiten wir zur Beantwortung und Erledigung Ihrer Anfragen. Sie sind nicht verpflichtet, uns Ihre personenbezogenen Daten bereitzustellen. Aber ohne Mitteilung Ihrer E-Mail-Adresse können wir Ihnen auch nicht per E-Mail antworten."
+        },
+        {
+          "type": "text",
+          "subtitle": "(2) Rechtsgrundlagen",
+          "text": "a) Sollten Sie uns eine ausdrückliche Einwilligung zur Verarbeitung Ihrer Daten gegeben haben, ist Art. 6 Abs. 1a) DSGVO die Rechtsgrundlage für diese Verarbeitung.\nb) Sollten wir Ihre Daten zur Durchführung vorvertraglicher Maßnahmen verarbeiten, ist Art. 6 Abs. 1b) DSGVO die Rechtsgrundlage.\nc) In allen anderen Fällen (insbesondere bei Nutzung eines Kontaktformulars) ist Art. 6 Abs. 1f) DSGVO die Rechtsgrundlage.",
+          "important": "WIDERSPRUCHSRECHT: Sie haben das Recht, der Datenverarbeitung, die auf der Grundlage des Art. 6 Abs. 1f) DSGVO erfolgt und nicht der Direktwerbung dient, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit zu widersprechen. Im Falle der Direktwerbung können Sie der Verarbeitung hingegen ohne Angabe von Gründen jederzeit widersprechen."
+        },
+        {
+          "type": "text",
+          "subtitle": "(3) Berechtigtes Interesse",
+          "text": "Unser berechtigtes Interesse an der Verarbeitung besteht darin, mit Ihnen auf schnellem Wege zu kommunizieren und Ihre Anfragen kostengünstig zu beantworten. Wenn Sie uns Ihre Anschrift mitteilen, behalten wir uns vor, diese für postalische Direktwerbung zu verwenden. Ihr Interesse am Datenschutz können Sie durch eine sparsame Datenweitergabe (z. B. Verwendung eines Pseudonyms) wahren."
+        },
+        {
+          "type": "text",
+          "subtitle": "(4) Empfängerkategorien",
+          "text": "Hostinganbieter, Versanddienstleister bei Direktwerbung"
+        },
+        {
+          "type": "text",
+          "subtitle": "(5) Speicherdauer",
+          "text": "Ihre Daten werden gelöscht, wenn sich aus den Umständen entnehmen lässt, dass Ihre Anfrage bzw. der betroffene Sachverhalt abschließend geklärt ist.\n\nFalls es jedoch zu einem Vertragsschluss kommt, werden die nach Handels- und Steuerrecht erforderlichen Daten von uns für die gesetzlich bestimmten Zeiträume aufbewahrt, also regelmäßig zehn Jahre (vgl. § 257 HGB, § 147 AO)."
+        },
+        {
+          "type": "text",
+          "subtitle": "(6) Widerrufsrecht",
+          "text": "Sie haben im Fall der Verarbeitung aufgrund Ihrer Einwilligung das Recht, Ihre Einwilligung jederzeit zu widerrufen."
+        }
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "§ 3 INFORMATIONEN ÜBER COOKIES",
+      "icon": "🍪",
+      "content": [
+        {
+          "type": "text",
+          "subtitle": "(1) Verarbeitungszweck",
+          "text": "Auf dieser Webseite werden technisch notwendige Cookies eingesetzt. Es handelt sich dabei um kleine Textdateien, die in bzw. von Ihrem Internetbrowser auf Ihrem Computersystem nicht dauerhaft gespeichert werden und nur der Funktionsfähigkeit der Webseite dienen.\n\nAndere Cookies bleiben dauerhaft und erkennen Ihren Browser beim nächsten Besuch wieder, um die Benutzerfreundlichkeit der Webseite zu erhöhen."
+        },
+        {
+          "type": "text",
+          "subtitle": "(2) Rechtsgrundlage",
+          "text": "Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs.1 a) DSGVO.\n\nDie nachstehende Einwilligung zum Cookie-Einsatz auf unserer Seite haben Sie ggf. ausdrücklich erteilt:\n\nWir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Verwendung unserer Website an unsere Partner für soziale Medien, Werbung und Analysen weiter. Unsere Partner führen diese Informationen möglicherweise mit weiteren Daten zusammen, die Sie ihnen bereitgestellt haben oder die sie im Rahmen Ihrer Nutzung der Dienste gesammelt haben."
+        },
+        {
+          "type": "text",
+          "subtitle": "(3) Speicherdauer",
+          "text": "Die technisch notwendigen Cookies werden im Regelfall mit dem Schließen des Browsers gelöscht. Dauerhaft gespeicherte Cookies haben eine unterschiedlich lange Lebensdauer von einigen Minuten bis zu mehreren Jahren."
+        },
+        {
+          "type": "text",
+          "subtitle": "(4) Widerrufsrecht",
+          "text": "Falls Sie die Speicherung dieser Cookies nicht wünschen, deaktivieren Sie bitte die Annahme dieser Cookies in Ihrem Internetbrowser. Dies kann aber eine Funktionseinschränkung unserer Webseite zur Folge haben.\n\nIhre Einwilligung in die dauerhafte Speicherung können Sie dadurch widerrufen, dass Sie die gespeicherten Cookies über Ihren Browser löschen."
+        }
+      ]
+    },
+    {
+      "id": "social-plugins",
+      "title": "§ 4 SOCIAL PLUGINS",
+      "icon": "🔗",
+      "content": [
+        {
+          "type": "text",
+          "subtitle": "(1) Facebook",
+          "text": "Wir verwenden Social Plugins von facebook.com, betrieben durch Facebook Inc., 1601 S. California Ave, Palo Alto, CA 94304, USA. Die Plugins sind an dem Facebook Logo oder dem Zusatz \"Facebook Social Plugin\" zu erkennen. Wenn Sie z. B. den \"Gefällt mir\" Button anklicken oder einen Kommentar abgeben, wird die entsprechende Information von Ihrem Browser direkt an Facebook übermittelt und dort gespeichert. Weiterhin macht Facebook Ihre Vorlieben für Ihre Facebook-Freunde öffentlich. Sind Sie bei Facebook eingeloggt, kann Facebook den Aufruf unserer Seite Ihrem Facebook-Konto direkt zuordnen. Auch wenn Sie nicht eingeloggt sind oder gar kein Facebook-Konto besitzen, übermittelt Ihr Browser Informationen (z. B. welche Website Sie aufgerufen haben, Ihre IP-Adresse), die von Facebook gespeichert werden. Details zum Umgang mit Ihren persönlichen Daten durch Facebook sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den Datenschutzhinweisen von Facebook. Wenn Sie nicht möchten, dass Facebook die über unsere Websites über Sie gesammelten Daten Ihrem Facebook-Konto zuordnet, müssen Sie sich vor Ihrem Besuch unserer Websites bei Facebook ausloggen. Sie können das Laden der Facebook Plugins auch mit Add-Ons für Ihren Browser komplett verhindern, z. B. mit dem \"Facebook Blocker\"."
+        },
+        {
+          "type": "text",
+          "subtitle": "(2) Instagram",
+          "text": "Wir nutzen Funktionen des Dienstes Instagram, einem Angebot der Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland. Instagram ist ein soziales Netzwerk, das die Veröffentlichung von Fotos und Videos ermöglicht. Wenn Sie mit Instagram-Inhalten auf unserer Website interagieren, kann eine Verbindung zu den Instagram-Servern hergestellt werden.",
+          "link": {
+            "text": "Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Instagram:",
+            "url": "https://help.instagram.com/519522125107875",
+            "label": "https://help.instagram.com/519522125107875"
+          }
+        },
+        {
+          "type": "text",
+          "subtitle": "(3) Pinterest",
+          "text": "Wir unterhalten bei Pinterest eine Onlinepräsenz um unser Unternehmen sowie unsere Leistungen zu präsentieren und mit Kunden/Interessenten zu kommunizieren. Pinterest ist ein Service der Pinterest Inc., 651 Brannan Street, San Francisco, CA, 94107, USA.\n\nInsofern weisen wir darauf hin, dass die Möglichkeit besteht, dass Daten der Nutzer außerhalb der Europäischen Union, insbesondere in den USA, verarbeitet werden. Hierdurch können gesteigerte Risiken für die Nutzer insofern bestehen, als dass z.B. der spätere Zugriff auf die Nutzerdaten erschwert werden kann. Auch haben wir keinen Zugriff auf diese Nutzerdaten. Die Zugriffsmöglichkeit liegt ausschließlich bei Pinterest.",
+          "link": {
+            "text": "Die Datenschutzhinweise von Pinterest finden Sie unter:",
+            "url": "https://policy.pinterest.com/de/privacy-policy",
+            "label": "https://policy.pinterest.com/de/privacy-policy"
+          }
+        },
+        {
+          "type": "text",
+          "subtitle": "(4) WhatsApp",
+          "text": "Für die Kommunikation mit unseren Kunden nutzen wir WhatsApp, einen Dienst der WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, ein Tochterunternehmen der Meta Platforms Inc. Wenn Sie uns über WhatsApp kontaktieren, werden Ihre Telefonnummer und die von Ihnen gesendeten Nachrichten an WhatsApp-Server übermittelt. WhatsApp kann diese Daten für eigene Zwecke verarbeiten, insbesondere zur Personalisierung von Werbung und zur Verbesserung seiner Dienste.\n\nWir weisen darauf hin, dass WhatsApp personenbezogene Daten in den USA und anderen Ländern außerhalb der EU verarbeitet. Durch die Nutzung von WhatsApp erklären Sie sich mit dieser Übermittlung einverstanden. Wenn Sie nicht möchten, dass Ihre Daten an WhatsApp übermittelt werden, nutzen Sie bitte alternative Kontaktmöglichkeiten wie E-Mail oder Telefon.",
+          "link": {
+            "text": "Weitere Informationen zur Datenverarbeitung durch WhatsApp finden Sie in der Datenschutzerklärung:",
+            "url": "https://www.whatsapp.com/privacy",
+            "label": "https://www.whatsapp.com/privacy"
+          }
+        },
+        {
+          "type": "text",
+          "subtitle": "(5) Telegram",
+          "text": "Für die Kommunikation bieten wir auch die Nutzung von Telegram an, einem Messenger-Dienst der Telegram Messenger Inc. Bei der Nutzung von Telegram werden Ihre Nachrichten, Kontaktdaten und Metadaten an Server von Telegram übermittelt. Telegram speichert Nachrichten, Medien und Kontakte auf seinen Servern, um die Synchronisierung zwischen verschiedenen Geräten zu ermöglichen.\n\nTelegram verarbeitet Daten außerhalb der Europäischen Union. Wir haben keinen Einfluss auf die Datenverarbeitung durch Telegram und empfehlen, sich über die Datenschutzeinstellungen in der Telegram-App zu informieren. Für vertrauliche Kommunikation empfehlen wir alternative, datenschutzfreundlichere Kommunikationswege.",
+          "link": {
+            "text": "Weitere Informationen zur Datenschutz bei Telegram:",
+            "url": "https://telegram.org/privacy",
+            "label": "https://telegram.org/privacy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "google-adsense",
+      "title": "§ 5 WEBANZEIGEDIENST MIT GOOGLE ADSENSE",
+      "icon": "📊",
+      "content": [
+        {
+          "type": "text",
+          "subtitle": "(1) Verarbeitungszweck",
+          "text": "Auf diesen Seiten wird Google Adsense, ein Webanzeigendienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland (\"Google\") eingesetzt, um Werbung (Textanzeigen, Banner etc.) zu schalten. Dafür speichert Ihr Browser Cookies (kleine Textdateien) auf Ihrer Festplatte. Diese Cookies werden von Google genutzt, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anzubieten und die Zugriffe auf unsere Website zu analysieren. Bei Apps werden Gerätekennungen eingesetzt. Außerdem werden Informationen zu Ihrer Verwendung unserer Website an Partner für soziale Medien, Werbung und Analysen weitergegeben. Diese Partner führen diese Informationen mit weiteren Daten zusammen, die Sie ihnen bereitgestellt oder die sie im Rahmen Ihrer Nutzung der Dienste gesammelt haben."
+        },
+        {
+          "type": "text",
+          "subtitle": "(2) Rechtsgrundlage",
+          "text": "Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs.1 a) DSGVO."
+        },
+        {
+          "type": "text",
+          "subtitle": "(3) Empfängerkategorien",
+          "text": "Google und dessen Partnerunternehmen."
+        },
+        {
+          "type": "text",
+          "subtitle": "(4) Übermittlung an ein Drittland",
+          "text": "Google Ireland Limited ist ein mit Google LLC verbundenes Unternehmen. Google LLC sitzt in den USA (1600 Amphitheatre Parkway, Mountain View, CA 94043)."
+        },
+        {
+          "type": "text",
+          "subtitle": "(5) Speicherdauer",
+          "text": "Ihre personenbezogenen Daten werden nur solange gespeichert, wie Sie in die Verarbeitung eingewilligt haben."
+        },
+        {
+          "type": "text",
+          "subtitle": "(6) Widerruf der Einwilligung",
+          "text": "Sie können Ihre Einwilligung jederzeit dem Verantwortlichen gegenüber widerrufen."
+        }
+      ]
+    },
+    {
+      "id": "rechte-betroffener",
+      "title": "§ 6 IHRE RECHTE ALS BETROFFENER",
+      "icon": "⚖️",
+      "content": [
+        {
+          "type": "text",
+          "text": "Werden personenbezogene Daten von Ihnen verarbeitet, sind Sie Betroffener im Sinne der DSGVO und es stehen Ihnen folgende Rechte gegenüber uns als Verantwortlichen zu:"
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Auskunft",
+          "text": "Sie können im Rahmen des Art. 15 DSGVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten verlangen."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Berichtigung",
+          "text": "Sollten die Sie betreffenden Angaben nicht (mehr) zutreffend sein, können Sie nach Art. 16 DSGVO eine Berichtigung verlangen. Sollten Ihre Daten unvollständig sein, können Sie eine Vervollständigung verlangen."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Löschung",
+          "text": "Sie können unter den Bedingungen des Art. 17 DSGVO die Löschung Ihrer personenbezogenen Daten verlangen."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Einschränkung der Verarbeitung",
+          "text": "Sie haben im Rahmen der Vorgaben des Art. 18 DSGVO das Recht, eine Einschränkung der Verarbeitung der Sie betreffenden Daten zu verlangen."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Datenübertragbarkeit",
+          "text": "Sie haben nach Art. 20 DSGVO das Recht, die Sie betreffenden personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder die Übermittlung an einen anderen Verantwortlichen zu verlangen."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Widerruf der datenschutzrechtlichen Einwilligungserklärung",
+          "text": "Sie haben nach Art. 7 Abs. 3 DSGVO das Recht, Ihre datenschutzrechtliche Einwilligungserklärung jederzeit zu widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt."
+        },
+        {
+          "type": "text",
+          "subtitle": "Recht auf Beschwerde bei einer Aufsichtsbehörde",
+          "text": "Wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt, steht Ihnen nach Art. 77 DSGVO das Recht auf Beschwerde bei einer Aufsichtsbehörde (insbesondere in dem Mitgliedstaat ihres Aufenthaltsorts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes) zu."
+        },
+        {
+          "type": "text",
+          "subtitle": "Widerspruchsrecht nach Art. 21 DSGVO",
+          "text": "a) Allgemein: begründeter Widerspruch erforderlich\nErfolgt die Verarbeitung Sie betreffender personenbezogener Daten\n- zur Wahrung unseres überwiegenden berechtigten Interesses (Rechtsgrundlage nach Art. 6 Abs. 1 f) DSGVO) oder\n- im öffentlichen Interesse (Rechtsgrundlage nach Art. 6 Abs. 1 e) DSGVO),\nhaben Sie das Recht, jederzeit aus Gründen, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Widerspruch einzulegen; dies gilt auch für ein auf die Bestimmungen der DSGVO gestütztes Profiling.\n\nIm Fall des Widerspruchs verarbeiten wir die Sie betreffenden personenbezogenen Daten nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.\n\nb) Sonderfall Direktwerbung: einfacher Widerspruch genügt\nWerden die Sie betreffenden personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, haben Sie das Recht, jederzeit und ohne Angabe von Gründen Widerspruch gegen diese Verarbeitung einzulegen; dies gilt auch für das Profiling, soweit es mit solcher Direktwerbung in Verbindung steht.\n\nWidersprechen Sie der Verarbeitung für Zwecke der Direktwerbung, so werden die Sie betreffenden personenbezogenen Daten nicht mehr für diese Zwecke verarbeitet."
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "company": "Balaba Studio Massage",
+    "address": {
+      "street": "Herrnstrasse 37",
+      "city": "63695 Glauburg-Stockheim"
+    },
+    "phone": "+4915124908000",
+    "email": "balabamassage@gmail.com",
+    "social": [
+      {
+        "type": "instagram",
+        "label": "Instagram",
+        "value": "@balabastudio",
+        "href": "https://instagram.com/balabastudio"
+      },
+      {
+        "type": "whatsapp",
+        "label": "WhatsApp",
+        "value": "+4915124908000",
+        "href": "https://wa.me/4915124908000"
+      },
+      {
+        "type": "telegram",
+        "label": "Telegram",
+        "value": "@balabastudio",
+        "href": "https://t.me/balabastudio"
+      }
+    ]
+  }
+}

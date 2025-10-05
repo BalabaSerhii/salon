@@ -1,0 +1,149 @@
+{
+  "sections": [
+    {
+      "id": "zonen-massage",
+      "title": "Massage einzelner Zonen",
+      "description": "Gezielte Massage spezifischer Körperbereiche zur Linderung von Verspannungen und zur gezielten Entspannung.",
+      "image": "/images/preisliste/zonen-massage.jpg",
+      "layout": "image-left",
+      "services": [
+        {
+          "name": "Rückenmassage",
+          "duration": "30 Minuten",
+          "price": "30 €",
+          "description": "Gezielte Behandlung der Rückenmuskulatur zur Lockerung von Verspannungen"
+        },
+        {
+          "name": "Gesichtsmassage",
+          "duration": "30 Minuten",
+          "price": "40 €",
+          "description": "Entspannende Massage der Gesichtsmuskulatur für strahlende Haut"
+        },
+        {
+          "name": "Nacken & Schultern",
+          "duration": "25 Minuten",
+          "price": "25 €",
+          "description": "Lösung von Verspannungen im Nacken- und Schulterbereich"
+        },
+        {
+          "name": "Beinmassage",
+          "duration": "30 Minuten",
+          "price": "35 €",
+          "description": "Entspannende Massage der Beinmuskulatur zur Durchblutungsförderung"
+        },
+        {
+          "name": "Fußreflexzonenmassage",
+          "duration": "45 Minuten",
+          "price": "45 €",
+          "description": "Spezielle Massage der Fußreflexzonen zur ganzheitlichen Entspannung"
+        }
+      ]
+    },
+    {
+      "id": "ganzkoerper-massage",
+      "title": "Ganzkörpermassage",
+      "description": "Umfassende Entspannung des gesamten Körpers mit verschiedenen Massagetechniken für ganzheitliches Wohlbefinden.",
+      "image": "/images/preisliste/ganzkoerper-massage.jpg",
+      "layout": "image-right",
+      "services": [
+        {
+          "name": "Entspannungsmassage",
+          "duration": "45 Minuten",
+          "price": "55 €",
+          "description": "Sanfte Ganzkörpermassage zur allgemeinen Entspannung"
+        },
+        {
+          "name": "Intensivmassage",
+          "duration": "60 Minuten",
+          "price": "70 €",
+          "description": "Tiefenwirksame Massage zur Lösung starker Verspannungen"
+        },
+        {
+          "name": "Premium-Massage",
+          "duration": "90 Minuten",
+          "price": "95 €",
+          "description": "Ausführliche Massage mit speziellen Entspannungstechniken"
+        },
+        {
+          "name": "Luxus-Behandlung",
+          "duration": "120 Minuten",
+          "price": "125 €",
+          "description": "Umfassende Premium-Behandlung mit Aromaölen"
+        }
+      ]
+    },
+    {
+      "id": "pressotherapie",
+      "title": "Pressotherapie",
+      "description": "Apparative Lymphdrainage zur Entschlackung, Entwässerung und Straffung des Gewebes mit modernster Technologie.",
+      "image": "/images/preisliste/pressotherapie.jpg",
+      "layout": "image-left",
+      "services": [
+        {
+          "name": "Pressotherapie Beine",
+          "duration": "45 Minuten",
+          "price": "65 €",
+          "description": "Gezielte Behandlung der Beine zur Reduzierung von Wassereinlagerungen"
+        },
+        {
+          "name": "Pressotherapie Bauch",
+          "duration": "30 Minuten",
+          "price": "45 €",
+          "description": "Straffende Behandlung der Bauchregion"
+        },
+        {
+          "name": "Pressotherapie Arme",
+          "duration": "30 Minuten",
+          "price": "40 €",
+          "description": "Entschlackende Behandlung der Arme"
+        },
+        {
+          "name": "Pressotherapie Ganzkörper",
+          "duration": "90 Minuten",
+          "price": "110 €",
+          "description": "Komplette Pressotherapie-Behandlung des gesamten Körpers"
+        },
+        {
+          "name": "Pressotherapie Gesicht",
+          "duration": "25 Minuten",
+          "price": "35 €",
+          "description": "Straffende Behandlung des Gesichts und Halses"
+        }
+      ]
+    },
+    {
+      "id": "wellness-pakete",
+      "title": "Wellness-Pakete",
+      "description": "Speziell zusammengestellte Pakete für maximale Entspannung und ganzheitliches Wohlbefinden.",
+      "image": "/images/preisliste/wellness-pakete.jpg",
+      "layout": "image-right",
+      "services": [
+        {
+          "name": "Basis-Entspannung",
+          "duration": "60 Minuten",
+          "price": "85 €",
+          "description": "Ganzkörpermassage + Gesichtsmassage"
+        },
+        {
+          "name": "Premium-Wellness",
+          "duration": "120 Minuten",
+          "price": "145 €",
+          "description": "Ganzkörpermassage + Pressotherapie + Aromatherapie"
+        },
+        {
+          "name": "Luxus-Entspannung",
+          "duration": "180 Minuten",
+          "price": "195 €",
+          "description": "Komplettpaket mit allen Anwendungen inkl. Verlängerung"
+        },
+        {
+          "name": "Paar-Massage",
+          "duration": "90 Minuten",
+          "price": "170 €",
+          "description": "Gemeinsame Massage für zwei Personen im Doppelbehandlungszimmer"
+        }
+      ]
+    }
+  ],
+  "notice": "Alle Preise inklusive Mehrwertsteuer. Termine nach Vereinbarung. Stornierung bis 24 Stunden vor Termin kostenfrei."
+}

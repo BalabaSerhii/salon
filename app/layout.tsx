@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Script from "next/script";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Balaba Studio Massage – Glauburg",
   description:
-    "Professionelle Massage in Glauburg-Stockheim. Entspannung, Gesundheit und Wohlbefinden. Jetzt Termin vereinbaren.",
+    "Professionelle Massage in Glauburg-Stockheim. Entspannung für Körper und Geist. Jetzt Termin buchen!",
   openGraph: {
     title: "Balaba Studio Massage",
     description:
@@ -26,7 +27,7 @@ export const metadata = {
     siteName: "Balaba Studio",
     images: [
       {
-        url: "https://balabastudio.de/BalabaStudio.png",
+        url: "https://balabastudio.de/balabastudio.png",
         width: 1200,
         height: 630,
         alt: "Balaba Studio Massage – Glauburg, professionelle Massage",
@@ -47,6 +48,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        {/* Cookiebot Script - добавляется здесь */}
+        <Script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="08322d39-bbda-4e0c-925a-4e08a8067212"
+          data-blockingmode="auto"
+          type="text/javascript"
+        />
+        
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -61,7 +73,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               name: "Balaba Studio Massage",
-              image: "https://balabastudio.de/BalabaStudio.png",
+              image: "https://balabastudio.de/balabastudio.png",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Herrnstrasse 37",

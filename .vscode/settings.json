@@ -1,0 +1,15 @@
+{
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": false,
+
+  "indenticator.showIndentGuide": true,
+  "indenticator.color.dark": "#04b51e",
+  "indenticator.color.light": "#ff0000",
+  "indenticator.width": 1,
+  "indenticator.style": "solid",
+  "indenticator.showHover": false,
+
+  "indenticator.inner.showHighlight": false,
+  "indenticator.inner.showHover": false,
+  "indenticator.showCurrentDepthInStatusBar": true
+}
