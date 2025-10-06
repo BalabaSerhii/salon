@@ -53,13 +53,13 @@ export default function HomePage() {
       />
 
       {/* === HERO SECTION === */}
-      <header className="relative text-[#64615a] text-center" role="banner">
+      <section className="relative  text-[#64615a]  text-center " role="banner">
         <div className="bg-[#f8f7f4] pt-7 pb-10 text-center">
           <h1
             className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5 "
             itemProp="name"
           >
-            Professionelle Entspannungsmassage in{" "}<br />
+            Professionelle Entspannungsmassage in <br />
             <span className="font-semibold text-[#5c6d2f] ">
               63695 Glauburg-Stockheim
             </span>
@@ -100,17 +100,17 @@ export default function HomePage() {
             ].map((item, i) => (
               <article
                 key={i}
-                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition"
+                className="bg-[var(--background)] rounded-2xl p-3"
               >
                 <div className="text-2xl mb-2">{item.icon}</div>
                 <h2 className="font-semibold mb-2">{item.title}</h2>
-                <p className="text-green-100 text-sm">{item.text}</p>
+                <p className=" text-sm">{item.text}</p>
               </article>
             ))}
           </section>
 
           {/* CTA */}
-          <div className="bg-white rounded-2xl p-8 shadow-2xl max-w-2xl mx-auto">
+          {/* <div className="bg-white rounded-2xl p-8 shadow-2xl max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Jetzt Termin vereinbaren
             </h2>
@@ -128,9 +128,9 @@ export default function HomePage() {
             <p className="text-sm text-gray-500 mt-4">
               ⚡ Meist Termine innerhalb von 24–48 Stunden verfügbar
             </p>
-          </div>
+          </div> */}
         </div>
-      </header>
+      </section>
 
       {/* === BENEFITS === */}
       <BenefitsSection />
@@ -170,7 +170,7 @@ export default function HomePage() {
               Wohlbefinden.
             </p>
           </div>
-          <Gallery />
+          {/* <Gallery /> */}
         </div>
       </section>
 

@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
   title: "Balaba Studio Massage – Glauburg",
   description:
@@ -57,10 +56,9 @@ export default function RootLayout({
           data-blockingmode="auto"
           type="text/javascript"
         />
-        
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  mx-auto  `}
       >
         <Header />
         {children}
