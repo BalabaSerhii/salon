@@ -23,7 +23,7 @@ export default function ServicesPreview() {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+    <section className="py-16 md:py-20 bg-[var(--background)] rounded-2xl p-3">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
@@ -39,9 +39,9 @@ export default function ServicesPreview() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg p-6 border border-green-100 hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-2xl shadow-lg p-6 border border-green-100 hover:shadow-xl transition-all duration-300 text-center"
             >
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-3">
                 {service.name}
               </h3>
               <p className="text-gray-600 mb-4">{service.description}</p>

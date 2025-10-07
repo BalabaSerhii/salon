@@ -1,6 +1,6 @@
 export default function ButtonInsta() {
   return (
-    <button className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#E1306C] to-[#C13584] text-white rounded-xl hover:opacity-90 transition">
+    <button className="  px-6 py-2 bg-gradient-to-r from-[#E1306C] to-[#C13584] text-white rounded-lg hover:opacity-90 transition">
       <a
         target="_blank"
         href="https://www.instagram.com/balabastudio_glauburg/?igshid=MzRlODBiNWFlZA==#direct"

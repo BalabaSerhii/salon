@@ -1,10 +1,8 @@
 "use client";
 
-import AboutUs from "@/components/AboutUs";
 import ButtonInsta from "@/components/ButtonInsta";
 import ButtonWA from "@/components/ButtonWA";
 import ContactSection from "@/components/ContactSection";
-import Gallery from "@/components/Gallery";
 import ReviewsSEO from "@/components/ReviewsSEO";
 import ServicesPreview from "@/components/ServicesPreview";
 import BenefitsSection from "@/components/BenefitsSection";
@@ -110,7 +108,7 @@ export default function HomePage() {
           </section>
 
           {/* CTA */}
-          {/* <div className="bg-white rounded-2xl p-8 shadow-2xl max-w-2xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Jetzt Termin vereinbaren
             </h2>
@@ -128,7 +126,8 @@ export default function HomePage() {
             <p className="text-sm text-gray-500 mt-4">
               ⚡ Meist Termine innerhalb von 24–48 Stunden verfügbar
             </p>
-          </div> */}
+          </div>
+          <CTASection></CTASection>
         </div>
       </section>
 
@@ -151,41 +150,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* === GALLERY === */}
-      <section
-        className="py-16 md:py-20 bg-white"
-        aria-labelledby="gallery-title"
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2
-              id="gallery-title"
-              className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-            >
-              Unsere Räumlichkeiten
-            </h2>
-            <div className="w-20 h-1 mx-auto rounded-full mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Entdecken Sie unsere entspannende Atmosphäre – designed für Ihr
-              Wohlbefinden.
-            </p>
-          </div>
-          {/* <Gallery /> */}
-        </div>
-      </section>
+    
 
-      {/* === ABOUT US === */}
-      <section className="py-16 md:py-20 " aria-labelledby="about-title">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2
-            id="about-title"
-            className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center"
-          >
-            Über uns
-          </h2>
-          <AboutUs />
-        </div>
-      </section>
+     
 
       {/* === REVIEWS === */}
       <section className="py-16 md:py-20 bg-white" aria-labelledby="reviews">
@@ -216,17 +183,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* === FINAL CTA === */}
-      <footer>
-        <CTASection />
-      </footer>
+    
 
-      {/* === Floating WhatsApp Button === */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className="transform hover:scale-110 transition-transform duration-300">
-          <ButtonWA />
-        </div>
-      </div>
+    
     </main>
   );
 }

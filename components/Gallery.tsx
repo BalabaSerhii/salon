@@ -6,7 +6,6 @@ import ModalGallery from "./ModalGallery";
 
 const images = [
   { src: "/client.jpg", alt: "Client relax" },
-  { src: "/balabateam.jpg", alt: "Balaba Team" },
   { src: "/dark.jpg", alt: "Balaba Studio draußen am Abend" },
   { src: "/office.jpg", alt: "Massageraum in Glauburg" },
   { src: "/officedark.jpg", alt: "Massageraum in Glauburg Entspannung" },
@@ -31,15 +30,15 @@ export default function Gallery() {
 
   return (
     <section>
-      <div>
+      <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3" >
         {images.map((img, i) => (
           <button
             key={img.src}
             onClick={() => open(i)}
-            className="block w-full"
+            className="block w-full "
           >
             {" "}
-            <Image src={img.src} alt={img.alt} width={80} height={600} />
+            <Image src={img.src} alt={img.alt} width={80} height={600} className=""/>
           </button>
         ))}
       </div>
