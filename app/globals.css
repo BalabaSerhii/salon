@@ -4,8 +4,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-
-
 }
 html,
 body {
@@ -50,7 +48,6 @@ p {
   font-weight: inherit;
 }
 
-
 :root {
   --background: #f8f7f4;
   --foreground: #64615a;
@@ -84,3 +81,4 @@ body {
 .social-links li:hover {
   background-color: rgb(255, 255, 255);
 }
+

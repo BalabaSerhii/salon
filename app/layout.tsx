@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Script from "next/script";
 import ButtonWA from "@/components/ButtonWA";
-
+import { Toaster } from "@/components/ui/sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -63,12 +63,12 @@ export default function RootLayout({
       >
         <Header />
         {children}
-          {/* === Floating WhatsApp Button === */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className="transform hover:scale-110 transition-transform duration-300">
-          <ButtonWA />
+        {/* === Floating WhatsApp Button === */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="transform hover:scale-110 transition-transform duration-300">
+            <ButtonWA />
+          </div>
         </div>
-      </div>
         <Footer />
         <Script
           id="ld-json"
@@ -116,6 +116,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <Toaster position="top-right" duration={4000} />
       </body>
     </html>
   );

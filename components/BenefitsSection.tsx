@@ -28,11 +28,7 @@ export default function BenefitsSection() {
         >
           {benefits.map((benefit, index) => (
             <li key={index} className="h-full ">
-              <article
-
-                className="h-full flex flex-col gap-4 bg-gradient-to-br from-green-50 to-white rounded-xl p-6 border border-green-100 hover:shadow-lg transition-all duration-300 focus-within:shadow-lg items-center text-center"
-
-              >
+              <article className="h-full flex flex-col gap-4 bg-gradient-to-br from-green-50 to-white rounded-xl p-6 border border-green-100 hover:shadow-lg transition-all duration-300 focus-within:shadow-lg items-center text-center">
                 {/* Эмодзи — визуальный элемент, скрыт от скринридеров (текст заголовка даёт смысл) */}
                 <div className="text-3xl mb-1 " aria-hidden="true">
                   {benefit.icon}
