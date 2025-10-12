@@ -38,7 +38,7 @@ const categories: Category[] = [
       {
         name: "Aroma-Ganzkörpermassage + Pressotherapie für Beine, Bauch und Arme",
         duration: "60 + 45 Min",
-        price: "65 €",
+        price: "95 €",
       },
     ],
   },
