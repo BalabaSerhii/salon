@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { BlogPost } from '../blog.ts';
+import Image from "next/image";
+import { BlogPost } from "../app/lib/blog";
 
 interface BlogArticleProps {
   post: BlogPost;
@@ -15,9 +15,11 @@ export default function BlogArticle({ post }: BlogArticleProps) {
           alt={post.title}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+          priority
         />
       </div>
-      
+
       {/* Article Content */}
       <div className="p-6 md:p-8">
         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-4">
@@ -28,17 +30,17 @@ export default function BlogArticle({ post }: BlogArticleProps) {
           <span>{post.publishDate}</span>
           <span>Von {post.author}</span>
         </div>
-        
+
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
           {post.title}
         </h1>
-        
+
         <div className="prose prose-lg max-w-none">
           <div className="text-gray-700 leading-relaxed whitespace-pre-line">
             {post.content}
           </div>
         </div>
-        
+
         {/* Tags */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <div className="flex flex-wrap gap-2">
