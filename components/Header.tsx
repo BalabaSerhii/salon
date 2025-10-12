@@ -142,6 +142,8 @@ export default function Header() {
             alt="Logo von Balaba Studio Massage in Glauburg"
             width={100}
             height={50}
+            priority={true}
+            unoptimized={true}
           />
         </Link>
 

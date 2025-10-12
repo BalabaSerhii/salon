@@ -87,20 +87,23 @@ export default function Footer() {
       <div className="container grid grid-cols-1 md:grid-cols-2 justify-items-center items-center ">
         {/* Левая колонка: логотип + адрес */}
         <div className=" items-center flex gap-10 ">
-          <Link href="/" aria-label="Zur Startseite" >
+          <Link href="/" aria-label="Zur Startseite">
             <Image
               src="/balabastudio.png"
               alt="Logo von Balaba Studio Massage"
               width={80}
               height={40}
               className="mb-4 "
-              priority
+              priority={true}
+              unoptimized={true}
             />
           </Link>
 
           <address className="not-italic text-sm flex flex-col">
             <a href="https://www.google.com/maps/place/Balaba+Massage+Studio/@50.325005,9.0119886,21z/data=!4m22!1m15!4m14!1m6!1m2!1s0x47bd1fd72ba2be4d:0x1e5e44f028e158d4!2zSGVycm5zdHJhw59lIDM3LCA2MzY5NSBHbGF1YnVyZywg0JPQtdGA0LzQsNC90LjRjw!2m2!1d9.0123212!2d50.3250513!1m6!1m2!1s0x47bd1ff68239fc3d:0xacd5e4c867c97da6!2sHerrnstra%C3%9Fe+37,+63695+Glauburg!2m2!1d9.0123212!2d50.3250513!3m5!1s0x47bd1ff68239fc3d:0xacd5e4c867c97da6!8m2!3d50.3250513!4d9.0123212!16s%2Fg%2F11wxg0z523?entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D">
-              Herrnstrasse 37, <br />63695 Glauburg-Stockheim, <br />Deutschland
+              Herrnstrasse 37, <br />
+              63695 Glauburg-Stockheim, <br />
+              Deutschland
             </a>
             <a
               href="mailto:balabamassage@gmail.com"
@@ -173,8 +176,9 @@ export default function Footer() {
             <p className="text-sm">
               Mo – Sa: 09:00 – 20:00
               <br />
-              <span className="text-amber-700 text-[0.625rem]">NUR nach vorheriger Terminvereinbarung
-</span>
+              <span className="text-amber-700 text-[0.625rem]">
+                NUR nach vorheriger Terminvereinbarung
+              </span>
               <br />
               So: geschlossen
             </p>
