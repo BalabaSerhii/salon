@@ -1,286 +1,274 @@
-import type { ReactElement } from "react";
-import Image from "next/image";
-import Script from "next/script";
-import { Icons } from "../../components/Icons";
+"use client";
 
-// Типы (сохранены)
+import AppointmentForm from "@/components/AppointmentForm";
+import { useState } from "react";
+
 interface Service {
   name: string;
-  duration: string;
+  duration?: string;
   price: string;
-  description: string;
 }
 
-interface Section {
-  id: string;
+interface Category {
   title: string;
-  description: string;
-  image: string;
-  layout: "image-left" | "image-right";
+  color: "green" | "blue" | "yellow" | "pink";
   services: Service[];
 }
 
-interface PreislisteData {
-  sections: Section[];
-  notice: string;
-}
-
-import preislisteData from "../data/preisliste-data.json";
-
-// Утилита для преобразования длительности
-function durationToDatetime(duration: string): string | undefined {
-  if (!duration) return undefined;
-  const m = duration.match(/(\d+)\s*min/i);
-  if (m) return `PT${m[1]}M`;
-  const h = duration.match(/(\d+)\s*h(?:ours?|r|Std)?/i);
-  if (h) return `PT${h[1]}H`;
-  const hm = duration.match(/(\d+)\s*h(?:ours?|Std)?\s*(\d+)\s*min/i);
-  if (hm) return `PT${hm[1]}H${hm[2]}M`;
-  const digits = duration.match(/^\s*(\d+)\s*$/);
-  if (digits) return `PT${digits[1]}M`;
-  return undefined;
-}
-
-export default function PreislistePage(): ReactElement {
-  // ← ИЗМЕНИЛ НАЗВАНИЕ
-  // JSON-LD данные
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Balaba Studio Massage",
-    url: "https://balabastudio.de",
-    image: "https://balabastudio.de/BalabaStudio.png",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Herrnstrasse 37",
-      postalCode: "63695",
-      addressLocality: "Glauburg-Stockheim",
-      addressCountry: "DE",
-    },
-    telephone: "+49 151 24908000",
-    sameAs: [
-      "https://www.instagram.com/balabastudio_glauburg/",
-      "https://www.facebook.com/profile.php?id=61571893245558",
+const categories: Category[] = [
+  {
+    title: "Kombipakete (Super-Mix)",
+    color: "green",
+    services: [
+      {
+        name: "Klassische Rücken- und Nackenmassage + Pressotherapie für Beine, Bauch und Arme",
+        duration: "30 + 45 Min",
+        price: "60 €",
+      },
+      {
+        name: "Klassische Massage (Rücken, Nacken, Arme) + Bein-Pressotherapie",
+        duration: "25 Min",
+        price: "55 €",
+      },
+      {
+        name: "Klassische Ganzkörpermassage + Pressotherapie für Beine, Bauch und Arme",
+        duration: "60 + 45 Min",
+        price: "90 €",
+      },
+      {
+        name: "Aroma-Ganzkörpermassage + Pressotherapie für Beine, Bauch und Arme",
+        duration: "60 + 45 Min",
+        price: "65 €",
+      },
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Preisliste",
-      itemListElement: (preislisteData as PreislisteData).sections.flatMap(
-        (s: Section) =>
-          s.services.map((svc) => ({
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: svc.name,
-              description: svc.description,
-            },
-          }))
-      ),
+  },
+  {
+    title: "Massage Einzelner Zonen",
+    color: "blue",
+    services: [
+      { name: "Rücken & Nacken", duration: "30 Min", price: "30 €" },
+      { name: "Arme & Nacken", duration: "30 Min", price: "30 €" },
+      { name: "Rücken, Nacken & Arme", duration: "30 Min", price: "30 €" },
+      { name: "Beine ohne Füße", duration: "30 Min", price: "30 €" },
+      { name: "Kopf", duration: "20 Min", price: "20 €" },
+      { name: "Gesicht", duration: "20 Min", price: "30 €" },
+      { name: "Kopf & Gesicht", duration: "30 Min", price: "40 €" },
+    ],
+  },
+  {
+    title: "Spezialmassagen",
+    color: "yellow",
+    services: [
+      {
+        name: "Anti-Cellulite-Massage Beine & Gesäß",
+        duration: "40 Min",
+        price: "50 €",
+      },
+      { name: "Ganzkörpermassage", duration: "60 Min", price: "80 €" },
+      { name: "Ganzkörpermassage", duration: "90 Min", price: "99 €" },
+      {
+        name: "Aroma-Entspannungsmassage (Ganzkörper)",
+        duration: "45 Min",
+        price: "50 €",
+      },
+      {
+        name: "Aroma-Entspannungsmassage (Ganzkörper)",
+        duration: "60 Min",
+        price: "65 €",
+      },
+      {
+        name: "Aroma-Entspannungsmassage (Ganzkörper)",
+        duration: "90 Min",
+        price: "85 €",
+      },
+      {
+        name: "Klassische Ganzkörpermassage",
+        duration: "40 Min",
+        price: "45 €",
+      },
+      {
+        name: "Klassische Ganzkörpermassage",
+        duration: "60 Min",
+        price: "60 €",
+      },
+      {
+        name: "Klassische Ganzkörpermassage",
+        duration: "90 Min",
+        price: "90 €",
+      },
+    ],
+  },
+  {
+    title: "Pressotherapie (Apparative Lymphdrainage-Massage)",
+    color: "pink",
+    services: [
+      { name: "Arme, Bauch, Beine", duration: "45 Min", price: "35 €" },
+      { name: "Bauch, Beine", duration: "30 Min", price: "25 €" },
+      { name: "Beine", duration: "25 Min", price: "20 €" },
+      { name: "Probebehandlung", price: "10 €" },
+    ],
+  },
+];
+
+const getColorClasses = (color: string, type: "bg" | "border" | "text" = "bg") => {
+  const baseClasses = {
+    green: {
+      bg: "bg-green-500 hover:bg-green-600 focus:bg-green-600",
+      border: "border-green-500",
+      text: "text-green-600"
     },
+    blue: {
+      bg: "bg-blue-500 hover:bg-blue-600 focus:bg-blue-600", 
+      border: "border-blue-500",
+      text: "text-blue-600"
+    },
+    yellow: {
+      bg: "bg-yellow-500 hover:bg-yellow-600 focus:bg-yellow-600",
+      border: "border-yellow-500", 
+      text: "text-yellow-600"
+    },
+    pink: {
+      bg: "bg-pink-500 hover:bg-pink-600 focus:bg-pink-600",
+      border: "border-pink-500",
+      text: "text-pink-600"
+    }
   };
 
-  function renderPriceSection(section: Section, index: number): ReactElement {
-    const isImageLeft = section.layout === "image-left";
-    const sectionHeadingId = `${section.id}-title`;
+  return baseClasses[color as keyof typeof baseClasses]?.[type] || baseClasses.green[type];
+};
 
-    return (
-      <article
-        key={section.id}
-        id={section.id}
-        aria-labelledby={sectionHeadingId}
-        className="bg-white rounded-2xl shadow-lg overflow-hidden border border-green-100 mb-8 md:mb-12 lg:mb-16"
-      >
-        <div
-          className={`flex flex-col ${
-            isImageLeft ? "lg:flex-row" : "lg:flex-row-reverse"
-          } lg:items-stretch`}
-        >
-          {/* Image Section */}
-          <figure className="lg:w-2/5 relative m-0">
-            <div className="aspect-video lg:aspect-auto lg:h-full relative">
-              <Image
-                src={section.image}
-                alt={section.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..."
-                priority={index === 0}
-              />
-              <figcaption className="sr-only">{section.title}</figcaption>
+export default function PriceList() {
+  const [loadingService, setLoadingService] = useState<string | null>(null);
+  const whatsappNumber = "4915124908000";
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6 pointer-events-none">
-                <span className="text-white font-semibold text-lg">
-                  {section.title}
-                </span>
-              </div>
-            </div>
-          </figure>
-
-          {/* Content Section */}
-          <div className="lg:w-3/5 p-6 md:p-8">
-            <header className="mb-6 md:mb-8">
-              <h2
-                id={sectionHeadingId}
-                className="text-2xl md:text-3xl font-bold text-gray-800 mb-3"
-              >
-                {section.title}
-              </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-[#62733f] to-green-600 rounded-full mb-4" />
-              <p className="text-gray-600 leading-relaxed">
-                {section.description}
-              </p>
-            </header>
-
-            {/* Services List */}
-            <ul
-              className="space-y-4 md:space-y-6"
-              aria-label={`${section.title} — Dienstleistungen`}
-            >
-              {section.services.map((service, serviceIndex) => {
-                const dt = durationToDatetime(service.duration);
-                return (
-                  <li
-                    key={serviceIndex}
-                    className="border border-green-100 rounded-xl p-4 md:p-6 hover:shadow-md transition-all duration-300 bg-gradient-to-r from-green-50 to-white"
-                  >
-                    <article
-                      aria-labelledby={`${section.id}-svc-${serviceIndex}-name`}
-                      className="flex flex-col md:flex-row md:items-center md:justify-between gap-3"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3">
-                          <Icons.Scale // ← РАСКОММЕНТИРОВАЛ ИКОНКУ
-                            aria-hidden="true"
-                            focusable={false}
-                            className="w-5 h-5 text-[#62733f] mt-1 flex-shrink-0"
-                          />
-                          <div>
-                            <h3
-                              id={`${section.id}-svc-${serviceIndex}-name`}
-                              className="text-lg md:text-xl font-semibold text-gray-800 mb-1"
-                            >
-                              {service.name}
-                            </h3>
-                            <p className="text-gray-600 text-sm md:text-base mb-2">
-                              {service.description}
-                            </p>
-
-                            <div className="flex items-center gap-4 text-sm text-gray-500">
-                              <span className="flex items-center gap-1">
-                                <Icons.Clock
-                                  aria-hidden="true"
-                                  focusable={false}
-                                  className="w-4 h-4"
-                                />
-                                {dt ? (
-                                  <time dateTime={dt} title={service.duration}>
-                                    {service.duration}
-                                  </time>
-                                ) : (
-                                  <span>{service.duration}</span>
-                                )}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="text-right mt-3 md:mt-0">
-                        <div
-                          className="text-2xl md:text-3xl font-bold text-[#62733f] mb-1"
-                          aria-label={`Preis: ${service.price}`}
-                        >
-                          {service.price}
-                        </div>
-                        <span className="text-sm text-gray-500">
-                          inkl. MwSt
-                        </span>
-                      </div>
-                    </article>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      </article>
+  const getWhatsappLink = (serviceName: string, duration?: string) => {
+    const serviceText = duration 
+      ? `${serviceName} (${duration})`
+      : serviceName;
+    
+    const text = encodeURIComponent(
+      `Hallo! Ich möchte einen Termin für "${serviceText}" buchen. Können Sie mir bitte verfügbare Termine mitteilen?`
     );
-  }
+    return `https://wa.me/${whatsappNumber}?text=${text}`;
+  };
+
+  const handleBookingClick = (serviceName: string, duration?: string) => {
+    setLoadingService(serviceName);
+    // Сброс состояния загрузки через 2 секунды на случай, если переход не произошел
+    setTimeout(() => setLoadingService(null), 2000);
+  };
 
   return (
-    <>
-      {/* JSON-LD Schema */}
-      <Script
-        id="preisliste-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-      />
+    <section className="container mx-auto px-4 py-10">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800">
+        Unsere Preise
+      </h1>
 
-      <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 py-8 md:py-12 lg:py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          {/* Header Section */}
-          <header className="text-center mb-8 md:mb-12 lg:mb-16">
-            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 lg:p-12 border border-green-100 mx-auto max-w-4xl">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 md:mb-6">
-                Preisliste
-              </h1>
-              <div className="w-24 h-1 bg-gradient-to-r from-[#62733f] to-green-600 mx-auto rounded-full mb-6 md:mb-8" />
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Entdecken Sie unsere vielfältigen Massage-Angebote und
-                Pressotherapie-Behandlungen. Professionelle Anwendungen zu
-                fairen Preisen in 63695 Glauburg-Stockheim.
-              </p>
-            </div>
-          </header>
+      {categories.map((category) => (
+        <div key={category.title} className="mb-12">
+          <h2 className={`text-xl md:text-2xl font-semibold mb-6 border-l-4 pl-4 ${getColorClasses(category.color, "border")} ${getColorClasses(category.color, "text")}`}>
+            {category.title}
+          </h2>
 
-          {/* Price Sections */}
-          <div className="space-y-8 md:space-y-12 lg:space-y-16">
-            {(preislisteData as PreislisteData).sections.map((section, index) =>
-              renderPriceSection(section, index)
-            )}
-          </div>
-
-          {/* Notice Section */}
-          <footer
-            className="mt-12 md:mt-16"
-            aria-labelledby="wichtige-hinweise"
-          >
-            <div className="bg-gradient-to-r from-[#62733f]/10 to-green-100 rounded-2xl p-6 md:p-8 border border-[#62733f]/20">
-              <div className="flex items-start gap-4">
-                <Icons.Info
-                  aria-hidden="true"
-                  focusable={false}
-                  className="w-6 h-6 text-[#62733f] mt-1 flex-shrink-0"
-                />
-                <div>
-                  <h3
-                    id="wichtige-hinweise"
-                    className="text-lg font-semibold text-gray-800 mb-2"
-                  >
-                    Wichtige Hinweise
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {(preislisteData as PreislisteData).notice}
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {category.services.map((service, index) => (
+              <li
+                key={`${service.name}-${service.duration}-${index}`}
+                className="flex flex-col justify-between p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white group"
+              >
+                <div className="flex-grow">
+                  <p className="font-medium text-gray-800 group-hover:text-gray-900 transition-colors leading-relaxed">
+                    {service.name}
                   </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="bg-white px-3 py-1 rounded-full text-sm text-gray-600 border border-green-200">
-                      📞 Terminvereinbarung erforderlich
-                    </span>
-                    <span className="bg-white px-3 py-1 rounded-full text-sm text-gray-600 border border-green-200">
-                      💰 Alle Preise inkl. MwSt
-                    </span>
-                    <span className="bg-white px-3 py-1 rounded-full text-sm text-gray-600 border border-green-200">
-                      ⏰ Stornierung bis 24h vorher
-                    </span>
-                  </div>
+                  {service.duration && (
+                    <p className="text-sm text-gray-600 mt-2 font-medium flex items-center">
+                      <span className="mr-2">⏱️</span>
+                      {service.duration}
+                    </p>
+                  )}
                 </div>
-              </div>
-            </div>
-          </footer>
+                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                  <span className="font-bold text-lg text-gray-900">
+                    {service.price}
+                  </span>
+                  <a
+                    href={getWhatsappLink(service.name, service.duration)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleBookingClick(service.name, service.duration)}
+                    className={`${getColorClasses(category.color, "bg")} text-white py-2 px-4 rounded-lg transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 min-w-[120px] text-center flex items-center justify-center`}
+                  >
+                    {loadingService === service.name ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Wird geladen...
+                      </>
+                    ) : (
+                      "Termin buchen"
+                    )}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </main>
-    </>
+      ))}
+
+      {/* Важная информация */}
+      <div className="mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+        <h3 className="font-semibold text-lg mb-4 text-gray-800 flex items-center">
+          <span className="mr-2">ℹ️</span>
+          Wichtige Informationen:
+        </h3>
+        <ul className="text-sm text-gray-600 space-y-2">
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Alle Preise in Euro</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Termine nur nach vorheriger Vereinbarung</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Professionelle Massage in Glauburg-Stockheim</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Privatzahlung - keine Krankenkassenabrechnung</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Hermstrasse 37, 63695 Glauburg-Stockheim</span>
+          </li>
+        </ul>
+        
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <p className="text-sm text-gray-600">
+            📞 Telefon:{" "}
+            <a href="tel:+4915124908000" className="text-blue-600 hover:text-blue-800 font-medium">
+              +49 1512 4908000
+            </a>
+          </p>
+          <p className="text-sm text-gray-600 mt-1">
+            🌐 Website:{" "}
+            <a href="https://www.balabastudio.de" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">
+              www.BalabaStudio.de
+            </a>
+          </p>
+        </div>
+      </div>
+
+      {/* SEO текст */}
+      <p className="mt-8 text-gray-600 text-sm text-center leading-relaxed">
+        Professionelle Massage in Glauburg-Stockheim. Wir bieten klassische Massagen, 
+        Aroma-Entspannungsmassagen, Anti-Cellulite-Behandlungen und Pressotherapie 
+        für Arme, Beine, Rücken, Nacken und Gesicht. Ideal zur Entspannung nach 
+        einem langen Arbeitstag oder zur aktiven Regeneration. Jetzt Termin buchen!
+      </p>
+    </section>
   );
 }

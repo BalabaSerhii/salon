@@ -63,7 +63,7 @@ export default function HomePage() {
 
       {/* === HERO SECTION === */}
       {/* <AppointmentForm services={services} /> */}
-      <section className="relative  text-[#64615a]  text-center " role="banner">
+      <section className="relative  text-[#64615a]  text-center mt-1" role="banner">
         <div className="bg-[#f8f7f4] pt-7 pb-10 text-center">
           <h1
             className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5 "
@@ -151,12 +151,7 @@ export default function HomePage() {
         aria-labelledby="services-title"
       >
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2
-            id="services-title"
-            className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10"
-          >
-            Unsere Massage-Angebote
-          </h2>
+          
           <ServicesPreview />
         </div>
       </section>
@@ -175,21 +170,7 @@ export default function HomePage() {
         <ReviewCarousel />
       </section>
 
-      {/* === CONTACT === */}
-      <section
-        className="py-16 md:py-20  text-white"
-        aria-labelledby="contact-title"
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2
-            id="contact-title"
-            className="text-3xl md:text-4xl font-bold mb-8 text-center"
-          >
-            Kontakt & Anfahrt
-          </h2>
-          <ContactSection />
-        </div>
-      </section>
+    
     </main>
   );
 }

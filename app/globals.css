@@ -82,21 +82,26 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-
-.embla{
+.embla {
   overflow: hidden;
   width: 100%;
   padding: 0 20px;
 }
 
-.embla__container{
+.embla__container {
   display: flex;
- gap: 10px;
+  gap: 10px;
 }
 
+.embla__slide {
+  flex: 0 0 80%;
+  justify-items: center;
+  justify-content: center;
+}
 
-.embla__slide{
-flex: 0 0 80%;
-justify-items: center;
-justify-content: center;
+@layer base {
+  .container {
+    @apply mx-auto px-4 md:px-6 lg:px-8;
+    max-width: 1200px;
+  }
 }

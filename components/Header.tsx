@@ -171,7 +171,6 @@ export default function Header() {
                     {link.label}
                   </Link>
 
-                  {/* зелёная точка под активным пунктом (как было у тебя) */}
                   {isActive && (
                     <motion.span
                       layoutId="active-dot"
