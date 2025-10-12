@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BlogCardProps } from "../lib/blog.ts";
+import { BlogCardProps } from "../app/lib/blog";
 
 export default function BlogCard({ post, layout }: BlogCardProps) {
   const isImageRight = layout === "image-right";

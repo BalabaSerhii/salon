@@ -13,5 +13,7 @@ export interface BlogPost {
 
 export interface BlogCardProps {
   post: BlogPost;
-  layout: 'image-right' | 'image-left';
+  layout: "image-right" | "image-left";
 }
+
+export const blogPosts: BlogPost[] = [];

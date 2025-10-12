@@ -2,23 +2,11 @@
 
 import ButtonInsta from "@/components/ButtonInsta";
 import ButtonWA from "@/components/ButtonWA";
-import ContactSection from "@/components/ContactSection";
 import ReviewsSEO from "@/components/ReviewsSEO";
 import ServicesPreview from "@/components/ServicesPreview";
 import BenefitsSection from "@/components/BenefitsSection";
-import CTASection from "@/components/CTASection";
 import Script from "next/script";
-import AppointmentForm from "@/components/AppointmentForm";
 import ReviewCarousel from "@/components/ReviewCarousel";
-
-const services = [
-  { id: "massage-relax", name: "Расслабляющий массаж", durationMinutes: 60 },
-  {
-    id: "back-therapy",
-    name: "Терапевтический массаж спины",
-    durationMinutes: 45,
-  },
-];
 
 export default function HomePage() {
   return (
@@ -63,7 +51,10 @@ export default function HomePage() {
 
       {/* === HERO SECTION === */}
       {/* <AppointmentForm services={services} /> */}
-      <section className="relative  text-[#64615a]  text-center mt-1" role="banner">
+      <section
+        className="relative  text-[#64615a]  text-center mt-1"
+        role="banner"
+      >
         <div className="bg-[#f8f7f4] pt-7 pb-10 text-center">
           <h1
             className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5 "
@@ -151,7 +142,6 @@ export default function HomePage() {
         aria-labelledby="services-title"
       >
         <div className="container mx-auto px-4 max-w-6xl">
-          
           <ServicesPreview />
         </div>
       </section>
@@ -169,8 +159,6 @@ export default function HomePage() {
         </div>
         <ReviewCarousel />
       </section>
-
-    
     </main>
   );
 }

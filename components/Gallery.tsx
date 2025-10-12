@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import ModalGallery from "./ModalGallery";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { ChevronLeftIcon, ChevronRightIcon, } from '@heroicons/react/24/solid';
 
 const images = [
   { src: "/client.jpg", alt: "Client relax" },

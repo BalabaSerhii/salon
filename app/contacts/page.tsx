@@ -48,6 +48,12 @@ const services: Service[] = [
   { id: "12", name: "Kombipaket Super-Mix", durationMinutes: 75 },
 ];
 
+// Интерфейс для ответа сервера
+interface ApiResponse {
+  message?: string;
+  previewUrl?: string;
+}
+
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState<"form" | "contacts">("form");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -64,7 +70,7 @@ export default function ContactPage() {
   });
 
   const selectedServiceId = watch("serviceId");
-  const selectedService = services.find((s) => s.id === selectedServiceId);
+  // Убрали неиспользуемую переменную selectedService
 
   async function onSubmit(data: AppointmentFormValues) {
     try {
@@ -75,9 +81,10 @@ export default function ContactPage() {
       });
 
       const contentType = res.headers.get("content-type") || "";
-      let body: any;
+      let body: ApiResponse | string;
+
       if (contentType.includes("application/json")) {
-        body = await res.json();
+        body = (await res.json()) as ApiResponse;
       } else {
         body = await res.text();
         throw new Error(
@@ -85,9 +92,10 @@ export default function ContactPage() {
         );
       }
 
-      if (!res.ok) throw new Error(body?.message || "Server error");
+      if (!res.ok)
+        throw new Error((body as ApiResponse)?.message || "Server error");
 
-      if (body.previewUrl) {
+      if ((body as ApiResponse).previewUrl) {
         toast.success("Terminanfrage erfolgreich gesendet!");
       } else {
         toast.success("Terminanfrage erfolgreich gesendet!");
@@ -129,7 +137,11 @@ export default function ContactPage() {
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Mobile Tab Navigation */}
-            <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} mb-6`}>
+            <div
+              className={`lg:hidden ${
+                isMobileMenuOpen ? "block" : "hidden"
+              } mb-6`}
+            >
               <div className="bg-white rounded-lg p-1 shadow-sm border">
                 <button
                   onClick={() => {
@@ -197,7 +209,10 @@ export default function ContactPage() {
                   24 Stunden bei Ihnen
                 </p>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-4 sm:space-y-6"
+                >
                   <div className="grid grid-cols-1 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -479,7 +494,11 @@ export default function ContactPage() {
           </div>
 
           {/* Sidebar - Hidden on mobile when menu is closed */}
-          <div className={`space-y-4 sm:space-y-6 ${isMobileMenuOpen ? 'block' : 'hidden lg:block'}`}>
+          <div
+            className={`space-y-4 sm:space-y-6 ${
+              isMobileMenuOpen ? "block" : "hidden lg:block"
+            }`}
+          >
             {/* Contact Card */}
             <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">

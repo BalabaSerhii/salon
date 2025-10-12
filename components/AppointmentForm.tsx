@@ -15,6 +15,12 @@ interface Props {
   services: Service[];
 }
 
+// Интерфейс для ответа API
+interface ApiResponse {
+  message?: string;
+  previewUrl?: string;
+}
+
 export default function AppointmentForm({ services }: Props) {
   const {
     register,
@@ -35,9 +41,10 @@ export default function AppointmentForm({ services }: Props) {
       });
 
       const contentType = res.headers.get("content-type") || "";
-      let body: any;
+      let body: ApiResponse | string;
+
       if (contentType.includes("application/json")) {
-        body = await res.json();
+        body = (await res.json()) as ApiResponse;
       } else {
         body = await res.text();
         throw new Error(
@@ -45,99 +52,152 @@ export default function AppointmentForm({ services }: Props) {
         );
       }
 
-      if (!res.ok) throw new Error(body?.message || "Ошибка сервера");
+      if (!res.ok) {
+        throw new Error(
+          typeof body === "object"
+            ? body?.message || "Server error"
+            : "Server error"
+        );
+      }
 
-      if (body.previewUrl) {
-        // если используется Ethereal — покажем ссылку для просмотра письма
-        toast("Проверка отправки");
+      if (typeof body === "object" && body.previewUrl) {
+        toast.success("Terminanfrage erfolgreich gesendet!");
       } else {
-        toast("Проверка отправки");
+        toast.success("Terminanfrage erfolgreich gesendet!");
       }
       reset();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       console.error("Submit error:", err);
-      alert("Ошибка при отправке: " + msg);
+      toast.error("Fehler beim Senden: " + msg);
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg space-y-4">
       <div>
-        <label className="block text-sm font-medium">Услуга</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Gewünschte Behandlung
+        </label>
         <select
           {...register("serviceId")}
-          className="mt-1 w-full rounded border px-3 py-2"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
         >
-          <option value="">Выберите услугу</option>
+          <option value="">Bitte wählen</option>
           {services.map((s) => (
             <option key={s.id} value={s.id}>
-              {s.name} — {s.durationMinutes} мин
+              {s.name} — {s.durationMinutes} Min
             </option>
           ))}
         </select>
         {errors.serviceId && (
-          <p className="text-red-600 text-sm">{errors.serviceId.message}</p>
+          <p className="text-red-600 text-sm mt-1">
+            {errors.serviceId.message}
+          </p>
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-medium">Длительность (мин)</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Dauer (Minuten)
+        </label>
         <select
-          {...register("duration")}
-          className="mt-1 w-full rounded border px-3 py-2"
+          {...register("duration", { valueAsNumber: true })}
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
         >
-          <option value="">Выберите</option>
+          <option value="">Bitte wählen</option>
           <option value="30">30</option>
           <option value="45">45</option>
           <option value="60">60</option>
+          <option value="75">75</option>
+          <option value="90">90</option>
         </select>
         {errors.duration && (
-          <p className="text-red-600 text-sm">{errors.duration.message}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.duration.message}</p>
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-medium">Дата и время</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Datum & Uhrzeit
+        </label>
         <input
           {...register("datetime")}
           type="datetime-local"
-          className="mt-1 w-full rounded border px-3 py-2"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
         {errors.datetime && (
-          <p className="text-red-600 text-sm">{errors.datetime.message}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.datetime.message}</p>
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-medium">Телефон</label>
+        <label className="block text-sm font-medium text-gray-700">Name</label>
+        <input
+          {...register("name")}
+          type="text"
+          placeholder="Vor- und Nachname"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+        {errors.name && (
+          <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Telefonnummer
+        </label>
         <input
           {...register("phone")}
           type="tel"
           placeholder="+49..."
-          className="mt-1 w-full rounded border px-3 py-2"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
         {errors.phone && (
-          <p className="text-red-600 text-sm">{errors.phone.message}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          E-Mail
+        </label>
+        <input
+          {...register("email")}
+          type="email"
+          placeholder="ihre@email.de"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+        {errors.email && (
+          <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
         )}
       </div>
 
       <div className="flex items-center space-x-2">
-        <input id="wa" type="checkbox" {...register("whatsapp")} />
-        <label htmlFor="wa" className="text-sm">
-          WhatsApp
+        <input
+          id="whatsapp"
+          type="checkbox"
+          {...register("whatsapp")}
+          className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+        />
+        <label htmlFor="whatsapp" className="text-sm text-gray-700">
+          Ich bevorzuge Kommunikation per WhatsApp
         </label>
       </div>
 
       <div>
-        <label className="block text-sm font-medium">Комментарий</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Kommentar oder besondere Wünsche
+        </label>
         <textarea
           {...register("comment")}
           rows={3}
-          className="mt-1 w-full rounded border px-3 py-2"
+          placeholder="Besondere Wünsche oder gesundheitliche Hinweise..."
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
         {errors.comment && (
-          <p className="text-red-600 text-sm">{errors.comment.message}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.comment.message}</p>
         )}
       </div>
 
@@ -145,9 +205,9 @@ export default function AppointmentForm({ services }: Props) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded bg-blue-600 px-4 py-2 text-white disabled:opacity-60"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? "Отправка..." : "Записаться"}
+          {isSubmitting ? "Wird gesendet..." : "Termin anfragen"}
         </button>
       </div>
     </form>

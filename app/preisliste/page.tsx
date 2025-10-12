@@ -1,6 +1,5 @@
 "use client";
 
-import AppointmentForm from "@/components/AppointmentForm";
 import { useState } from "react";
 
 interface Service {

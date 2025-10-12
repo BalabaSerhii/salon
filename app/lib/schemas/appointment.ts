@@ -1,12 +1,18 @@
 import { z } from "zod";
 
 export const appointmentSchema = z.object({
-  serviceId: z.string().min(1, "Выберите услугу"),
-  duration: z.string().min(1, "Укажите длительность"),
-  datetime: z.string().min(1, "Выберите дату и время"),
-  phone: z.string().min(5, "Введите корректный телефон"),
+  serviceId: z.string().min(1, "Bitte wählen Sie eine Behandlung aus"),
+  duration: z.string().min(1, "Bitte wählen Sie eine Dauer aus"),
+  datetime: z.string().min(1, "Bitte wählen Sie Datum und Uhrzeit"),
+  name: z.string().min(2, "Name muss mindestens 2 Zeichen lang sein"),
+  phone: z.string().min(5, "Bitte geben Sie eine gültige Telefonnummer ein"),
+  email: z
+    .string()
+    .email("Bitte geben Sie eine gültige E-Mail Adresse ein")
+    .optional()
+    .or(z.literal("")),
   whatsapp: z.boolean().optional(),
-  comment: z.string().max(1000).optional(),
+  comment: z.string().optional(),
 });
 
 export type AppointmentFormValues = z.infer<typeof appointmentSchema>;
