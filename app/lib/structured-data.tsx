@@ -2,7 +2,6 @@
 
 import Script from "next/script";
 
-// Перенесенные данные отзывов
 const allReviews = [
   {
     author: "Karin Thon",
@@ -124,7 +123,7 @@ export const StructuredData = () => {
     paymentAccepted: "Cash, EC Card",
 
     // Business Details
-    foundingDate: "2024",
+    foundingDate: "2025",
     founder: {
       "@type": "Person",
       name: "Serhii Balaba",
@@ -236,7 +235,7 @@ export const StructuredData = () => {
         worstRating: "1",
       },
       reviewBody: review.text,
-      datePublished: "2024-01-15", // Можно заменить на реальные даты если есть
+      datePublished: "2025-01-15", // Можно заменить на реальные даты если есть
       publisher: {
         "@type": "Organization",
         name: "Balaba Studio Massage",
@@ -253,29 +252,66 @@ export const StructuredData = () => {
     slogan: "Professionelle Entspannungsmassage in Glauburg-Stockheim",
   };
 
-  // Service-specific structured data
+  // Service-specific structured data (ИСПРАВЛЕННЫЙ - добавлены недостающие поля)
   const serviceStructuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Massage Therapy Services",
     description: "Professionelle Massagetherapie und Wellness-Behandlungen",
+
+    // Provider with complete LocalBusiness data
     provider: {
       "@type": "LocalBusiness",
       name: "Balaba Studio Massage",
+      telephone: "+49-151-24908000", // ✅ ДОБАВЛЕНО
+      priceRange: "€€", // ✅ ДОБАВЛЕНО
+      image: [
+        // ✅ ДОБАВЛЕНО
+        "https://balabastudio.de/balabastudio.png",
+        "https://balabastudio.de/logobeauty.webp",
+      ],
       address: {
         "@type": "PostalAddress",
         streetAddress: "Herrnstrasse 37",
         addressLocality: "Glauburg-Stockheim",
         postalCode: "63695",
         addressCountry: "DE",
+        addressRegion: "Hessen", // ✅ ДОБАВЛЕНО
       },
+      geo: {
+        // ✅ ДОБАВЛЕНО
+        "@type": "GeoCoordinates",
+        latitude: 50.3250513,
+        longitude: 9.0123212,
+      },
+      openingHours: "Mo-Sa 10:00-20:00", // ✅ ДОБАВЛЕНО
+      url: "https://balabastudio.de", // ✅ ДОБАВЛЕНО
     },
+
+    // Service details
+    serviceType: "Massage Therapy",
+    category: "Health & Beauty",
+
+    // Service area
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Glauburg-Stockheim, Hessen, Deutschland",
     },
-    serviceType: "Massage Therapy",
-    category: "Health & Beauty",
+
+    // Offers and pricing
+    offers: {
+      "@type": "Offer",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        price: "50",
+        priceCurrency: "EUR",
+        minPrice: "10",
+        maxPrice: "50",
+      },
+    },
+
+    // Additional service information
+    termsOfService: "https://balabastudio.de/agb",
   };
 
   return (
