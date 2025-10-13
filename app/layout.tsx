@@ -66,7 +66,7 @@ export default function RootLayout({
         </div>
         <main className="flex-grow">{children}</main>
         {/* === Floating WhatsApp Button === */}
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-6 right-6 z-50 ">
           <div className="transform hover:scale-110 transition-transform duration-300">
             <ButtonWA />
           </div>

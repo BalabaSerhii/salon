@@ -908,7 +908,7 @@ export default function ContactPage() {
                         {...register("phone")}
                         type="tel"
                         placeholder="+49 151 1234567"
-                        className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all"
+                        className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all   "
                       />
                       {errors.phone && (
                         <p className="text-red-600 text-sm mt-2 font-medium">
