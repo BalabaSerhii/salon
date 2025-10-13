@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import {
   FaFacebook,
   FaInstagram,
@@ -37,53 +36,6 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <Script
-        id="footer-ld-json"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "DaySpa",
-            name: "Balaba Studio Massage",
-            image: "https://balabastudio.de/balabastudio.png",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "Herrnstrasse 37",
-              addressLocality: "Glauburg-Stockheim",
-              postalCode: "63695",
-              addressCountry: "DE",
-            },
-            geo: {
-              "@type": "GeoCoordinates",
-              latitude: 50.325,
-              longitude: 9.012417,
-            },
-            telephone: "+4915124908000",
-            email: "balabamassage@gmail.com",
-            url: "https://balabastudio.de",
-            sameAs: [
-              "https://www.instagram.com/balabastudio_glauburg/",
-              "https://www.facebook.com/profile.php?id=61571893245558",
-              "https://t.me/BalabaStudio",
-            ],
-            openingHoursSpecification: [
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                ],
-                opens: "09:00",
-                closes: "20:00",
-              },
-            ],
-          }),
-        }}
-      />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Левая колонка: логотип + адрес */}
@@ -224,7 +176,7 @@ export default function Footer() {
             © {year} Balaba Studio – Alle Rechte vorbehalten.
           </p>
           <p className="text-gray-600 text-sm mb-3">
-„Website erstellt von Balaba Digital“ ✅
+            „Website erstellt von Balaba Digital“ ✅
           </p>
           <div className="flex justify-center gap-6">
             <Link

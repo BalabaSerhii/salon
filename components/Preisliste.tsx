@@ -1,6 +1,5 @@
 import type { ReactElement } from "react";
 import Image from "next/image";
-import Script from "next/script";
 import { Icons } from "./Icons";
 
 // Типы (сохранены)
@@ -42,42 +41,6 @@ function durationToDatetime(duration: string): string | undefined {
 }
 
 export default function Preisliste(): ReactElement {
-  // JSON-LD данные
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Balaba Studio Massage",
-    url: "https://balabastudio.de",
-    image: "https://balabastudio.de/BalabaStudio.png",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Herrnstrasse 37",
-      postalCode: "63695",
-      addressLocality: "Glauburg-Stockheim",
-      addressCountry: "DE",
-    },
-    telephone: "+49 151 24908000",
-    sameAs: [
-      "https://www.instagram.com/balabastudio_glauburg/",
-      "https://www.facebook.com/profile.php?id=61571893245558",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Preisliste",
-      itemListElement: (preislisteData as PreislisteData).sections.flatMap(
-        (s: Section) =>
-          s.services.map((svc) => ({
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: svc.name,
-              description: svc.description,
-            },
-          }))
-      ),
-    },
-  };
-
   function renderPriceSection(section: Section, index: number): ReactElement {
     const isImageLeft = section.layout === "image-left";
     const sectionHeadingId = `${section.id}-title`;
@@ -207,13 +170,6 @@ export default function Preisliste(): ReactElement {
 
   return (
     <>
-      {/* JSON-LD Schema */}
-      <Script
-        id="preisliste-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-      />
-
       <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 py-8 md:py-12 lg:py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Header Section */}

@@ -2,176 +2,13 @@
 
 import ButtonInsta from "@/components/ButtonInsta";
 import ButtonWA from "@/components/ButtonWA";
-import ReviewsSEO from "@/components/ReviewsSEO";
 import ServicesPreview from "@/components/ServicesPreview";
 import BenefitsSection from "@/components/BenefitsSection";
-import Script from "next/script";
 import ReviewCarousel from "@/components/ReviewCarousel";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-x-hidden">
-      {/* ✅ Complete Structured Data for SEO */}
-      <Script
-        id="ld-json-home"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-
-            // Basic Information
-            name: "Balaba Studio Massage",
-            description:
-              "Professionelle Massagen und Pressotherapie in Glauburg-Stockheim - Entspannungsmassagen, Lymphdrainage und Wellness-Behandlungen",
-            url: "https://balabastudio.de",
-            image: [
-              "https://balabastudio.de/balabastudio.png",
-              "https://balabastudio.de/logobeauty.webp",
-            ],
-
-            // Contact Information
-            telephone: "+49-151-24908000",
-            email: "balabamassage@gmail.com",
-
-            // Address
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "Herrnstrasse 37",
-              addressLocality: "Glauburg-Stockheim",
-              postalCode: "63695",
-              addressCountry: "DE",
-              addressRegion: "Hessen",
-            },
-
-            // Geo Coordinates
-            geo: {
-              "@type": "GeoCoordinates",
-              latitude: 50.3250513,
-              longitude: 9.0123212,
-            },
-
-            // Business Hours
-            openingHoursSpecification: [
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                ],
-                opens: "10:00",
-                closes: "20:00",
-              },
-            ],
-
-            // Price Information
-            priceRange: "€€",
-            currenciesAccepted: "EUR",
-            paymentAccepted: "Cash",
-
-            // Business Details
-            foundingDate: "2025",
-            founder: {
-              "@type": "Person",
-              name: "Serhii Balaba",
-            },
-            numberOfEmployees: {
-              "@type": "QuantitativeValue",
-              value: "1",
-            },
-
-            // Services Offered
-            makesOffer: [
-              {
-                "@type": "Offer",
-                name: "Pressotherapie",
-                description:
-                  "Apparative Lymphdrainage-Massage zur Entschlackung und Entwässerung",
-                price: "10",
-                priceCurrency: "EUR",
-              },
-              {
-                "@type": "Offer",
-                name: "Ganzkörpermassage",
-                description:
-                  "Umfassende Entspannungsmassage des gesamten Körpers",
-                price: "50",
-                priceCurrency: "EUR",
-              },
-              {
-                "@type": "Offer",
-                name: "Zonen-Massage",
-                description: "Gezielte Massage spezifischer Körperbereiche",
-                price: "20",
-                priceCurrency: "EUR",
-              },
-            ],
-
-            // Business Type & Categories
-            additionalType: "https://www.productontology.org/id/Massage",
-            keywords:
-              "Massage, Pressotherapie, Lymphdrainage, Entspannung, Wellness, Glauburg-Stockheim",
-
-            // Professional Certifications
-            hasCredential: "Zertifizierte Massagetherapeutin",
-
-            // Social Media & Reviews
-            sameAs: [
-              "https://www.instagram.com/balabastudio_glauburg/",
-              "https://www.facebook.com/profile.php?id=61571893245558",
-              "https://wa.me/4915124908000",
-            ],
-
-            // Aggregate Rating
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "5",
-              ratingCount: "30",
-              bestRating: "5",
-              worstRating: "5",
-            },
-
-            // Area Served
-            areaServed: {
-              "@type": "City",
-              name: "Glauburg-Stockheim",
-            },
-
-            // Additional Business Info
-            logo: "https://balabastudio.de/logobeauty.webp",
-            slogan: "Professionelle Entspannungsmassage in Glauburg-Stockheim",
-          }),
-        }}
-      />
-
-      {/* Additional Service Schema */}
-      <Script
-        id="ld-json-service"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Massage Therapy",
-            description:
-              "Professionelle Massagetherapie und Wellness-Behandlungen",
-            provider: {
-              "@type": "LocalBusiness",
-              name: "Balaba Studio Massage",
-            },
-            areaServed: "Glauburg-Stockheim und Umgebung",
-            serviceType: "Massage Therapy",
-            category: "Health & Beauty",
-          }),
-        }}
-      />
-
       {/* === HERO SECTION === */}
       <section
         className="relative text-[#64615a] text-center mt-1"
@@ -273,7 +110,6 @@ export default function HomePage() {
           >
             Kundenbewertungen
           </h2>
-          <ReviewsSEO />
         </div>
         <div className="container mx-auto px-4 max-w-6xl">
           <ReviewCarousel />
