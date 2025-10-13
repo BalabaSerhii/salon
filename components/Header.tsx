@@ -138,7 +138,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="z-50" aria-label="Zur Startseite">
           <Image
-            src="/balabastudio.png"
+            src="/logobeauty.webp"
             alt="Logo von Balaba Studio Massage in Glauburg"
             width={100}
             height={50}

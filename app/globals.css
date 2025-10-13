@@ -62,7 +62,7 @@ p {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #fd6c6c;
+    --background: #f8f7f4;
     --foreground: #ededed;
   }
 }

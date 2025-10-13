@@ -89,7 +89,7 @@ export default function Footer() {
         <div className=" items-center flex gap-10 ">
           <Link href="/" aria-label="Zur Startseite">
             <Image
-              src="/balabastudio.png"
+              src="/logobeauty.webp"
               alt="Logo von Balaba Studio Massage"
               width={80}
               height={40}
@@ -111,8 +111,8 @@ export default function Footer() {
             >
               balabamassage@gmail.com
             </a>
-            <br />
-            <a href="tel:+4915124908000" className="hover:underline">
+            
+            <a href="tel:+4915124908000" className="hover:underline mt-0">
               +49 151 24908000
             </a>
           </address>
