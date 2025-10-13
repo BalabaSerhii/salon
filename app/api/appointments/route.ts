@@ -4,7 +4,7 @@ import { appointmentSchema } from "../../lib/schemas/appointment";
 import { ZodError } from "zod";
 
 // Отключаем кэширование для API routes
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
@@ -12,15 +12,17 @@ export async function POST(req: Request) {
     const data = appointmentSchema.parse(body);
 
     // Проверяем обязательные environment variables в продакшене
-    const requiredEnvVars = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'];
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+    const requiredEnvVars = ["SMTP_HOST", "SMTP_USER", "SMTP_PASS"];
+    const missingVars = requiredEnvVars.filter(
+      (varName) => !process.env[varName]
+    );
 
-    if (missingVars.length > 0 && process.env.NODE_ENV === 'production') {
-      console.error('Missing required environment variables:', missingVars);
+    if (missingVars.length > 0 && process.env.NODE_ENV === "production") {
+      console.error("Missing required environment variables:", missingVars);
       return NextResponse.json(
-        { 
-          message: 'Email service is not properly configured',
-          error: 'Missing environment variables'
+        {
+          message: "Email service is not properly configured",
+          error: "Missing environment variables",
         },
         { status: 500 }
       );
@@ -30,16 +32,17 @@ export async function POST(req: Request) {
     let isTestAccount = false;
 
     // В продакшене используем реальный SMTP, в development - тестовый
-    if (process.env.NODE_ENV === 'production' || 
-        (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)) {
-      
+    if (
+      process.env.NODE_ENV === "production" ||
+      (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
+    ) {
       transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT) || 587,
         secure: process.env.SMTP_SECURE === "true",
-        auth: { 
-          user: process.env.SMTP_USER, 
-          pass: process.env.SMTP_PASS 
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
         },
         // Добавляем таймауты для надежности
         connectionTimeout: 10000,
@@ -50,29 +53,28 @@ export async function POST(req: Request) {
       // Проверяем соединение с SMTP
       try {
         await transporter.verify();
-        console.log('SMTP connection verified');
+        console.log("SMTP connection verified");
       } catch (verifyError) {
-        console.error('SMTP connection failed:', verifyError);
+        console.error("SMTP connection failed:", verifyError);
         return NextResponse.json(
-          { 
-            message: 'Email service connection failed',
-            error: 'SMTP verification failed'
+          {
+            message: "Email service connection failed",
+            error: "SMTP verification failed",
           },
           { status: 500 }
         );
       }
-
     } else {
       // Development: используем Ethereal Email
-      console.log('Using Ethereal test account for development');
+      console.log("Using Ethereal test account for development");
       const testAccount = await nodemailer.createTestAccount();
       transporter = nodemailer.createTransport({
         host: testAccount.smtp.host,
         port: testAccount.smtp.port,
         secure: testAccount.smtp.secure,
-        auth: { 
-          user: testAccount.user, 
-          pass: testAccount.pass 
+        auth: {
+          user: testAccount.user,
+          pass: testAccount.pass,
         },
       });
       isTestAccount = true;
@@ -82,13 +84,13 @@ export async function POST(req: Request) {
     const formatGermanDateTime = (dateString: string) => {
       try {
         const date = new Date(dateString);
-        return date.toLocaleString('de-DE', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
+        return date.toLocaleString("de-DE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
         });
       } catch {
         return dateString;
@@ -110,12 +112,12 @@ export async function POST(req: Request) {
         `Name: ${data.name}`,
         `Email: ${data.email}`,
         `Telefon: ${data.phone}`,
-        `WhatsApp bevorzugt: ${data.whatsapp ? 'Ja' : 'Nein'}`,
-        `Kommentar: ${data.comment || 'Keine'}`,
+        `WhatsApp bevorzugt: ${data.whatsapp ? "Ja" : "Nein"}`,
+        `Kommentar: ${data.comment || "Keine"}`,
         ``,
-        `Gesendet am: ${new Date().toLocaleString('de-DE')}`
-      ].join('\n'),
-      
+        `Gesendet am: ${new Date().toLocaleString("de-DE")}`,
+      ].join("\n"),
+
       html: `
         <!DOCTYPE html>
         <html>
@@ -155,13 +157,15 @@ export async function POST(req: Request) {
                 <span class="label">Telefon:</span> ${data.phone}
               </div>
               <div class="field">
-                <span class="label">WhatsApp:</span> ${data.whatsapp ? 'Ja' : 'Nein'}
+                <span class="label">WhatsApp:</span> ${
+                  data.whatsapp ? "Ja" : "Nein"
+                }
               </div>
               <div class="field">
-                <span class="label">Kommentar:</span> ${data.comment || 'Keine'}
+                <span class="label">Kommentar:</span> ${data.comment || "Keine"}
               </div>
               <div class="footer">
-                <p>Gesendet am: ${new Date().toLocaleString('de-DE')}</p>
+                <p>Gesendet am: ${new Date().toLocaleString("de-DE")}</p>
                 <p>BalabaStudio • Hermstrasse 37, 63695 Glauburg-Stockheim</p>
               </div>
             </div>
@@ -171,44 +175,47 @@ export async function POST(req: Request) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    
+
     let previewUrl = null;
     if (isTestAccount) {
       previewUrl = nodemailer.getTestMessageUrl(info);
-      console.log('Development email sent. Preview URL:', previewUrl);
+      console.log("Development email sent. Preview URL:", previewUrl);
     } else {
-      console.log('Production email sent. Message ID:', info.messageId);
+      console.log("Production email sent. Message ID:", info.messageId);
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Appointment request sent successfully',
+    return NextResponse.json({
+      success: true,
+      message: "Appointment request sent successfully",
       previewUrl,
-      messageId: info.messageId
+      messageId: info.messageId,
     });
-
   } catch (err: unknown) {
     console.error("API error:", err);
-    
+
     if (err instanceof ZodError) {
+      // ИСПРАВЛЕННАЯ ЧАСТЬ: правильное обращение к errors
       return NextResponse.json(
-        { 
-          message: "Validierungsfehler", 
-          errors: err.errors.map(error => ({
-            field: error.path.join('.'),
-            message: error.message
-          }))
+        {
+          message: "Validierungsfehler",
+          errors: err.issues.map((error) => ({
+            // ← ИСПРАВЛЕНО: err.issues вместо err.errors
+            field: error.path?.join(".") || "unknown",
+            message: error.message,
+          })),
         },
         { status: 400 }
       );
     }
-    
-    const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-    
+
+    const errorMessage =
+      err instanceof Error ? err.message : "Unknown error occurred";
+
     return NextResponse.json(
-      { 
+      {
         message: "Fehler beim Senden der Terminanfrage",
-        error: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+        error:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       },
       { status: 500 }
     );

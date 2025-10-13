@@ -7,7 +7,6 @@ import {
   appointmentSchema,
   AppointmentFormValues,
 } from "../lib/schemas/appointment";
-// УБИРАЕМ импорт toast
 import ToastNotification from "@/components/ToastNotification";
 import {
   FaWhatsapp,
@@ -75,13 +74,10 @@ export default function ContactPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    watch,
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
     defaultValues: { whatsapp: false },
   });
-
-  const selectedServiceId = watch("serviceId");
 
   // ДОБАВЛЯЕМ функции для управления уведомлениями
   const showToast = (message: string, type: "success" | "error") => {
