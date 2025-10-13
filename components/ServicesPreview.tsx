@@ -49,23 +49,23 @@ export default function ServicesPreview() {
                 {service.price}
               </div>
               <Link
-                href={service.link}
-                className="block w-full bg-gradient-to-r from-[#62733f] to-green-600 text-white text-center py-3 rounded-lg font-semibold hover:from-[#62733f]/90 hover:to-green-600/90 transition-all duration-300"
-              >
-                Mehr erfahren
-              </Link>
+  href={service.link}
+  className="block w-full bg-[#f8f7f4] text-[#64615a] text-center py-3 rounded-lg font-semibold border-2 border-[#2d983f] transition-all duration-500 hover:bg-[#2d983f] hover:text-white hover:border-[#247a32] focus:outline-none focus:ring-2 focus:ring-[#2d983f] focus:ring-offset-2"
+>
+  Mehr erfahren
+</Link>
             </div>
           ))}
         </div>
 
         <div className="text-center">
-          <Link
-            href="/preisliste"
-            className="inline-flex items-center gap-2 bg-white text-[#62733f] border border-[#62733f] px-8 py-4 rounded-lg font-semibold hover:bg-[#62733f] hover:text-white transition-all duration-300"
-          >
-            Komplette Preisliste ansehen
-            <span>→</span>
-          </Link>
+         <Link
+  href="/preisliste"
+  className="inline-flex items-center gap-2 bg-[#f8f7f4] text-[#64615a] text-center py-3 px-8 rounded-lg font-semibold border-2 border-[#2d983f] transition-all duration-300 hover:bg-[#2d983f] hover:text-white hover:border-[#247a32] focus:outline-none focus:ring-2 focus:ring-[#2d983f] focus:ring-offset-2"
+>
+  Komplette Preisliste ansehen
+  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+</Link>
         </div>
       </div>
     </section>

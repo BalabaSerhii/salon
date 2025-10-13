@@ -7,7 +7,8 @@ import {
   appointmentSchema,
   AppointmentFormValues,
 } from "../lib/schemas/appointment";
-import { toast } from "sonner";
+// УБИРАЕМ импорт toast
+import ToastNotification from "@/components/ToastNotification";
 import {
   FaWhatsapp,
   FaInstagram,
@@ -58,6 +59,17 @@ export default function ContactPage() {
   const [activeTab, setActiveTab] = useState<"form" | "contacts">("form");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // ДОБАВЛЯЕМ состояние для уведомлений
+  const [toastNotification, setToastNotification] = useState<{
+    isVisible: boolean;
+    message: string;
+    type: "success" | "error";
+  }>({
+    isVisible: false,
+    message: "",
+    type: "success",
+  });
+
   const {
     register,
     handleSubmit,
@@ -70,7 +82,22 @@ export default function ContactPage() {
   });
 
   const selectedServiceId = watch("serviceId");
-  // Убрали неиспользуемую переменную selectedService
+
+  // ДОБАВЛЯЕМ функции для управления уведомлениями
+  const showToast = (message: string, type: "success" | "error") => {
+    setToastNotification({
+      isVisible: true,
+      message,
+      type,
+    });
+  };
+
+  const hideToast = () => {
+    setToastNotification((prev) => ({
+      ...prev,
+      isVisible: false,
+    }));
+  };
 
   async function onSubmit(data: AppointmentFormValues) {
     try {
@@ -95,21 +122,37 @@ export default function ContactPage() {
       if (!res.ok)
         throw new Error((body as ApiResponse)?.message || "Server error");
 
-      if ((body as ApiResponse).previewUrl) {
-        toast.success("Terminanfrage erfolgreich gesendet!");
-      } else {
-        toast.success("Terminanfrage erfolgreich gesendet!");
-      }
+      // ЗАМЕНЯЕМ toast.success на наш центрированный toast
+      showToast(
+        "Terminanfrage erfolgreich gesendet! Wir melden uns in Kürze bei Ihnen.",
+        "success"
+      );
+
       reset();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       console.error("Submit error:", err);
-      toast.error("Fehler beim Senden: " + msg);
+
+      // Определяем понятное сообщение об ошибке
+      let userFriendlyMessage = "Fehler beim Senden der Terminanfrage";
+
+      if (msg.includes("Validierungsfehler")) {
+        userFriendlyMessage = "Bitte überprüfen Sie Ihre Eingaben auf Fehler.";
+      } else if (msg.includes("Email service") || msg.includes("SMTP")) {
+        userFriendlyMessage =
+          "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.";
+      } else if (msg.includes("Network") || msg.includes("Fetch")) {
+        userFriendlyMessage =
+          "Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung.";
+      }
+
+      // ЗАМЕНЯЕМ toast.error на наш центрированный toast
+      showToast(userFriendlyMessage, "error");
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-4 sm:py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-4 sm:py-8 mt-3">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
@@ -567,6 +610,15 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* ДОБАВЛЯЕМ наш центрированный Toast компонент */}
+      <ToastNotification
+        message={toastNotification.message}
+        type={toastNotification.type}
+        isVisible={toastNotification.isVisible}
+        onClose={hideToast}
+        duration={4000}
+      />
     </div>
   );
 }

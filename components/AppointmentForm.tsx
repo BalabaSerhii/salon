@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   appointmentSchema,
   AppointmentFormValues,
 } from "../app/lib/schemas/appointment";
-import { toast } from "sonner";
+import ToastNotification from "../components/ToastNotification"; 
 
 type Service = { id: string; name: string; durationMinutes: number };
 
@@ -22,6 +22,16 @@ interface ApiResponse {
 }
 
 export default function AppointmentForm({ services }: Props) {
+  const [toastNotification, setToastNotification] = useState<{
+    isVisible: boolean;
+    message: string;
+    type: "success" | "error";
+  }>({
+    isVisible: false,
+    message: "",
+    type: "success",
+  });
+
   const {
     register,
     handleSubmit,
@@ -31,6 +41,21 @@ export default function AppointmentForm({ services }: Props) {
     resolver: zodResolver(appointmentSchema),
     defaultValues: { whatsapp: false },
   });
+
+  const showToast = (message: string, type: "success" | "error") => {
+    setToastNotification({
+      isVisible: true,
+      message,
+      type,
+    });
+  };
+
+  const hideToast = () => {
+    setToastNotification((prev) => ({
+      ...prev,
+      isVisible: false,
+    }));
+  };
 
   async function onSubmit(data: AppointmentFormValues) {
     try {
@@ -60,156 +85,191 @@ export default function AppointmentForm({ services }: Props) {
         );
       }
 
-      if (typeof body === "object" && body.previewUrl) {
-        toast.success("Terminanfrage erfolgreich gesendet!");
-      } else {
-        toast.success("Terminanfrage erfolgreich gesendet!");
-      }
+      // Показываем центрированное уведомление об успехе
+      showToast(
+        "Terminanfrage erfolgreich gesendet! Wir melden uns in Kürze bei Ihnen.",
+        "success"
+      );
+
       reset();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       console.error("Submit error:", err);
-      toast.error("Fehler beim Senden: " + msg);
+
+      // Определяем понятное сообщение об ошибке
+      let userFriendlyMessage = "Fehler beim Senden der Terminanfrage";
+
+      if (msg.includes("Validierungsfehler")) {
+        userFriendlyMessage = "Bitte überprüfen Sie Ihre Eingaben auf Fehler.";
+      } else if (msg.includes("Email service") || msg.includes("SMTP")) {
+        userFriendlyMessage =
+          "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.";
+      } else if (msg.includes("Network") || msg.includes("Fetch")) {
+        userFriendlyMessage =
+          "Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung.";
+      }
+
+      // Показываем центрированное уведомление об ошибке
+      showToast(userFriendlyMessage, "error");
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Gewünschte Behandlung
-        </label>
-        <select
-          {...register("serviceId")}
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        >
-          <option value="">Bitte wählen</option>
-          {services.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name} — {s.durationMinutes} Min
-            </option>
-          ))}
-        </select>
-        {errors.serviceId && (
-          <p className="text-red-600 text-sm mt-1">
-            {errors.serviceId.message}
-          </p>
-        )}
-      </div>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Gewünschte Behandlung
+          </label>
+          <select
+            {...register("serviceId")}
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          >
+            <option value="">Bitte wählen</option>
+            {services.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name} — {s.durationMinutes} Min
+              </option>
+            ))}
+          </select>
+          {errors.serviceId && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.serviceId.message}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Dauer (Minuten)
-        </label>
-        <select
-          {...register("duration", { valueAsNumber: true })}
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        >
-          <option value="">Bitte wählen</option>
-          <option value="30">30</option>
-          <option value="45">45</option>
-          <option value="60">60</option>
-          <option value="75">75</option>
-          <option value="90">90</option>
-        </select>
-        {errors.duration && (
-          <p className="text-red-600 text-sm mt-1">{errors.duration.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Dauer (Minuten)
+          </label>
+          <select
+            {...register("duration", { valueAsNumber: true })}
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          >
+            <option value="">Bitte wählen</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+            <option value="60">60</option>
+            <option value="75">75</option>
+            <option value="90">90</option>
+          </select>
+          {errors.duration && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.duration.message}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Datum & Uhrzeit
-        </label>
-        <input
-          {...register("datetime")}
-          type="datetime-local"
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        />
-        {errors.datetime && (
-          <p className="text-red-600 text-sm mt-1">{errors.datetime.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Datum & Uhrzeit
+          </label>
+          <input
+            {...register("datetime")}
+            type="datetime-local"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          {errors.datetime && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.datetime.message}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Name</label>
-        <input
-          {...register("name")}
-          type="text"
-          placeholder="Vor- und Nachname"
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        />
-        {errors.name && (
-          <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="Vor- und Nachname"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          {errors.name && (
+            <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Telefonnummer
-        </label>
-        <input
-          {...register("phone")}
-          type="tel"
-          placeholder="+49..."
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        />
-        {errors.phone && (
-          <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Telefonnummer
+          </label>
+          <input
+            {...register("phone")}
+            type="tel"
+            placeholder="+49..."
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          {errors.phone && (
+            <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
+          )}
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          E-Mail
-        </label>
-        <input
-          {...register("email")}
-          type="email"
-          placeholder="ihre@email.de"
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        />
-        {errors.email && (
-          <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            E-Mail
+          </label>
+          <input
+            {...register("email")}
+            type="email"
+            placeholder="ihre@email.de"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          {errors.email && (
+            <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
+          )}
+        </div>
 
-      <div className="flex items-center space-x-2">
-        <input
-          id="whatsapp"
-          type="checkbox"
-          {...register("whatsapp")}
-          className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-        />
-        <label htmlFor="whatsapp" className="text-sm text-gray-700">
-          Ich bevorzuge Kommunikation per WhatsApp
-        </label>
-      </div>
+        <div className="flex items-center space-x-2">
+          <input
+            id="whatsapp"
+            type="checkbox"
+            {...register("whatsapp")}
+            className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+          />
+          <label htmlFor="whatsapp" className="text-sm text-gray-700">
+            Ich bevorzuge Kommunikation per WhatsApp
+          </label>
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Kommentar oder besondere Wünsche
-        </label>
-        <textarea
-          {...register("comment")}
-          rows={3}
-          placeholder="Besondere Wünsche oder gesundheitliche Hinweise..."
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-        />
-        {errors.comment && (
-          <p className="text-red-600 text-sm mt-1">{errors.comment.message}</p>
-        )}
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Kommentar oder besondere Wünsche
+          </label>
+          <textarea
+            {...register("comment")}
+            rows={3}
+            placeholder="Besondere Wünsche oder gesundheitliche Hinweise..."
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          {errors.comment && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.comment.message}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? "Wird gesendet..." : "Termin anfragen"}
-        </button>
-      </div>
-    </form>
+        <div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Wird gesendet..." : "Termin anfragen"}
+          </button>
+        </div>
+      </form>
+
+      {/* Центрированное уведомление */}
+      <ToastNotification
+        message={toastNotification.message}
+        type={toastNotification.type}
+        isVisible={toastNotification.isVisible}
+        onClose={hideToast}
+        duration={2000}
+      />
+    </>
   );
 }

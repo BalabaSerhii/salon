@@ -11,7 +11,7 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 export default function HomePage() {
   return (
     <main
-      className="min-h-screen "
+      className="min-h-screen overflow-x-hidden" // ← ДОБАВЛЕНО: предотвращает горизонтальный скролл
       itemScope
       itemType="https://schema.org/LocalBusiness"
     >
@@ -50,28 +50,30 @@ export default function HomePage() {
       />
 
       {/* === HERO SECTION === */}
-      {/* <AppointmentForm services={services} /> */}
       <section
-        className="relative  text-[#64615a]  text-center mt-1"
+        className="relative text-[#64615a] text-center mt-1"
         role="banner"
       >
-        <div className="bg-[#f8f7f4] pt-7 pb-10 text-center">
-          <h1
-            className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5 "
-            itemProp="name"
-          >
-            Professionelle Entspannungsmassage in <br />
-            <span className="font-semibold text-[#5c6d2f] ">
-              63695 Glauburg-Stockheim
-            </span>
-          </h1>
+        <div className="bg-[#f8f7f4] pt-7 pb-10 text-center w-full">
+          {/* ДОБАВЛЕН КОНТЕЙНЕР ДЛЯ ОГРАНИЧЕНИЯ ШИРИНЫ */}
+          <div className="container mx-auto px-4 max-w-6xl">
+            <h1
+              className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5"
+              itemProp="name"
+            >
+              Professionelle Entspannungsmassage in <br />
+              <span className="font-semibold text-[#5c6d2f]">
+                63695 Glauburg-Stockheim
+              </span>
+            </h1>
 
-          <p
-            className="text-xl sm:w-1/2 md:text-2xl lg:text-3xl mx-auto leading-relaxed w-4/5 pt-5 border-t pb-5 border-gray-300"
-            itemProp="description"
-          >
-            Apparative Lymphdrainage-Massage <span>(Pressotherapie)</span>
-          </p>
+            <p
+              className="text-xl md:text-2xl lg:text-3xl mx-auto leading-relaxed w-full md:w-4/5 pt-5 border-t pb-5 border-gray-300 px-4" // ← ИСПРАВЛЕНО: добавлены отступы
+              itemProp="description"
+            >
+              Apparative Lymphdrainage-Massage <span>(Pressotherapie)</span>
+            </p>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 max-w-6xl">
@@ -79,7 +81,7 @@ export default function HomePage() {
 
           {/* USP (Уникальные преимущества) */}
           <section
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto px-4" // ← ДОБАВЛЕНО: px-4 для мобильных
             aria-label="Unsere Vorteile"
           >
             {[
@@ -101,32 +103,32 @@ export default function HomePage() {
             ].map((item, i) => (
               <article
                 key={i}
-                className="bg-[var(--background)] rounded-2xl p-3"
+                className="bg-[var(--background)] rounded-2xl p-6 text-center" // ← ИСПРАВЛЕНО: добавлены отступы
               >
                 <div className="text-2xl mb-2">{item.icon}</div>
-                <h2 className="font-semibold mb-2">{item.title}</h2>
-                <p className=" text-sm">{item.text}</p>
+                <h2 className="font-semibold mb-2 text-lg">{item.title}</h2>
+                <p className="text-sm text-gray-600">{item.text}</p>
               </article>
             ))}
           </section>
 
           {/* CTA */}
-          <div className="bg-white rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl max-w-2xl mx-auto px-4 md:px-8"> {/* ← ИСПРАВЛЕНО: добавлены отступы */}
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Jetzt Termin vereinbaren
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-base md:text-lg">
               Einfach und unverbindlich per WhatsApp oder Instagram
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <div className="transform hover:scale-105 transition-transform duration-300">
+              <div className="transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
                 <ButtonWA />
               </div>
-              <div className="transform hover:scale-105 transition-transform duration-300">
+              <div className="transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
                 <ButtonInsta />
               </div>
             </div>
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-sm text-gray-500 mt-4 text-center">
               ⚡ Meist Termine innerhalb von 24–48 Stunden verfügbar
             </p>
           </div>
@@ -157,7 +159,9 @@ export default function HomePage() {
           </h2>
           <ReviewsSEO />
         </div>
-        <ReviewCarousel />
+        <div className="container mx-auto px-4 max-w-6xl"> {/* ← ДОБАВЛЕН КОНТЕЙНЕР */}
+          <ReviewCarousel />
+        </div>
       </section>
     </main>
   );
