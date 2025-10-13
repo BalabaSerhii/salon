@@ -28,7 +28,7 @@ export const priceCategories: PriceCategory[] = [
       {
         id: "kombi-2",
         name: "Klassische Massage (Rücken, Nacken, Arme) + Bein-Pressotherapie",
-        duration: "25 Min",
+        duration: "30 + 25 Min",
         price: "55 €",
       },
       {
@@ -39,6 +39,12 @@ export const priceCategories: PriceCategory[] = [
       },
       {
         id: "kombi-4",
+        name: "Aroma-Rückenmassage + Pressotherapie für Beine, Bauch und Arme",
+        duration: "30 + 45 Min",
+        price: "65 €",
+      },
+      {
+        id: "kombi-5",
         name: "Aroma-Ganzkörpermassage + Pressotherapie für Beine, Bauch und Arme",
         duration: "60 + 45 Min",
         price: "95 €",
@@ -70,8 +76,8 @@ export const priceCategories: PriceCategory[] = [
         duration: "40 Min",
         price: "50 €",
       },
-      { id: "special-2", name: "Ganzkörpermassage", duration: "60 Min", price: "80 €" },
-      { id: "special-3", name: "Ganzkörpermassage", duration: "90 Min", price: "99 €" },
+      { id: "special-2", name: "Ganzkörpermassage", duration: "60 Min", price: "60 €" },
+      { id: "special-3", name: "Ganzkörpermassage", duration: "90 Min", price: "90 €" },
       {
         id: "special-4",
         name: "Aroma-Entspannungsmassage (Ganzkörper)",
@@ -88,12 +94,12 @@ export const priceCategories: PriceCategory[] = [
         id: "special-6",
         name: "Aroma-Entspannungsmassage (Ganzkörper)",
         duration: "90 Min",
-        price: "85 €",
+        price: "90 €",
       },
       {
         id: "special-7",
         name: "Klassische Ganzkörpermassage",
-        duration: "40 Min",
+        duration: "45 Min",
         price: "45 €",
       },
       {

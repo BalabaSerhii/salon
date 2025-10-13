@@ -50,7 +50,7 @@ p {
 
 :root {
   --background: #f8f7f4;
-  --foreground: #64615a;
+  --foreground: #1f2937;
 }
 
 @theme inline {
@@ -62,8 +62,8 @@ p {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #f8f7f4;
-    --foreground: #ededed;
+    --background: #0a0a0a; 
+    --foreground: #f9fafb; 
   }
 }
 

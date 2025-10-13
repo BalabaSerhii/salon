@@ -224,7 +224,7 @@ export default function Footer() {
             © {year} Balaba Studio – Alle Rechte vorbehalten.
           </p>
           <p className="text-gray-600 text-sm mb-3">
-            Сайт создан в Balaba Digital
+„Website erstellt von Balaba Digital“ ✅
           </p>
           <div className="flex justify-center gap-6">
             <Link
