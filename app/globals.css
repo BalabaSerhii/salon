@@ -50,7 +50,7 @@ p {
 
 :root {
   --background: #f8f7f4;
-  --foreground: #1f2937;
+  --foreground: #f8f7f4;
 }
 
 @theme inline {
@@ -62,8 +62,8 @@ p {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a; 
-    --foreground: #f9fafb; 
+    --background: #0a0a0a;
+    --foreground: #f9fafb;
   }
 }
 
@@ -104,4 +104,17 @@ body {
     @apply mx-auto px-4 md:px-6 lg:px-8;
     max-width: 1200px;
   }
+}
+
+input,
+textarea,
+select {
+  color: #000000 !important; 
+  background-color: white !important; 
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; 
+  opacity: 0.7;
 }
