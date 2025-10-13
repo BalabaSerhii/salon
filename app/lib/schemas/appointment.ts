@@ -10,16 +10,8 @@ export const appointmentSchema = z.object({
     .email("Bitte geben Sie eine gültige E-Mail-Adresse ein")
     .optional()
     .or(z.literal("")),
-  whatsapp: z.boolean().default(false),
+  whatsapp: z.boolean(), // УБРАТЬ .default(false)
   comment: z.string().optional(),
 });
 
-
 export type AppointmentFormValues = z.infer<typeof appointmentSchema>;
-interface ExtendedAppointmentFormValues extends AppointmentFormValues {
-  serviceName?: string;
-  serviceDuration?: string;
-  serviceDescription?: string;
-  servicePrice?: string;
-  formattedDatetime?: string;
-}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -41,6 +41,7 @@ interface ServiceCategory {
   description: string;
   services: Service[];
 }
+
 interface TimeSlot {
   time: string;
   display: string;
@@ -224,7 +225,7 @@ const serviceCategories: ServiceCategory[] = [
       {
         id: "zone-5",
         name: "Kopf und Gesicht",
-        description: "Kombinierte Kopf- und Gesichtsmassage",
+        description: "Kombinierte Kopf- и Gesichtsmassage",
         price: "40 Euro",
         duration: "30 Minuten",
       },
@@ -272,74 +273,7 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const generateAvailableDates = (): DateSelection[] => {
-    const dates: DateSelection[] = [];
-    const today = new Date();
 
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-
-      if (date.getDay() !== 0) {
-        dates.push({
-          date: date.toISOString().split("T")[0],
-          display: date.toLocaleDateString("de-DE", {
-            weekday: "short",
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          }),
-        });
-      }
-    }
-
-    return dates;
-  };
-  const generateTimeSlots = (): TimeSlot[] => {
-    const slots: TimeSlot[] = [];
-    const now = new Date();
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-
-    // Временные слоты с 9:00 до 20:00 с интервалом в 30 минут
-    for (let hour = 9; hour <= 20; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const timeString = `${hour.toString().padStart(2, "0")}:${minute
-          .toString()
-          .padStart(2, "0")}`;
-        const slotTime = hour * 60 + minute;
-
-        // Проверяем, не прошел ли временной слот для выбранной даты
-        const isToday = selectedDate === new Date().toISOString().split("T")[0];
-        const available = !isToday || slotTime > currentTime;
-
-        slots.push({
-          time: timeString,
-          display: timeString,
-          available,
-        });
-      }
-    }
-
-    return slots;
-  };
-
-  const handleDateSelect = (date: string) => {
-    setSelectedDate(date);
-    setSelectedTime("");
-    setValue("datetime", `${date}T${selectedTime}`, { shouldValidate: true });
-    setShowDatePicker(false);
-  };
-
-  const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
-    if (selectedDate) {
-      setValue("datetime", `${selectedDate}T${time}`, { shouldValidate: true });
-    }
-  };
-
-  // ДОБАВЬТЕ useMemo ДЛЯ ОПТИМИЗАЦИИ
-  const availableDates = useMemo(() => generateAvailableDates(), []);
-  const timeSlots = useMemo(() => generateTimeSlots(), [selectedDate]);
   // Состояние для уведомлений
   const [toastNotification, setToastNotification] = useState<{
     isVisible: boolean;
@@ -360,7 +294,11 @@ export default function ContactPage() {
     setValue,
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
-    defaultValues: { whatsapp: false },
+    defaultValues: {
+      whatsapp: false,
+      email: "",
+      comment: "",
+    },
   });
 
   const selectedServiceId = watch("serviceId");
@@ -398,6 +336,62 @@ export default function ContactPage() {
     }));
   };
 
+  // Генерация доступных дат
+  const generateAvailableDates = (): DateSelection[] => {
+    const dates: DateSelection[] = [];
+    const today = new Date();
+
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+
+      if (date.getDay() !== 0) {
+        dates.push({
+          date: date.toISOString().split("T")[0],
+          display: date.toLocaleDateString("de-DE", {
+            weekday: "short",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }),
+        });
+      }
+    }
+
+    return dates;
+  };
+
+  // Генерация временных слотов с useCallback
+  const generateTimeSlots = useCallback((): TimeSlot[] => {
+    const slots: TimeSlot[] = [];
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    for (let hour = 9; hour <= 20; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const timeString = `${hour.toString().padStart(2, "0")}:${minute
+          .toString()
+          .padStart(2, "0")}`;
+        const slotTime = hour * 60 + minute;
+
+        const isToday = selectedDate === new Date().toISOString().split("T")[0];
+        const available = !isToday || slotTime > currentTime;
+
+        slots.push({
+          time: timeString,
+          display: timeString,
+          available,
+        });
+      }
+    }
+
+    return slots;
+  }, [selectedDate]);
+
+  // useMemo для оптимизации
+  const availableDates = useMemo(() => generateAvailableDates(), []);
+  const timeSlots = useMemo(() => generateTimeSlots(), [generateTimeSlots]);
+
   // Обработчик выбора услуги
   const handleServiceChange = (serviceId: string) => {
     setValue("serviceId", serviceId);
@@ -410,6 +404,23 @@ export default function ContactPage() {
     }
   };
 
+  // Обработчик выбора даты
+  const handleDateSelect = (date: string) => {
+    setSelectedDate(date);
+    setSelectedTime("");
+    setValue("datetime", `${date}T${selectedTime}`, { shouldValidate: true });
+    setShowDatePicker(false);
+  };
+
+  // Обработчик выбора времени
+  const handleTimeSelect = (time: string) => {
+    setSelectedTime(time);
+    if (selectedDate) {
+      setValue("datetime", `${selectedDate}T${time}`, { shouldValidate: true });
+    }
+  };
+
+  // Функция отправки формы
   async function onSubmit(data: AppointmentFormValues) {
     try {
       // Находим выбранную услугу для получения названия и продолжительности
@@ -425,12 +436,10 @@ export default function ContactPage() {
       // Подготавливаем данные для отправки с правильными названиями
       const emailData = {
         ...data,
-        // Добавляем человеко-читаемые названия вместо ID
         serviceName: selectedServiceData?.name || "Unbekannter Service",
         serviceDuration: selectedServiceData?.duration || "Unbekannte Dauer",
         serviceDescription: selectedServiceData?.description || "",
         servicePrice: selectedServiceData?.price || "",
-        // Форматируем дату для email
         formattedDatetime:
           selectedDate && selectedTime
             ? `${new Date(selectedDate).toLocaleDateString("de-DE", {
@@ -506,7 +515,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Improved Mobile Menu Button */}
+        {/* Mobile Menu Button */}
         <div className="lg:hidden flex justify-center mb-6">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -606,35 +615,25 @@ export default function ContactPage() {
                   onSubmit={handleSubmit(onSubmit)}
                   className="space-y-6 sm:space-y-8"
                 >
-                  {/* Service Selection - Improved with Categories */}
+                  {/* Service Selection */}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-4">
                       Gewünschte Behandlung *
                     </label>
 
-                    {/* Service Select with Categories */}
                     <div className="relative">
                       <select
                         {...register("serviceId")}
                         onChange={(e) => handleServiceChange(e.target.value)}
                         className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all appearance-none bg-white cursor-pointer"
-                        aria-describedby="service-description"
                       >
                         <option value="">
                           Bitte wählen Sie eine Behandlung
                         </option>
                         {serviceCategories.map((category) => (
-                          <optgroup
-                            key={category.id}
-                            label={category.name}
-                            className="font-semibold text-gray-800"
-                          >
+                          <optgroup key={category.id} label={category.name}>
                             {category.services.map((service) => (
-                              <option
-                                key={service.id}
-                                value={service.id}
-                                className="py-2 text-gray-700"
-                              >
+                              <option key={service.id} value={service.id}>
                                 {service.name} - {service.price} (
                                 {service.duration})
                               </option>
@@ -651,9 +650,8 @@ export default function ContactPage() {
                       </p>
                     )}
 
-                    {/* Selected Service Details */}
                     {selectedService && (
-                      <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl animate-fadeIn">
+                      <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
                         <h4 className="font-semibold text-green-800 text-lg mb-2">
                           {selectedService.name}
                         </h4>
@@ -677,7 +675,7 @@ export default function ContactPage() {
                     )}
                   </div>
 
-                  {/* Date & Time Selection - Improved with Calendar */}
+                  {/* Date & Time Selection */}
                   <div className="space-y-6">
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-4">
@@ -762,7 +760,7 @@ export default function ContactPage() {
                         </div>
                       </div>
 
-                      {/* Time Selection - Only show when date is selected */}
+                      {/* Time Selection */}
                       {selectedDate && (
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -801,7 +799,8 @@ export default function ContactPage() {
                               ))}
                             </div>
                             <p className="text-xs text-gray-500 mt-2 text-center">
-                              � scrollen Sie horizontal um mehr Zeiten zu sehen
+                              ← scrollen Sie horizontal um mehr Zeiten zu sehen
+                              →
                             </p>
                           </div>
 
@@ -835,17 +834,14 @@ export default function ContactPage() {
                         </div>
                       )}
 
-                      {/* Hidden input for form submission */}
                       <input type="hidden" {...register("datetime")} />
 
-                      {/* Validation Messages */}
                       {errors.datetime && (
                         <p className="text-red-600 text-sm mt-3 font-medium bg-red-50 p-3 rounded-lg border border-red-200">
                           {errors.datetime.message}
                         </p>
                       )}
 
-                      {/* Selected DateTime Display */}
                       {selectedDate && selectedTime && (
                         <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                           <div className="flex items-center justify-between">
@@ -1005,7 +1001,7 @@ export default function ContactPage() {
                 </form>
               </div>
             ) : (
-              /* Contact Information - Improved */
+              /* Contact Information */
               <div className="space-y-6">
                 <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center">
@@ -1110,7 +1106,7 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* Improved Sidebar */}
+          {/* Sidebar */}
           <div
             className={`space-y-6 transition-all duration-300 ${
               isMobileMenuOpen ? "block animate-slideIn" : "hidden lg:block"
@@ -1213,47 +1209,14 @@ export default function ContactPage() {
         .animate-slideIn {
           animation: slideIn 0.3s ease-out;
         }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
       `}</style>
     </div>
   );
 }
-
-{
-  /* Custom CSS for animations and scrollbar */
-}
-<style jsx>{`
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  .animate-fadeIn {
-    animation: fadeIn 0.3s ease-out;
-  }
-  .animate-slideIn {
-    animation: slideIn 0.3s ease-out;
-  }
-  /* Hide scrollbar for horizontal scrolling */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-`}</style>;

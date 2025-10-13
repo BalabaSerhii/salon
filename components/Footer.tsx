@@ -111,7 +111,7 @@ export default function Footer() {
             >
               balabamassage@gmail.com
             </a>
-            
+
             <a href="tel:+4915124908000" className="hover:underline mt-0">
               +49 151 24908000
             </a>
@@ -129,7 +129,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/price" className="hover:text-[#00a63e]">
+                <Link href="/preisliste" className="hover:text-[#00a63e]">
                   Preisliste
                 </Link>
               </li>

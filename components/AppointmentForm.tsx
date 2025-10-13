@@ -7,7 +7,7 @@ import {
   appointmentSchema,
   AppointmentFormValues,
 } from "../app/lib/schemas/appointment";
-import ToastNotification from "../components/ToastNotification"; 
+import ToastNotification from "../components/ToastNotification";
 
 type Service = { id: string; name: string; durationMinutes: number };
 
@@ -39,7 +39,11 @@ export default function AppointmentForm({ services }: Props) {
     reset,
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
-    defaultValues: { whatsapp: false },
+    defaultValues: {
+      whatsapp: false,
+      email: "",
+      comment: "",
+    },
   });
 
   const showToast = (message: string, type: "success" | "error") => {
@@ -119,7 +123,7 @@ export default function AppointmentForm({ services }: Props) {
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Gewünschte Behandlung
+            Gewünschte Behandlung *
           </label>
           <select
             {...register("serviceId")}
@@ -139,6 +143,8 @@ export default function AppointmentForm({ services }: Props) {
           )}
         </div>
 
+        {/* УДАЛЕН БЛОК С DURATION - НАЧАЛО */}
+        {/* 
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Dauer (Minuten)
@@ -160,10 +166,12 @@ export default function AppointmentForm({ services }: Props) {
             </p>
           )}
         </div>
+        */}
+        {/* УДАЛЕН БЛОК С DURATION - КОНЕЦ */}
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Datum & Uhrzeit
+            Datum & Uhrzeit *
           </label>
           <input
             {...register("datetime")}
@@ -179,7 +187,7 @@ export default function AppointmentForm({ services }: Props) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Name
+            Name *
           </label>
           <input
             {...register("name")}
@@ -194,7 +202,7 @@ export default function AppointmentForm({ services }: Props) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Telefonnummer
+            Telefonnummer *
           </label>
           <input
             {...register("phone")}
