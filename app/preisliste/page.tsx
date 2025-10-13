@@ -124,13 +124,12 @@ export default function PriceList() {
               Wichtiger Hinweis
             </h3>
             <p className="text-sm text-red-700 mt-1">
-              Wir bieten ausschließlich professionelle medizinische und
-              entspannungstherapeutische Massagedienstleistungen an.{" "}
+              Wir bieten ausschließlich professionelle entspannungstherapeutische Massagedienstleistungen und Pressotherapie an.{" "}
               <strong>
                 Erotische Massagen oder Dienstleistungen erotischer Art werden
                 in keiner Form angeboten oder toleriert.
               </strong>
-              Wir behalten uns das Recht vor, unangemessene Anfragen abzulehnen.
+               Wir behalten uns das Recht vor, unangemessene Anfragen abzulehnen.
             </p>
           </div>
         </div>
