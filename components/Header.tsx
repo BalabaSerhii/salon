@@ -323,7 +323,7 @@ export default function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={closeMenu}
-                      className="flex items-center justify-center gap-2 w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
+                      className="flex items-center justify-center gap-2 mt-8 w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
                     >
                       <FaWhatsapp size={18} />
                       Termin buchen

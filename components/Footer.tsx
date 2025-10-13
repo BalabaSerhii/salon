@@ -84,7 +84,7 @@ export default function Footer() {
           }),
         }}
       />
-      <div className="container grid grid-cols-1 md:grid-cols-2 justify-items-center items-center ">
+      <div className="container grid grid-cols-1 pt-5 md:grid-cols-2 justify-items-center items-center ">
         {/* Левая колонка: логотип + адрес */}
         <div className=" items-center flex gap-10 ">
           <Link href="/" aria-label="Zur Startseite">

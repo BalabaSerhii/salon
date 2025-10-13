@@ -99,7 +99,7 @@ export default function PriceList() {
         <h2 className="text-lg font-semibold mb-4 text-gray-800 text-center">
           Schnellnavigation zu unseren Dienstleistungen
         </h2>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        <div className="flex flex-wrap md:justify-center lg:justify-center gap-4 md:gap-6">
           {priceCategories.map((category) => (
             <ScrollToSection key={category.id} targetId={category.id}>
               {category.title}

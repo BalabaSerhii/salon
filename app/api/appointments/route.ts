@@ -1,15 +1,26 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { appointmentSchema } from "../../lib/schemas/appointment";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 
 // Отключаем кэширование для API routes
 export const dynamic = "force-dynamic";
 
+// Расширенная схема для email данных
+const emailAppointmentSchema = appointmentSchema.extend({
+  serviceName: z.string().optional(),
+  serviceDuration: z.string().optional(),
+  serviceDescription: z.string().optional(),
+  servicePrice: z.string().optional(),
+  formattedDatetime: z.string().optional(),
+});
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const data = appointmentSchema.parse(body);
+
+    // Используем расширенную схему для email
+    const data = emailAppointmentSchema.parse(body);
 
     // Проверяем обязательные environment variables в продакшене
     const requiredEnvVars = ["SMTP_HOST", "SMTP_USER", "SMTP_PASS"];
@@ -80,40 +91,33 @@ export async function POST(req: Request) {
       isTestAccount = true;
     }
 
-    // Форматируем дату для немецкого формата
-    const formatGermanDateTime = (dateString: string) => {
-      try {
-        const date = new Date(dateString);
-        return date.toLocaleString("de-DE", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-      } catch {
-        return dateString;
-      }
-    };
+    // Используем отформатированную дату из данных или форматируем сами
+    const formattedDate = data.formattedDatetime || data.datetime;
 
-    const formattedDate = formatGermanDateTime(data.datetime);
+    // Получаем название услуги и продолжительность
+    const serviceName = data.serviceName || `Service ID: ${data.serviceId}`;
+    const serviceDuration = data.serviceDuration || "Unbekannte Dauer";
 
     const mailOptions = {
       from: process.env.SMTP_FROM || `BalabaStudio <${process.env.SMTP_USER}>`,
       to: process.env.NOTIFY_EMAIL_TO || process.env.SMTP_USER,
-      subject: `Neue Terminanfrage: ${data.serviceId} - ${formattedDate}`,
+      subject: `Neue Terminanfrage: ${serviceName}`,
       text: [
         `Neue Terminanfrage eingegangen:`,
         `===============================`,
-        `Service: ${data.serviceId}`,
-        `Dauer: ${data.duration} Minuten`,
+        `Service: ${serviceName}`,
+        `Dauer: ${serviceDuration}`,
         `Datum/Zeit: ${formattedDate}`,
         `Name: ${data.name}`,
-        `Email: ${data.email}`,
+        `Email: ${data.email || "Nicht angegeben"}`,
         `Telefon: ${data.phone}`,
         `WhatsApp bevorzugt: ${data.whatsapp ? "Ja" : "Nein"}`,
         `Kommentar: ${data.comment || "Keine"}`,
+        ``,
+        `Service Details:`,
+        `- ID: ${data.serviceId}`,
+        `- Beschreibung: ${data.serviceDescription || "Keine"}`,
+        `- Preis: ${data.servicePrice || "Unbekannt"}`,
         ``,
         `Gesendet am: ${new Date().toLocaleString("de-DE")}`,
       ].join("\n"),
@@ -129,6 +133,7 @@ export async function POST(req: Request) {
               .content { background: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; }
               .field { margin-bottom: 12px; padding: 8px 0; border-bottom: 1px solid #eee; }
               .label { font-weight: bold; color: #2d983f; min-width: 150px; display: inline-block; }
+              .details { background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; }
               .footer { margin-top: 20px; padding-top: 20px; border-top: 2px solid #2d983f; font-size: 12px; color: #666; }
             </style>
           </head>
@@ -139,10 +144,10 @@ export async function POST(req: Request) {
             </div>
             <div class="content">
               <div class="field">
-                <span class="label">Service:</span> ${data.serviceId}
+                <span class="label">Service:</span> ${serviceName}
               </div>
               <div class="field">
-                <span class="label">Dauer:</span> ${data.duration} Minuten
+                <span class="label">Dauer:</span> ${serviceDuration}
               </div>
               <div class="field">
                 <span class="label">Datum/Zeit:</span> ${formattedDate}
@@ -151,7 +156,9 @@ export async function POST(req: Request) {
                 <span class="label">Name:</span> ${data.name}
               </div>
               <div class="field">
-                <span class="label">Email:</span> ${data.email}
+                <span class="label">Email:</span> ${
+                  data.email || "Nicht angegeben"
+                }
               </div>
               <div class="field">
                 <span class="label">Telefon:</span> ${data.phone}
@@ -164,6 +171,24 @@ export async function POST(req: Request) {
               <div class="field">
                 <span class="label">Kommentar:</span> ${data.comment || "Keine"}
               </div>
+              
+              <div class="details">
+                <h3 style="margin-top: 0; color: #2d983f;">Service Details:</h3>
+                <div class="field">
+                  <span class="label">Service ID:</span> ${data.serviceId}
+                </div>
+                <div class="field">
+                  <span class="label">Beschreibung:</span> ${
+                    data.serviceDescription || "Keine"
+                  }
+                </div>
+                <div class="field">
+                  <span class="label">Preis:</span> ${
+                    data.servicePrice || "Unbekannt"
+                  }
+                </div>
+              </div>
+              
               <div class="footer">
                 <p>Gesendet am: ${new Date().toLocaleString("de-DE")}</p>
                 <p>BalabaStudio • Hermstrasse 37, 63695 Glauburg-Stockheim</p>
@@ -194,12 +219,10 @@ export async function POST(req: Request) {
     console.error("API error:", err);
 
     if (err instanceof ZodError) {
-      // ИСПРАВЛЕННАЯ ЧАСТЬ: правильное обращение к errors
       return NextResponse.json(
         {
           message: "Validierungsfehler",
           errors: err.issues.map((error) => ({
-            // ← ИСПРАВЛЕНО: err.issues вместо err.errors
             field: error.path?.join(".") || "unknown",
             message: error.message,
           })),

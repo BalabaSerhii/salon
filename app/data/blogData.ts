@@ -10,10 +10,10 @@ export const blogPosts: BlogPost[] = [
     content: `Im Balaba Studio in Glauburg-Stockheim bei Frankfurt am Main bieten wir professionelle Entspannungsmassagen, die weit über reines Wohlbefinden hinausgehen. Unsere zertifizierten Masseure in der Hermstrasse 37 verstehen die tiefgreifende Wirkung einer ganzheitlichen Massagetherapie.
 
 ## Stressreduktion und Entspannung im Balaba Studio Glauburg
-Massagen senken nachweislich den Cortisolspiegel im Körper - das Hormon, das für Stress verantwortlich ist. Gleichzeitig werden Endorphine freigesetzt, die natürlichen Stimmungsaufheller unseres Körpers. In unserer Massagepraxis in Glauburg-Stockheim setzen wir gezielt Techniken ein, die diese natürlichen Prozesse optimal unterstützen.
+Massagen senken nachweislich den Cortisolspiegel im Körper - das Hormon, das für Stress verantwortlich ist. Gleichzeitig werden Endorphine freigesetzt, die natürlichen Stimmungsaufheller unseres Körpers. In unserer Massagestudio in Glauburg-Stockheim setzen wir gezielt Techniken ein, die diese natürlichen Prozesse optimal unterstützen.
 
 ## Verbesserte Durchblutung durch professionelle Massage
-Durch die sanften Druck- und Streichbewegungen unserer erfahrenen Masseure wird die Blutzirkulation angeregt. Dies fördert die Sauerstoffversorgung der Muskeln und Organe und unterstützt den Abtransport von Stoffwechselprodukten. Als Ihre Massagepraxis in der Nähe von Frankfurt garantieren wir höchste Qualität.
+Durch die sanften Druck- und Streichbewegungen unserer erfahrenen Masseure wird die Blutzirkulation angeregt. Dies fördert die Sauerstoffversorgung der Muskeln und Organe und unterstützt den Abtransport von Stoffwechselprodukten. Als Ihre Massagestudio in der Nähe von Frankfurt garantieren wir höchste Qualität.
 
 ## Stärkung des Immunsystems
 Studien zeigen, dass regelmäßige Massagen im Balaba Studio Glauburg die Anzahl der Lymphozyten erhöhen - weiße Blutkörperchen, die für die Abwehr von Krankheitserregern verantwortlich sind.
@@ -24,7 +24,7 @@ Die tiefe Entspannung während der Massage in unserem Studio in Stockheim förde
 ## Schmerzlinderung bei Verspannungen
 Verspannungen im Nacken-, Schulter- und Rückenbereich werden durch unsere speziellen Techniken gelöst, was zu einer spürbaren Reduktion von Schmerzen führt.
 
-**Ihr Balaba Studio Team aus Glauburg-Stockheim** empfiehlt idealerweise alle 2-4 Wochen eine Entspannungsmassage einzuplanen, um nachhaltige Effekte zu erzielen. Vereinbaren Sie noch heute Ihren Termin in unserer Massagepraxis!`,
+**Ihr Balaba Studio Team aus Glauburg-Stockheim** empfiehlt idealerweise jede Woche eine Entspannungsmassage einzuplanen, um nachhaltige Effekte zu erzielen. Vereinbaren Sie noch heute Ihren Termin in unserer Massagestudio!`,
     imageUrl:
       "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     readTime: "5 Min lesezeit",
@@ -35,7 +35,7 @@ Verspannungen im Nacken-, Schulter- und Rückenbereich werden durch unsere spezi
       "Massage Glauburg",
       "Entspannungsmassage Frankfurt",
       "Wellness Stockheim",
-      "Massagepraxis Rhein-Main",
+      "Massagestudio Rhein-Main",
     ],
   },
   {
@@ -233,8 +233,7 @@ Die Muskeln sind nach der Massage entspannt und empfindlicher gegenüber Kälte.
 Manche Menschen fühlen sich sofort energiegeladen, andere benötigen etwas Ruhe. Hören Sie auf die Signale Ihres Körpers.
 
 **Ihr Balaba Studio Team in Glauburg-Stockheim steht Ihnen für weitere Fragen jederzeit zur Verfügung!**`,
-    imageUrl:
-      "https://images.unsplash.com/photo-1559599189-94dfced2cfe8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "/messagestok.jpg",
     readTime: "4 Min lesezeit",
     category: "Massage-Tipps",
     publishDate: "05.12.2024",
@@ -362,8 +361,7 @@ Bestimmte Ölmischungen können dabei helfen, emotionale Blockaden zu lösen und
 In unserem Studio in der Hermstrasse 37 stellen wir die Ölmischungen individuell auf Ihre Bedürfnisse zusammen. Gemeinsam finden wir die perfekte Kombination für Ihr Wohlbefinden.
 
 **Vereinbaren Sie noch heute Ihren Termin für eine wohltuende Aroma-Massage in Glauburg-Stockheim!**`,
-    imageUrl:
-      "https://images.unsplash.com/photo-1603713722966-92c4c73e48af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "/aromamassage.jpg",
     readTime: "5 Min lesezeit",
     category: "Aromatherapie",
     publishDate: "01.12.2024",
