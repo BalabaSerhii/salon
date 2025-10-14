@@ -29,18 +29,7 @@ export default function ModalGallery({
   // Минимальное расстояние свайпа для активации навигации
   const minSwipeDistance = 50;
 
-  // Глобальный обработчик touch-событий для блокировки жестов браузера
-  const handleGlobalTouchStart = useCallback((e: TouchEvent) => {
-    // Блокируем ВСЕ touch-события на уровне документа
-    e.preventDefault();
-  }, []);
-
-  const handleGlobalTouchMove = useCallback((e: TouchEvent) => {
-    // Блокируем ВСЕ touch-события на уровне документа
-    e.preventDefault();
-  }, []);
-
-  // Обработчик начала касания внутри модалки
+  // Обработчик начала касания
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart({
@@ -49,7 +38,7 @@ export default function ModalGallery({
     });
   }, []);
 
-  // Обработчик движения касания внутри модалки
+  // Обработчик движения касания
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     setTouchEnd({
       x: e.targetTouches[0].clientX,
@@ -131,49 +120,23 @@ export default function ModalGallery({
   useEffect(() => {
     if (index === null) return;
 
-    // Блокируем ВСЕ жесты браузера на уровне документа
-    document.addEventListener("touchstart", handleGlobalTouchStart, {
-      passive: false,
-    });
-    document.addEventListener("touchmove", handleGlobalTouchMove, {
-      passive: false,
-    });
-
     // Добавляем обработчики клавиатуры
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keydown", handleTabKey);
 
     // Блокируем скролл body
     document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed"; // ← ВАЖНО: фиксируем позицию
-    document.body.style.width = "100%";
-    document.body.style.height = "100%";
 
     // Фокус на модальном окне для доступности
     const modal = document.getElementById("modal-gallery");
     modal?.focus();
 
     return () => {
-      // Восстанавливаем жесты браузера
-      document.removeEventListener("touchstart", handleGlobalTouchStart);
-      document.removeEventListener("touchmove", handleGlobalTouchMove);
-
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keydown", handleTabKey);
-
-      // Восстанавливаем скролл body
       document.body.style.overflow = "unset";
-      document.body.style.position = "unset";
-      document.body.style.width = "unset";
-      document.body.style.height = "unset";
     };
-  }, [
-    index,
-    handleKeyDown,
-    handleTabKey,
-    handleGlobalTouchStart,
-    handleGlobalTouchMove,
-  ]);
+  }, [index, handleKeyDown, handleTabKey]);
 
   if (index === null) return null;
 
@@ -195,16 +158,11 @@ export default function ModalGallery({
       aria-modal="true"
       aria-label="Image gallery"
       tabIndex={-1}
-      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 outline-none"
-      // Обработчики жестов для всего модального окна
+      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 outline-none touch-pan-y"
+      // ← ДОБАВЛЕНО: Обработчики жестов для всего модального окна
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      // CSS для блокировки жестов браузера
-      style={{
-        touchAction: "none", // ← Полностью отключаем жесты браузера
-        WebkitOverflowScrolling: "touch",
-      }}
     >
       {/* Overlay для закрытия по клику */}
       <div className="absolute inset-0" onClick={close} aria-hidden="true" />
@@ -232,8 +190,13 @@ export default function ModalGallery({
           </button>
         )}
 
-        <figure className="flex flex-col items-center w-full">
-          <div className="max-w-[90vw] max-h-[80vh] bg-white/5 rounded-lg">
+        <figure
+          className="flex flex-col items-center w-full"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="max-w-[90vw] max-h-[80vh] bg-white/5 rounded-lg touch-pan-y">
             <Image
               src={currentImage.src}
               alt={currentImage.alt}
@@ -245,7 +208,6 @@ export default function ModalGallery({
               quality={85}
               unoptimized={true}
               onDragStart={(e) => e.preventDefault()}
-              style={{ touchAction: "none" }} // ← Отключаем жесты на изображении
             />
           </div>
           <figcaption className="text-white text-sm mt-4 text-center px-4">
