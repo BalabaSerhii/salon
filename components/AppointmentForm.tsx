@@ -143,33 +143,7 @@ export default function AppointmentForm({ services }: Props) {
           )}
         </div>
 
-        {/* УДАЛЕН БЛОК С DURATION - НАЧАЛО */}
-        {/* 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Dauer (Minuten)
-          </label>
-          <select
-            {...register("duration", { valueAsNumber: true })}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          >
-            <option value="">Bitte wählen</option>
-            <option value="30">30</option>
-            <option value="45">45</option>
-            <option value="60">60</option>
-            <option value="75">75</option>
-            <option value="90">90</option>
-          </select>
-          {errors.duration && (
-            <p className="text-red-600 text-sm mt-1">
-              {errors.duration.message}
-            </p>
-          )}
-        </div>
-        */}
-        {/* УДАЛЕН БЛОК С DURATION - КОНЕЦ */}
-
-        <div>
+               <div>
           <label className="block text-sm font-medium text-gray-700">
             Datum & Uhrzeit *
           </label>
