@@ -3,10 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Script from "next/script";
 import ButtonWA from "@/components/ButtonWA";
 import { Toaster } from "@/components/ui/sonner";
 import { StructuredData } from "./lib/structured-data";
+import CookiebotLoader from "@/components/CookiebotLoader";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -51,14 +51,6 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        <Script
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid="08322d39-bbda-4e0c-925a-4e08a8067212"
-          data-blockingmode="auto"
-          strategy="afterInteractive"
-          type="text/javascript"
-        />
         <StructuredData />
       </head>
       <body
@@ -75,6 +67,7 @@ export default function RootLayout({
           </div>
         </div>
         <Footer />
+        <CookiebotLoader />
         <Toaster position="top-right" duration={4000} />
       </body>
     </html>
