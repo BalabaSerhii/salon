@@ -29,9 +29,19 @@ export default function ModalGallery({
   // Минимальное расстояние свайпа для активации навигации
   const minSwipeDistance = 50;
 
-  // Обработчик начала касания - ПРЕДОТВРАЩАЕМ поведение по умолчанию
+  // Глобальный обработчик touch-событий для блокировки жестов браузера
+  const handleGlobalTouchStart = useCallback((e: TouchEvent) => {
+    // Блокируем ВСЕ touch-события на уровне документа
+    e.preventDefault();
+  }, []);
+
+  const handleGlobalTouchMove = useCallback((e: TouchEvent) => {
+    // Блокируем ВСЕ touch-события на уровне документа
+    e.preventDefault();
+  }, []);
+
+  // Обработчик начала касания внутри модалки
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    e.preventDefault(); // ← ВАЖНО: предотвращаем навигацию браузера
     setTouchEnd(null);
     setTouchStart({
       x: e.targetTouches[0].clientX,
@@ -39,9 +49,8 @@ export default function ModalGallery({
     });
   }, []);
 
-  // Обработчик движения касания - ПРЕДОТВРАЩАЕМ поведение по умолчанию
+  // Обработчик движения касания внутри модалки
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    e.preventDefault(); // ← ВАЖНО: предотвращаем навигацию браузера
     setTouchEnd({
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY,
@@ -72,11 +81,6 @@ export default function ModalGallery({
     setTouchStart(null);
     setTouchEnd(null);
   }, [touchStart, touchEnd, next, prev]);
-
-  // Обработчик жестов - предотвращаем масштабирование и навигацию
-  const handleGesture = useCallback((e: Event) => {
-    e.preventDefault(); // ← Блокируем жесты браузера
-  }, []);
 
   // Обработчик клавиатуры
   const handleKeyDown = useCallback(
@@ -127,33 +131,49 @@ export default function ModalGallery({
   useEffect(() => {
     if (index === null) return;
 
+    // Блокируем ВСЕ жесты браузера на уровне документа
+    document.addEventListener("touchstart", handleGlobalTouchStart, {
+      passive: false,
+    });
+    document.addEventListener("touchmove", handleGlobalTouchMove, {
+      passive: false,
+    });
+
     // Добавляем обработчики клавиатуры
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keydown", handleTabKey);
 
-    // Блокируем жесты браузера
-    document.addEventListener("gesturestart", handleGesture);
-    document.addEventListener("gesturechange", handleGesture);
-    document.addEventListener("gestureend", handleGesture);
-
     // Блокируем скролл body
     document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none"; // ← ВАЖНО: отключаем жесты браузера
+    document.body.style.position = "fixed"; // ← ВАЖНО: фиксируем позицию
+    document.body.style.width = "100%";
+    document.body.style.height = "100%";
 
     // Фокус на модальном окне для доступности
     const modal = document.getElementById("modal-gallery");
     modal?.focus();
 
     return () => {
+      // Восстанавливаем жесты браузера
+      document.removeEventListener("touchstart", handleGlobalTouchStart);
+      document.removeEventListener("touchmove", handleGlobalTouchMove);
+
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keydown", handleTabKey);
-      document.removeEventListener("gesturestart", handleGesture);
-      document.removeEventListener("gesturechange", handleGesture);
-      document.removeEventListener("gestureend", handleGesture);
+
+      // Восстанавливаем скролл body
       document.body.style.overflow = "unset";
-      document.body.style.touchAction = "unset"; // ← Восстанавливаем жесты
+      document.body.style.position = "unset";
+      document.body.style.width = "unset";
+      document.body.style.height = "unset";
     };
-  }, [index, handleKeyDown, handleTabKey, handleGesture]);
+  }, [
+    index,
+    handleKeyDown,
+    handleTabKey,
+    handleGlobalTouchStart,
+    handleGlobalTouchMove,
+  ]);
 
   if (index === null) return null;
 
@@ -181,7 +201,10 @@ export default function ModalGallery({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       // CSS для блокировки жестов браузера
-      style={{ touchAction: "pan-y" }} // ← Разрешаем только вертикальный скролл
+      style={{
+        touchAction: "none", // ← Полностью отключаем жесты браузера
+        WebkitOverflowScrolling: "touch",
+      }}
     >
       {/* Overlay для закрытия по клику */}
       <div className="absolute inset-0" onClick={close} aria-hidden="true" />
@@ -209,10 +232,7 @@ export default function ModalGallery({
           </button>
         )}
 
-        <figure
-          className="flex flex-col items-center w-full"
-          // Убираем дублирующие обработчики - они уже на родителе
-        >
+        <figure className="flex flex-col items-center w-full">
           <div className="max-w-[90vw] max-h-[80vh] bg-white/5 rounded-lg">
             <Image
               src={currentImage.src}
@@ -225,8 +245,7 @@ export default function ModalGallery({
               quality={85}
               unoptimized={true}
               onDragStart={(e) => e.preventDefault()}
-              // Предотвращаем жесты на самом изображении
-              style={{ touchAction: "pan-y" }}
+              style={{ touchAction: "none" }} // ← Отключаем жесты на изображении
             />
           </div>
           <figcaption className="text-white text-sm mt-4 text-center px-4">
