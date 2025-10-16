@@ -1,9 +1,15 @@
 export default function ButtonWA() {
+  const whatsappLink = "https://wa.me/4915124908000";
+
   return (
-    <button className="bg-green-500/20 rounded-lg px-6 py-2 text-black hover:bg-green-600 cursor-pointer transition">
-      <a target="_blank" href="https://wa.me/4915124908000">
-        WhatsApp
-      </a>
-    </button>
+    <a
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Написать нам в WhatsApp"
+      className="inline-block px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-center"
+    >
+      WhatsApp
+    </a>
   );
 }
