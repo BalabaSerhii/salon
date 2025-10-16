@@ -6,8 +6,8 @@ export default function ButtonWA() {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Написать нам в WhatsApp"
-      className="inline-block px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-center"
+      aria-label="Schreiben Sie uns bitte über WhatsApp"
+      className="inline-block px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-colors"
     >
       WhatsApp
     </a>

@@ -165,8 +165,8 @@ export default function Header() {
                     href={link.href}
                     className={`transition-colors ${
                       isActive
-                        ? "text-green-600 font-semibold"
-                        : "text-gray-500 hover:text-green-500"
+                        ? "text-green-800 font-semibold" // ✅ темный зеленый для контраста
+                        : "text-gray-700 hover:text-green-800" // серый и hover тоже безопаснее
                     }`}
                     aria-current={isActive ? "page" : undefined}
                   >
