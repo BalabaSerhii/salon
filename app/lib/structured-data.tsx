@@ -263,11 +263,11 @@ export const StructuredData = () => {
     provider: {
       "@type": "LocalBusiness",
       name: "Balaba Studio Massage",
-      telephone: "+49-151-24908000", // ✅ ДОБАВЛЕНО
+      telephone: "+4915124908000", // ✅ ДОБАВЛЕНО
       priceRange: "€€", // ✅ ДОБАВЛЕНО
       image: [
         // ✅ ДОБАВЛЕНО
-        "https://balabastudio.de/balabastudio.png",
+        "https://balabastudio.de/logo.png",
         "https://balabastudio.de/logobeauty.webp",
       ],
       address: {

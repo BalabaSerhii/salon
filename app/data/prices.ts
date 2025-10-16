@@ -17,7 +17,8 @@ export const priceCategories: PriceCategory[] = [
   {
     id: "kombipakete",
     title: "Kombipakete (Super-Mix)",
-    description: "Kombinierte Behandlungen für maximale Entspannung und Wirkung",
+    description:
+      "Kombinierte Behandlungen für maximale Entspannung und Wirkung",
     services: [
       {
         id: "kombi-1",
@@ -56,13 +57,44 @@ export const priceCategories: PriceCategory[] = [
     title: "Massage Einzelner Zonen",
     description: "Gezielte Behandlungen für spezifische Körperbereiche",
     services: [
-      { id: "zone-1", name: "Rücken & Nacken", duration: "30 Min", price: "30 €" },
-      { id: "zone-2", name: "Arme & Nacken", duration: "30 Min", price: "30 €" },
-      { id: "zone-3", name: "Rücken, Nacken & Arme", duration: "30 Min", price: "30 €" },
-      { id: "zone-4", name: "Beine ohne Füße", duration: "30 Min", price: "30 €" },
-      { id: "zone-5", name: "Kopf", duration: "20 Min", price: "20 €" },
-      { id: "zone-6", name: "Gesicht", duration: "20 Min", price: "30 €" },
-      { id: "zone-7", name: "Kopf & Gesicht", duration: "30 Min", price: "40 €" },
+      {
+        id: "zone-1",
+        name: "Rücken & Nacken",
+        duration: "30 Min",
+        price: "30 €",
+      },
+      {
+        id: "zone-2",
+        name: "Arme & Nacken",
+        duration: "30 Min",
+        price: "30 €",
+      },
+      {
+        id: "zone-3",
+        name: "Rücken, Nacken & Arme",
+        duration: "30 Min",
+        price: "30 €",
+      },
+      {
+        id: "zone-4",
+        name: "Rücken, Nacken & Arme",
+        duration: "45 Min",
+        price: "45 €",
+      },
+      {
+        id: "zone-5",
+        name: "Beine ohne Füße",
+        duration: "30 Min",
+        price: "30 €",
+      },
+      { id: "zone-6", name: "Kopf", duration: "20 Min", price: "20 €" },
+      { id: "zone-7", name: "Gesicht", duration: "20 Min", price: "30 €" },
+      {
+        id: "zone-8",
+        name: "Kopf & Gesicht",
+        duration: "30 Min",
+        price: "40 €",
+      },
     ],
   },
   {
@@ -76,8 +108,18 @@ export const priceCategories: PriceCategory[] = [
         duration: "40 Min",
         price: "50 €",
       },
-      { id: "special-2", name: "Ganzkörpermassage", duration: "60 Min", price: "60 €" },
-      { id: "special-3", name: "Ganzkörpermassage", duration: "90 Min", price: "90 €" },
+      {
+        id: "special-2",
+        name: "Ganzkörpermassage",
+        duration: "60 Min",
+        price: "60 €",
+      },
+      {
+        id: "special-3",
+        name: "Ganzkörpermassage",
+        duration: "90 Min",
+        price: "90 €",
+      },
       {
         id: "special-4",
         name: "Aroma-Entspannungsmassage (Ganzkörper)",
@@ -119,10 +161,21 @@ export const priceCategories: PriceCategory[] = [
   {
     id: "pressotherapie",
     title: "Pressotherapie (Apparative Lymphdrainage)",
-    description: "Moderne Gerätetherapie für optimale Entwässerung und Straffung",
+    description:
+      "Moderne Gerätetherapie für optimale Entwässerung und Straffung",
     services: [
-      { id: "presso-1", name: "Arme, Bauch, Beine", duration: "45 Min", price: "35 €" },
-      { id: "presso-2", name: "Bauch, Beine", duration: "30 Min", price: "25 €" },
+      {
+        id: "presso-1",
+        name: "Arme, Bauch, Beine",
+        duration: "45 Min",
+        price: "35 €",
+      },
+      {
+        id: "presso-2",
+        name: "Bauch, Beine",
+        duration: "30 Min",
+        price: "25 €",
+      },
       { id: "presso-3", name: "Beine", duration: "25 Min", price: "20 €" },
       { id: "presso-4", name: "Probebehandlung", price: "10 €" },
     ],
@@ -132,6 +185,8 @@ export const priceCategories: PriceCategory[] = [
 // SEO метаданные
 export const priceListMetadata = {
   title: "Preisliste - Professionelle Massagen in Glauburg | BalabaStudio",
-  description: "Übersicht unserer Preise für Massagen, Pressotherapie und Spezialbehandlungen. Transparente Preise für klassische Massagen, Aroma-Massagen und Lymphdrainage.",
-  keywords: "Massage Preise, Preisliste, Glauburg Massage, Pressotherapie Kosten, Aroma-Massage Preise",
+  description:
+    "Übersicht unserer Preise für Massagen, Pressotherapie und Spezialbehandlungen. Transparente Preise für klassische Massagen, Aroma-Massagen und Lymphdrainage.",
+  keywords:
+    "Massage Preise, Preisliste, Glauburg Massage, Pressotherapie Kosten, Aroma-Massage Preise",
 };

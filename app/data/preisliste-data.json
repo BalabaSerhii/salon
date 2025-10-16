@@ -14,6 +14,12 @@
           "description": "Gezielte Behandlung der Rückenmuskulatur zur Lockerung von Verspannungen"
         },
         {
+          "name": "Rückenmassage",
+          "duration": "45 Minuten",
+          "price": "45 €",
+          "description": "Gezielte Behandlung der Rückenmuskulatur zur Lockerung von Verspannungen"
+        },
+        {
           "name": "Gesichtsmassage",
           "duration": "30 Minuten",
           "price": "40 €",

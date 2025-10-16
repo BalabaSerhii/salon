@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Balaba Studio",
     images: [
       {
-        url: "https://balabastudio.de/balabastudio.png",
+        url: "https://balabastudio.de/logo.png",
         width: 1200,
         height: 630,
         alt: "Balaba Studio Massage – Glauburg, professionelle Massage",
