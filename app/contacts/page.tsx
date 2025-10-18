@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,8 +22,6 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import MapSection from "@/components/MapSection";
-
-// Интерфейс для услуги
 interface Service {
   id: string;
   name: string;
@@ -33,27 +30,21 @@ interface Service {
   duration: string;
   firstTimeOffer?: string;
 }
-
-// Интерфейс для категории услуг
 interface ServiceCategory {
   id: string;
   name: string;
   description: string;
   services: Service[];
 }
-
 interface TimeSlot {
   time: string;
   display: string;
   available: boolean;
 }
-
 interface DateSelection {
   date: string;
   display: string;
 }
-
-// Структурированные данные услуг согласно вашему списку
 const serviceCategories: ServiceCategory[] = [
   {
     id: "lymphdrainage",
@@ -267,12 +258,10 @@ const serviceCategories: ServiceCategory[] = [
     ],
   },
 ];
-
 interface ApiResponse {
   message?: string;
   previewUrl?: string;
 }
-
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState<"form" | "contacts">("form");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -280,8 +269,6 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [showDatePicker, setShowDatePicker] = useState(false);
-
-  // Состояние для уведомлений
   const [toastNotification, setToastNotification] = useState<{
     isVisible: boolean;
     message: string;
@@ -291,7 +278,6 @@ export default function ContactPage() {
     message: "",
     type: "success",
   });
-
   const {
     register,
     handleSubmit,
@@ -307,10 +293,7 @@ export default function ContactPage() {
       comment: "",
     },
   });
-
   const selectedServiceId = watch("serviceId");
-
-  // Обновляем выбранную услугу при изменении selection
   useState(() => {
     if (selectedServiceId) {
       for (const category of serviceCategories) {
@@ -326,8 +309,6 @@ export default function ContactPage() {
       setSelectedService(null);
     }
   });
-
-  // Функции для управления уведомлениями
   const showToast = (message: string, type: "success" | "error") => {
     setToastNotification({
       isVisible: true,
@@ -335,23 +316,18 @@ export default function ContactPage() {
       type,
     });
   };
-
   const hideToast = () => {
     setToastNotification((prev) => ({
       ...prev,
       isVisible: false,
     }));
   };
-
-  // Генерация доступных дат
   const generateAvailableDates = (): DateSelection[] => {
     const dates: DateSelection[] = [];
     const today = new Date();
-
     for (let i = 0; i < 30; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-
       if (date.getDay() !== 0) {
         dates.push({
           date: date.toISOString().split("T")[0],
@@ -364,26 +340,20 @@ export default function ContactPage() {
         });
       }
     }
-
     return dates;
   };
-
-  // Генерация временных слотов с useCallback
   const generateTimeSlots = useCallback((): TimeSlot[] => {
     const slots: TimeSlot[] = [];
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
-
     for (let hour = 9; hour <= 20; hour++) {
       for (let minute = 0; minute < 60; minute += 30) {
         const timeString = `${hour.toString().padStart(2, "0")}:${minute
           .toString()
           .padStart(2, "0")}`;
         const slotTime = hour * 60 + minute;
-
         const isToday = selectedDate === new Date().toISOString().split("T")[0];
         const available = !isToday || slotTime > currentTime;
-
         slots.push({
           time: timeString,
           display: timeString,
@@ -391,15 +361,10 @@ export default function ContactPage() {
         });
       }
     }
-
     return slots;
   }, [selectedDate]);
-
-  // useMemo для оптимизации
   const availableDates = useMemo(() => generateAvailableDates(), []);
   const timeSlots = useMemo(() => generateTimeSlots(), [generateTimeSlots]);
-
-  // Обработчик выбора услуги
   const handleServiceChange = (serviceId: string) => {
     setValue("serviceId", serviceId);
     for (const category of serviceCategories) {
@@ -410,27 +375,20 @@ export default function ContactPage() {
       }
     }
   };
-
-  // Обработчик выбора даты
   const handleDateSelect = (date: string) => {
     setSelectedDate(date);
     setSelectedTime("");
     setValue("datetime", `${date}T${selectedTime}`, { shouldValidate: true });
     setShowDatePicker(false);
   };
-
-  // Обработчик выбора времени
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
     if (selectedDate) {
       setValue("datetime", `${selectedDate}T${time}`, { shouldValidate: true });
     }
   };
-
-  // Функция отправки формы
   async function onSubmit(data: AppointmentFormValues) {
     try {
-      // Находим выбранную услугу для получения названия и продолжительности
       let selectedServiceData = null;
       for (const category of serviceCategories) {
         const service = category.services.find((s) => s.id === data.serviceId);
@@ -439,8 +397,6 @@ export default function ContactPage() {
           break;
         }
       }
-
-      // Подготавливаем данные для отправки с правильными названиями
       const emailData = {
         ...data,
         serviceName: selectedServiceData?.name || "Unbekannter Service",
@@ -457,16 +413,13 @@ export default function ContactPage() {
               })} um ${selectedTime} Uhr`
             : "Nicht angegeben",
       };
-
       const res = await fetch("/api/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(emailData),
       });
-
       const contentType = res.headers.get("content-type") || "";
       let body: ApiResponse | string;
-
       if (contentType.includes("application/json")) {
         body = (await res.json()) as ApiResponse;
       } else {
@@ -475,15 +428,12 @@ export default function ContactPage() {
           "Server returned non-JSON response: " + body.slice(0, 300)
         );
       }
-
       if (!res.ok)
         throw new Error((body as ApiResponse)?.message || "Server error");
-
       showToast(
         "Terminanfrage erfolgreich gesendet! Wir melden uns in Kürze bei Ihnen.",
         "success"
       );
-
       reset();
       setSelectedService(null);
       setSelectedDate("");
@@ -491,9 +441,7 @@ export default function ContactPage() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       console.error("Submit error:", err);
-
       let userFriendlyMessage = "Fehler beim Senden der Terminanfrage";
-
       if (msg.includes("Validierungsfehler")) {
         userFriendlyMessage = "Bitte überprüfen Sie Ihre Eingaben auf Fehler.";
       } else if (msg.includes("Email service") || msg.includes("SMTP")) {
@@ -503,15 +451,13 @@ export default function ContactPage() {
         userFriendlyMessage =
           "Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung.";
       }
-
       showToast(userFriendlyMessage, "error");
     }
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-4 sm:py-8 mt-3">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8">
-        {/* Header */}
+        {}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
             Kontakt & Terminvereinbarung
@@ -521,8 +467,7 @@ export default function ContactPage() {
             uns darauf, Ihnen zu mehr Entspannung zu verhelfen
           </p>
         </div>
-
-        {/* Mobile Menu Button */}
+        {}
         <div className="lg:hidden flex justify-center mb-6">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -540,11 +485,10 @@ export default function ContactPage() {
             </span>
           </button>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {/* Main Content */}
+          {}
           <div className="lg:col-span-2">
-            {/* Mobile Tab Navigation */}
+            {}
             <div
               id="mobile-navigation"
               className={`lg:hidden transition-all duration-300 ${
@@ -580,8 +524,7 @@ export default function ContactPage() {
                 </button>
               </div>
             </div>
-
-            {/* Desktop Tab Navigation */}
+            {}
             <div className="hidden lg:flex justify-center mb-8">
               <div className="bg-white rounded-xl p-2 shadow-lg border border-green-100">
                 <button
@@ -606,9 +549,7 @@ export default function ContactPage() {
                 </button>
               </div>
             </div>
-
             {activeTab === "form" ? (
-              /* Improved Appointment Form */
               <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                   Termin anfragen
@@ -617,17 +558,15 @@ export default function ContactPage() {
                   Füllen Sie das Formular aus und wir melden uns innerhalb von
                   24 Stunden bei Ihnen
                 </p>
-
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className="space-y-6 sm:space-y-8"
                 >
-                  {/* Service Selection */}
+                  {}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-4">
                       Gewünschte Behandlung *
                     </label>
-
                     <div className="relative">
                       <select
                         {...register("serviceId")}
@@ -650,13 +589,11 @@ export default function ContactPage() {
                       </select>
                       <FaChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
                     </div>
-
                     {errors.serviceId && (
                       <p className="text-red-600 text-sm mt-2 font-medium">
                         {errors.serviceId.message}
                       </p>
                     )}
-
                     {selectedService && (
                       <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
                         <h4 className="font-semibold text-green-800 text-lg mb-2">
@@ -681,15 +618,13 @@ export default function ContactPage() {
                       </div>
                     )}
                   </div>
-
-                  {/* Date & Time Selection */}
+                  {}
                   <div className="space-y-6">
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-4">
                         Bevorzugtes Datum & Uhrzeit *
                       </label>
-
-                      {/* Date Selection */}
+                      {}
                       <div className="mb-6">
                         <label className="block text-sm font-medium text-gray-700 mb-3">
                           Datum auswählen *
@@ -735,8 +670,7 @@ export default function ContactPage() {
                               />
                             </svg>
                           </button>
-
-                          {/* Date Picker Dropdown */}
+                          {}
                           {showDatePicker && (
                             <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl z-10 max-h-80 overflow-y-auto">
                               <div className="p-4">
@@ -766,15 +700,13 @@ export default function ContactPage() {
                           )}
                         </div>
                       </div>
-
-                      {/* Time Selection */}
+                      {}
                       {selectedDate && (
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-3">
                             Uhrzeit auswählen *
                           </label>
-
-                          {/* Mobile: Horizontal scroll */}
+                          {}
                           <div className="md:hidden">
                             <div className="flex space-x-3 pb-4 overflow-x-auto scrollbar-hide">
                               {timeSlots.map((slot) => (
@@ -810,8 +742,7 @@ export default function ContactPage() {
                               →
                             </p>
                           </div>
-
-                          {/* Desktop: Grid layout */}
+                          {}
                           <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-3">
                             {timeSlots.map((slot) => (
                               <button
@@ -840,15 +771,12 @@ export default function ContactPage() {
                           </div>
                         </div>
                       )}
-
                       <input type="hidden" {...register("datetime")} />
-
                       {errors.datetime && (
                         <p className="text-red-600 text-sm mt-3 font-medium bg-red-50 p-3 rounded-lg border border-red-200">
                           {errors.datetime.message}
                         </p>
                       )}
-
                       {selectedDate && selectedTime && (
                         <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                           <div className="flex items-center justify-between">
@@ -887,8 +815,7 @@ export default function ContactPage() {
                       )}
                     </div>
                   </div>
-
-                  {/* Personal Information */}
+                  {}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-3">
@@ -906,7 +833,6 @@ export default function ContactPage() {
                         </p>
                       )}
                     </div>
-
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-3">
                         Telefonnummer *
@@ -924,8 +850,7 @@ export default function ContactPage() {
                       )}
                     </div>
                   </div>
-
-                  {/* Email */}
+                  {}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-3">
                       E-Mail Adresse
@@ -942,8 +867,7 @@ export default function ContactPage() {
                       </p>
                     )}
                   </div>
-
-                  {/* WhatsApp Preference */}
+                  {}
                   <div className="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
                     <input
                       id="whatsapp"
@@ -958,8 +882,7 @@ export default function ContactPage() {
                       Ich bevorzuge Kommunikation per WhatsApp
                     </label>
                   </div>
-
-                  {/* Comments */}
+                  {}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-3">
                       Besondere Wünsche oder Anmerkungen
@@ -976,8 +899,7 @@ export default function ContactPage() {
                       </p>
                     )}
                   </div>
-
-                  {/* Submit Button */}
+                  {}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -992,8 +914,7 @@ export default function ContactPage() {
                       "Termin anfragen"
                     )}
                   </button>
-
-                  {/* WhatsApp Alternative */}
+                  {}
                   <p className="text-center text-sm text-gray-600">
                     Alternativ:{" "}
                     <a
@@ -1008,14 +929,12 @@ export default function ContactPage() {
                 </form>
               </div>
             ) : (
-              /* Contact Information */
               <div className="space-y-6">
                 <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center">
                     <FaMapMarkerAlt className="text-green-600 mr-4 text-2xl" />
                     Standort & Kontakt
                   </h2>
-
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -1040,7 +959,6 @@ export default function ContactPage() {
                         </a>
                       </address>
                     </div>
-
                     <div>
                       <h3 className="text-xl font-semibold text-gray-800 mb-4">
                         Kontakt
@@ -1063,7 +981,6 @@ export default function ContactPage() {
                       </div>
                     </div>
                   </div>
-
                   <div className="mt-8 pt-6 border-t border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-800 mb-4">
                       Öffnungszeiten
@@ -1080,13 +997,11 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-
                 <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center">
                     <FaBus className="text-blue-600 mr-4 text-2xl" />
                     Anfahrt & Parken
                   </h2>
-
                   <div className="space-y-6">
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-3 flex items-center text-xl">
@@ -1097,7 +1012,6 @@ export default function ContactPage() {
                         RB34, Bus: 374, FB-20, FB-21, FB-25, FB-45
                       </p>
                     </div>
-
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-3 flex items-center text-xl">
                         <FaParking className="text-green-500 mr-3 text-lg" />
@@ -1112,14 +1026,13 @@ export default function ContactPage() {
               </div>
             )}
           </div>
-
-          {/* Sidebar */}
+          {}
           <div
             className={`space-y-6 transition-all duration-300 ${
               isMobileMenuOpen ? "block animate-slideIn" : "hidden lg:block"
             }`}
           >
-            {/* Contact Card */}
+            {}
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">
                 Schnellkontakt
@@ -1143,8 +1056,7 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-
-            {/* Social Media */}
+            {}
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">
                 Folgen Sie uns
@@ -1170,16 +1082,14 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-
-            {/* Map */}
+            {}
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <MapSection />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Toast Notification */}
+      {}
       <ToastNotification
         message={toastNotification.message}
         type={toastNotification.type}
@@ -1187,8 +1097,7 @@ export default function ContactPage() {
         onClose={hideToast}
         duration={4000}
       />
-
-      {/* Custom CSS for animations */}
+      {}
       <style jsx>{`
         @keyframes fadeIn {
           from {

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,7 +12,6 @@ import {
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/preisliste", label: "Preisliste" },
@@ -21,7 +19,6 @@ const navLinks = [
   { href: "/contacts", label: "Kontakt" },
   { href: "/blog", label: "Blog" },
 ];
-
 const socialLinks = [
   {
     href: "https://wa.me/4915124908000?text=Hallo,%20ich%20interessiere%20mich%20für%20Ihre%20Dienstleistungen",
@@ -44,16 +41,12 @@ const socialLinks = [
     label: "Telegram",
   },
 ];
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isAtTop, setIsAtTop] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
   const pathName = usePathname();
-
-  // Нормализация пути: убираем trailing slash (кроме "/"), декодируем
   const normalizePath = (p?: string) => {
     if (!p) return "/";
     try {
@@ -65,25 +58,18 @@ export default function Header() {
       return p;
     }
   };
-
-  // currentPath — мемоизировано, чтобы не пересоздавать при каждом рендере
   const currentPath = useMemo(() => normalizePath(pathName ?? "/"), [pathName]);
-
   const toggleMenu = () => {
     setIsMenuOpen((s) => !s);
   };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
-  // Скрытие/показ header при скролле: сохраняем твою логику
   useEffect(() => {
     const controlHeader = () => {
       const currentScrollY = window.scrollY ?? 0;
       const atTop = currentScrollY < 10;
       setIsAtTop(atTop);
-
       if (atTop) {
         setIsVisible(true);
       } else if (currentScrollY < lastScrollY) {
@@ -91,15 +77,11 @@ export default function Header() {
       } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       }
-
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", controlHeader, { passive: true });
     return () => window.removeEventListener("scroll", controlHeader);
   }, [lastScrollY]);
-
-  // Блокировка скролла при открытом меню и скрытие плавающей кнопки
   useEffect(() => {
     const floatingButton = document.querySelector(
       ".fixed.bottom-6.right-6"
@@ -116,26 +98,29 @@ export default function Header() {
       if (floatingButton) floatingButton.style.display = "block";
     };
   }, [isMenuOpen]);
-
   return (
     <>
-      {/* spacer чтобы контент не прыгал под fixed header */}
+      {}
       <div className="h-20 md:h-24" />
-
       <motion.header
-        className={`fixed top-0 left-0 right-0 flex justify-between items-center p-5  bg-[#f8f7f4] z-50 transition-all duration-300 ${
-          !isAtTop && isVisible
-            ? "bg-[#f8f7f4]/95 backdrop-blur-sm shadow-sm"
-            : isAtTop
-            ? "bg-[#f8f7f4] shadow-none"
-            : ""
-        }`}
+        className={`fixed top-0 left-0 right-0 
+  flex justify-between items-center 
+  py-4 px-4  /* Мобильные паддинги */
+  lg:py-5 lg:px-[500px]  /* Паддинги только для lg и выше */
+  bg-[#f8f7f4] z-50 
+  transition-all duration-300 ${
+    !isAtTop && isVisible
+      ? "bg-[#f8f7f4]/95 backdrop-blur-sm shadow-sm"
+      : isAtTop
+      ? "bg-[#f8f7f4] shadow-none"
+      : ""
+  }`}
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         role="banner"
       >
-        {/* Logo */}
+        {}
         <Link href="/" className="z-50" aria-label="Zur Startseite">
           <Image
             src="/logobeauty.webp"
@@ -146,8 +131,6 @@ export default function Header() {
             unoptimized={true}
           />
         </Link>
-
-        {/* Desktop nav (не меняем визуал для ПК/ноутов) */}
         <nav
           className="hidden md:block"
           role="navigation"
@@ -165,14 +148,13 @@ export default function Header() {
                     href={link.href}
                     className={`transition-colors ${
                       isActive
-                        ? "text-green-800 font-semibold" // ✅ темный зеленый для контраста
-                        : "text-gray-700 hover:text-green-800" // серый и hover тоже безопаснее
+                        ? "text-green-800 font-semibold"
+                        : "text-gray-700 hover:text-green-800"
                     }`}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {link.label}
                   </Link>
-
                   {isActive && (
                     <motion.span
                       layoutId="active-dot"
@@ -189,8 +171,7 @@ export default function Header() {
             })}
           </ul>
         </nav>
-
-        {/* Desktop social icons */}
+        {}
         <div className="hidden md:block">
           <ul className="flex gap-2 text-gray-500">
             {socialLinks.map((s) => {
@@ -211,8 +192,7 @@ export default function Header() {
             })}
           </ul>
         </div>
-
-        {/* Mobile menu button */}
+        {}
         <button
           onClick={toggleMenu}
           className="md:hidden p-2 text-gray-500 hover:text-green-500 transition-colors z-50"
@@ -223,12 +203,11 @@ export default function Header() {
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </motion.header>
-
-      {/* Mobile menu + backdrop */}
+      {}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
+            {}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -236,8 +215,7 @@ export default function Header() {
               className="fixed inset-0 bg-black/40 md:hidden z-40"
               onClick={closeMenu}
             />
-
-            {/* Slide panel */}
+            {}
             <motion.aside
               id="mobile-menu"
               role="dialog"
@@ -248,7 +226,7 @@ export default function Header() {
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 w-64 bg-white shadow-lg border-l border-gray-200 md:hidden z-50 overflow-y-auto"
             >
-              {/* close button */}
+              {}
               <div className="absolute top-4 right-4 z-50">
                 <button
                   onClick={closeMenu}
@@ -258,7 +236,6 @@ export default function Header() {
                   <FaTimes size={22} />
                 </button>
               </div>
-
               <div className="flex flex-col h-full pt-20 pb-6 px-4">
                 <nav className="flex-1" aria-label="Mobile Navigation">
                   <ul className="space-y-2">
@@ -291,8 +268,7 @@ export default function Header() {
                     })}
                   </ul>
                 </nav>
-
-                {/* Social + CTA */}
+                {}
                 <div className="border-t border-gray-200 pt-4 mt-4">
                   <p className="text-sm text-gray-500 mb-3 px-2">
                     Folgen Sie uns
@@ -316,7 +292,6 @@ export default function Header() {
                       );
                     })}
                   </ul>
-
                   <div className="px-2">
                     <a
                       href="https://wa.me/4915124908000?text=Hallo,%20ich%20interessiere%20mich%20für%20Ihre%20Dienstleistungen"
