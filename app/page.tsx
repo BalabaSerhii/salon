@@ -7,7 +7,8 @@ import BenefitsSection from "@/components/BenefitsSection";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import { motion, Variants } from "framer-motion";
 
-const containerVariants = {
+// Варианты анимаций для повторного использования
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,11 +18,16 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.95,
+  },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       type: "spring",
       stiffness: 100,
@@ -37,7 +43,7 @@ const cardVariants: Variants = {
     y: 0,
     scale: 1,
     transition: {
-      type: "spring" as const, 
+      type: "spring",
       stiffness: 80,
     },
   },
@@ -46,7 +52,7 @@ const cardVariants: Variants = {
     scale: 1.03,
     boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.1)",
     transition: {
-      type: "spring" as const, 
+      type: "spring",
       stiffness: 400,
       damping: 17,
     },
@@ -71,7 +77,6 @@ export default function HomePage() {
       >
         <div className="bg-[#f8f7f4] pt-7 pb-10 text-center w-full">
           <div className="container mx-auto px-4 max-w-6xl">
-            {/* Главный заголовок с анимацией */}
             <motion.h1
               className="text-3xl md:text-5xl lg:text-4xl font-bold leading-tight pb-5"
               initial={{ y: -50, opacity: 0 }}
@@ -94,7 +99,6 @@ export default function HomePage() {
               </motion.span>
             </motion.h1>
 
-            {/* Подзаголовок с анимацией */}
             <motion.p
               className="text-xl md:text-2xl lg:text-3xl mx-auto leading-relaxed w-full md:w-4/5 pt-5 border-t pb-5 border-gray-300 px-4"
               initial={{ y: 30, opacity: 0 }}
@@ -114,7 +118,6 @@ export default function HomePage() {
         </div>
 
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Декоративная линия с анимацией */}
           <motion.div
             className="w-24 h-1 bg-green-300 mx-auto rounded-full mb-8"
             initial={{ width: 0 }}

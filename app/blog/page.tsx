@@ -3,10 +3,10 @@
 import { useState } from "react";
 import BlogCard from "@/components/BlogCard";
 import { blogPosts } from "../data/blogData";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 // Варианты анимаций
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -16,7 +16,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 30,
@@ -34,7 +34,7 @@ const itemVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,

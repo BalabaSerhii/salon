@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { priceCategories } from "../data/prices";
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 
 // Единые стили для всех кнопок
 const buttonClasses =
@@ -94,7 +94,7 @@ export default function PriceList() {
   );
 
   // Анимации для контейнера
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -105,7 +105,7 @@ export default function PriceList() {
   };
 
   // Анимации для карточек услуг
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 20,

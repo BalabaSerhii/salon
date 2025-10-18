@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 import { blogPosts } from "../../data/blogData";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { use } from "react";
 
 interface BlogPostPageProps {
@@ -13,8 +13,45 @@ interface BlogPostPageProps {
   }>;
 }
 
+const pageVariants: Variants = {
+  initial: { opacity: 0 },
+  enter: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeIn",
+    },
+  },
+};
+
+const backButtonVariants: Variants = {
+  initial: { opacity: 0, x: -20 },
+  enter: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.5,
+      duration: 0.5,
+    },
+  },
+  hover: {
+    x: -5,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+};
+
 export default function BlogPostPage({ params }: BlogPostPageProps) {
-  // Используем хук use() для работы с Promise
   const { id } = use(params);
   const post = blogPosts.find((p) => p.id === id);
 
@@ -25,9 +62,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <motion.div
       className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-8"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      variants={pageVariants}
+      initial="initial"
+      animate="enter"
+      exit="exit"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Анимированный компонент статьи */}
@@ -42,9 +80,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Анимированная кнопка возврата */}
         <motion.div
           className="text-center mt-8"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          variants={backButtonVariants}
+          initial="initial"
+          animate="enter"
+          whileHover="hover"
         >
           <Link
             href="/blog"
