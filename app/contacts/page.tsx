@@ -989,6 +989,7 @@ export default function ContactPage() {
                       <FaClock className="text-green-500 mr-4 mt-1 flex-shrink-0 text-xl" />
                       <div>
                         <p className="font-bold">Mo - Sa: 9:00 - 20:00 Uhr</p>
+                        <p className="font-bold">So: Ruhetag</p>
                         <p className="text-gray-600 mt-2 font-medium">
                           Termine nach Vereinbarung
                         </p>
