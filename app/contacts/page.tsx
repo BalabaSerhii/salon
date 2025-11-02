@@ -468,23 +468,7 @@ export default function ContactPage() {
           </p>
         </div>
         {}
-        <div className="lg:hidden flex justify-center mb-6">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-md border-2 border-green-100 font-semibold text-gray-800 hover:bg-green-50 hover:border-green-300 transition-all duration-300"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-navigation"
-          >
-            {isMobileMenuOpen ? (
-              <FaTimes className="text-green-600 text-lg" />
-            ) : (
-              <FaBars className="text-green-600 text-lg" />
-            )}
-            <span className="text-green-700">
-              {isMobileMenuOpen ? "Menü schließen" : "Schnellnavigation"}
-            </span>
-          </button>
-        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {}
           <div className="lg:col-span-2">
@@ -525,11 +509,11 @@ export default function ContactPage() {
               </div>
             </div>
             {}
-            <div className="hidden lg:flex justify-center mb-8">
-              <div className="bg-white rounded-xl p-2 shadow-lg border border-green-100">
+            <div className=" lg:flex justify-center mb-8">
+              <div className="bg-white rounded-xl p-2 shadow-lg border border-green-100 flex justify-center">
                 <button
                   onClick={() => setActiveTab("form")}
-                  className={`px-8 py-4 rounded-lg font-semibold transition-all text-lg ${
+                  className={`px-8 py-2 rounded-lg font-semibold transition-all text-lg ${
                     activeTab === "form"
                       ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md"
                       : "text-gray-700 hover:text-green-700 hover:bg-green-50"
@@ -539,7 +523,7 @@ export default function ContactPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("contacts")}
-                  className={`px-8 py-4 rounded-lg font-semibold transition-all text-lg ${
+                  className={`px-8 py-2 rounded-lg font-semibold transition-all text-lg ${
                     activeTab === "contacts"
                       ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md"
                       : "text-gray-700 hover:text-green-700 hover:bg-green-50"

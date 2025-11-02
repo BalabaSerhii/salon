@@ -325,7 +325,7 @@ export default function PriceList() {
             </h3>
             <ul className="text-gray-600 space-y-3 text-sm">
               {[
-                "Alle Preise in Euro inklusive Mehrwertsteuer",
+                "Gemäß § 19 UStG keine Umsatzsteuer",
                 "Termine nur nach vorheriger Vereinbarung",
                 "Professionelle Massage in Glauburg-Stockheim",
                 "Privatzahlung - keine Krankenkassenabrechnung",
