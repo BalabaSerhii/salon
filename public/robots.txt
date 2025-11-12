@@ -1,34 +1,34 @@
 User-agent: *
 Allow: /
 
-# Запретить служебные папки
+# Запретить технические папки
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
-Disallow: /tmp/
+Disallow: /_next/
+Disallow: /404
+Disallow: /500
 
-# Разрешить блог и статьи
+# Разрешить важные разделы
 Allow: /blog/
 Allow: /blog/*
 
-# Основной хост (некоторые роботы поддерживают)
-Host: https://www.balabastudio.de
-
-# Sitemap
+# Основные sitemaps
 Sitemap: https://www.balabastudio.de/sitemap.xml
+Sitemap: https://www.balabastudio.de/sitemap-images.xml
 
-# Задержка для уважения к серверу
-Crawl-delay: 1
+# Скорость сканирования
+Crawl-delay: 0.5
 
-# Особые правила для разных роботов
+# Особые правила для роботов
 User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.1
+
+User-agent: Googlebot-Image
 Allow: /
 Crawl-delay: 0.5
 
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
-
-User-agent: Yandex
-Allow: /
-Crawl-delay: 2
