@@ -106,7 +106,7 @@ export default function Header() {
         className={`fixed top-0 left-0 right-0 
   flex justify-between items-center 
   py-4 px-4  /* Мобильные паддинги */
-  lg:py-5 lg:px-[500px]  /* Паддинги только для lg и выше */
+  lg:py-5 lg:px-[300px]  /* Паддинги только для lg и выше */
   bg-[#f8f7f4] z-50 
   transition-all duration-300 ${
     !isAtTop && isVisible
