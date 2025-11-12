@@ -6,7 +6,6 @@ import BlogArticle from "@/components/BlogArticle";
 import { blogPosts } from "../../data/blogData";
 import { motion, Variants } from "framer-motion";
 import { use } from "react";
-
 interface BlogPostPageProps {
   params: Promise<{
     id: string;

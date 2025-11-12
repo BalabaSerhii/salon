@@ -5,6 +5,7 @@ import BlogCard from "@/components/BlogCard";
 import { blogPosts } from "../data/blogData";
 import { motion, Variants } from "framer-motion";
 
+
 // Варианты анимаций
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

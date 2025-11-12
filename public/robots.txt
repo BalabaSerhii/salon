@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /blog/
+Allow: /blog/*
+
+Disallow: /api/
+Disallow: /admin/
+
+Host: https://www.balabastudio.de
+Sitemap: https://www.balabastudio.de/sitemap.xml
+Crawl-delay: 1

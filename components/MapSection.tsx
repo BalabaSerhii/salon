@@ -1,7 +1,7 @@
 export default function MapSection() {
   return (
     <section className="container mx-auto px-4 py-10">
-      <h2 className="text-2xl font-semibold mb-6 text-center">
+      <h2 className="text-2xl font-semibold mb-6 text-center text-[#979ca6]">
         Unser Studio auf der Karte
       </h2>
 

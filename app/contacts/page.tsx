@@ -258,6 +258,7 @@ const serviceCategories: ServiceCategory[] = [
     ],
   },
 ];
+
 interface ApiResponse {
   message?: string;
   previewUrl?: string;

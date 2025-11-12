@@ -17,10 +17,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
   title: "Balaba Studio Massage – Glauburg",
   description:
     "Professionelle Massage in Glauburg-Stockheim. Entspannung für Körper und Geist. Jetzt Termin buchen!",
+  metadataBase: new URL("https://www.balabastudio.de"), 
+  alternates: {
+    canonical: "/", 
+  },
   openGraph: {
     title: "Balaba Studio Massage",
     description:
