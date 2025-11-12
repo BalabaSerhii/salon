@@ -222,7 +222,7 @@ export const StructuredData = () => {
     },
 
     // Reviews (ДОБАВЛЕНО - реальные отзывы клиентов)
-    review: seoReviews.map((review, index) => ({
+    review: seoReviews.map((review) => ({
       "@type": "Review",
       author: {
         "@type": "Person",

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { blogPosts } from "@/data/blogData";
-
+import { blogPosts } from "../../data/blogData";
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
