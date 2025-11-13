@@ -62,13 +62,13 @@ export const StructuredData = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["HealthAndBeautyBusiness", "LocalBusiness", "DaySpa"],
-    "@id": "https://balabastudio.de/#organization",
+    "@id": "https://www.balabastudio.de/#organization",
 
     // Basic Business Information (REQUIRED)
     name: "Balaba Studio Massage",
     description:
       "Professionelle Massagen und Pressotherapie in Glauburg-Stockheim - Entspannungsmassagen, Lymphdrainage und Wellness-Behandlungen",
-    url: "https://balabastudio.de",
+    url: "https://www.balabastudio.de",
 
     // Contact Information (REQUIRED for LocalBusiness)
     telephone: "+49-151-24908000",
@@ -93,11 +93,11 @@ export const StructuredData = () => {
 
     // Media Assets (REQUIRED - multiple images)
     image: [
-      "https://balabastudio.de/balabastudio.png",
-      "https://balabastudio.de/logobeauty.webp",
-      "https://balabastudio.de/logo.png",
+      "https://www.balabastudio.de/balabastudio.png",
+      "https://www.balabastudio.de/logobeauty.webp",
+      "https://www.balabastudio.de/logo.png",
     ],
-    logo: "https://balabastudio.de/logobeauty.webp",
+    logo: "https://www.balabastudio.de/logobeauty.webp",
 
     // Business Hours (FIXED - consistent schedule)
     openingHours: "Mo-Sa 10:00-20:00",
@@ -267,8 +267,8 @@ export const StructuredData = () => {
       priceRange: "€€", // ✅ ДОБАВЛЕНО
       image: [
         // ✅ ДОБАВЛЕНО
-        "https://balabastudio.de/logo.png",
-        "https://balabastudio.de/logobeauty.webp",
+        "https://www.balabastudio.de/logo.png",
+        "https://www.balabastudio.de/logobeauty.webp",
       ],
       address: {
         "@type": "PostalAddress",
@@ -285,7 +285,7 @@ export const StructuredData = () => {
         longitude: 9.0123212,
       },
       openingHours: "Mo-Sa 10:00-20:00", // ✅ ДОБАВЛЕНО
-      url: "https://balabastudio.de", // ✅ ДОБАВЛЕНО
+      url: "https://www.balabastudio.de", // ✅ ДОБАВЛЕНО
     },
 
     // Service details
@@ -311,7 +311,7 @@ export const StructuredData = () => {
     },
 
     // Additional service information
-    termsOfService: "https://balabastudio.de/agb",
+    termsOfService: "https://www.balabastudio.de/agb",
   };
 
   return (
