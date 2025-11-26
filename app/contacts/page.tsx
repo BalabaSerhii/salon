@@ -626,7 +626,7 @@ export default function ContactPage() {
                               errors.datetime ? "border-red-500 bg-red-50" : ""
                             }`}
                           >
-                            <span>
+                            <span  className={!selectedDate ? "text-[#979ca6]" : ""}>
                               {selectedDate
                                 ? new Date(selectedDate).toLocaleDateString(
                                     "de-DE",
@@ -884,6 +884,12 @@ export default function ContactPage() {
                       </p>
                     )}
                   </div>
+                  <p className="text-sm font-semibold text-red-800  bg-[#fef2f2] rounded-xl text-center">
+                    Wir schätzen Ihre persönlichen Daten und geben sie niemals
+                    an Dritte weiter. Wir verwenden sie ausschließlich innerhalb
+                    unseres Systems zur Kontaktaufnahme und zur Bearbeitung
+                    Ihrer Anfrage
+                  </p>
                   {}
                   <button
                     type="submit"

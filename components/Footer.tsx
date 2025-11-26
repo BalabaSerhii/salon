@@ -8,6 +8,7 @@ import {
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
+import { getSortedCities } from "@/app/data/SEOText";
 
 const socialLinks = [
   {
@@ -34,12 +35,13 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const sortedCities = getSortedCities();
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200 text-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
         {/* === Верхняя сетка === */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* === Колонка 1: Логотип + контакты === */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
             <Link href="/" aria-label="Zur Startseite">
@@ -82,7 +84,7 @@ export default function Footer() {
           {/* === Колонка 2: Навигация === */}
           <nav
             aria-label="Footer Navigation"
-            className="flex flex-col items-center md:items-center text-center"
+            className="flex flex-col items-center md:items-start text-center md:text-left"
           >
             <h3 className="text-lg font-semibold mb-4">Navigation</h3>
             <ul className="space-y-2">
@@ -129,7 +131,28 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* === Колонка 3: Соцсети + время работы === */}
+          {/* === Колонка 3: Massage in Städten === */}
+          {/* <nav
+            aria-label="Massage in Städten"
+            className="flex flex-col items-center md:items-start text-center md:text-left"
+          >
+            <h3 className="text-lg font-semibold mb-4">Massage in Städten</h3>
+            <ul className="space-y-2">
+              {sortedCities.map((city) => (
+                <li key={city.id}>
+                  <Link
+                    href={`/city/${city.slug}`}
+                    className="hover:text-green-600 transition-colors font-medium"
+                    title={`Massage in ${city.city} - ${city.travelTime} entfernt`}
+                  >
+                    Massage {city.city}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav> */}
+
+          {/* === Колонка 4: Соцсети + время работы === */}
           <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-5">
             <div>
               <h3 className="text-lg font-semibold mb-3">Wir sind online</h3>
