@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
 
   compress: true,
 
+  experimental: {
+    optimizeCss: true, 
+  },
+
   async redirects() {
     return [
       {
@@ -49,10 +53,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
-  },
-
-  experimental: {
-    optimizeCss: true,
   },
 };
 
