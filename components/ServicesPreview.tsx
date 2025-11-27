@@ -11,7 +11,7 @@ export default function ServicesPreview() {
     {
       name: "Ganzkörpermassage",
       description: "Umfassende Entspannung von Kopf bis Fuß",
-      price: "ab 50€",
+      price: "ab 45€",
       link: "/preisliste#ganzkoerper-massage",
     },
     {

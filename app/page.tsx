@@ -6,6 +6,7 @@ import ServicesPreview from "@/components/ServicesPreview";
 import BenefitsSection from "@/components/BenefitsSection";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import { motion, Variants } from "framer-motion";
+import FAQAccordion from "@/components/FAQAccordion";
 
 // Варианты анимаций для повторного использования
 const containerVariants: Variants = {
@@ -312,6 +313,8 @@ export default function HomePage() {
           <ReviewCarousel />
         </motion.div>
       </motion.section>
+<FAQAccordion/>
+
     </motion.main>
   );
 }
