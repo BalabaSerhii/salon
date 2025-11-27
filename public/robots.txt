@@ -12,6 +12,8 @@ Disallow: /500
 # Разрешить важные разделы
 Allow: /blog/
 Allow: /blog/*
+Allow: /city/         
+Allow: /city/*        
 
 # Основные sitemaps
 Sitemap: https://www.balabastudio.de/sitemap.xml
