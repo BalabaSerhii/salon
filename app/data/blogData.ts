@@ -60,7 +60,7 @@ Kostenlose Parkplätze stehen ausreichend zur Verfügung.
 Vereinbaren Sie noch heute Ihren Termin in unserem Massagestudio oder fragen Sie nach unseren Geschenkgutscheinen – und überzeugen Sie sich selbst, warum Gäste aus der gesamten Region zu uns nach Glauburg kommen!`,
     imageUrl: "https://images.unsplash.com/photo-1598111465162-5f38a4199576?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     readTime: "4 Min lesezeit",
-    category: "Entspannung",
+    category: "Servicebereich",
     publishDate: "26.11.2025",
     author: "Serhii Balaba",
     tags: [
