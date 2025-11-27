@@ -132,7 +132,7 @@ export default function Footer() {
           </nav>
 
           {/* === Колонка 3: Massage in Städten === */}
-          {/* <nav
+          <nav
             aria-label="Massage in Städten"
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
@@ -150,7 +150,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </nav> */}
+          </nav>
 
           {/* === Колонка 4: Соцсети + время работы === */}
           <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-5">
