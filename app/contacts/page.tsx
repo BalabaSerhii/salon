@@ -17,8 +17,6 @@ import {
   FaClock,
   FaParking,
   FaBus,
-  FaBars,
-  FaTimes,
   FaChevronDown,
 } from "react-icons/fa";
 import MapSection from "@/components/MapSection";
@@ -626,7 +624,9 @@ export default function ContactPage() {
                               errors.datetime ? "border-red-500 bg-red-50" : ""
                             }`}
                           >
-                            <span  className={!selectedDate ? "text-[#979ca6]" : ""}>
+                            <span
+                              className={!selectedDate ? "text-[#979ca6]" : ""}
+                            >
                               {selectedDate
                                 ? new Date(selectedDate).toLocaleDateString(
                                     "de-DE",

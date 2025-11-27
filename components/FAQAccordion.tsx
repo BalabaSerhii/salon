@@ -1,8 +1,7 @@
-// components/FAQAccordion.tsx
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants  } from "framer-motion";
 
 const faqItems = [
   {
@@ -96,7 +95,6 @@ const faqItems = [
     icon: "📅",
     keywords: ["Massage Häufigkeit", "Wie oft Massage", "Massage Rhythmus"],
   },
-  
 ];
 
 export default function FAQAccordion() {
@@ -106,7 +104,6 @@ export default function FAQAccordion() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Исправленные variants с правильными типами
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -117,7 +114,7 @@ export default function FAQAccordion() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: {
       y: 30,
       opacity: 0,
@@ -127,7 +124,7 @@ export default function FAQAccordion() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94], // Исправлено: массив вместо строки
+        ease: "easeOut",
       },
     },
   };
