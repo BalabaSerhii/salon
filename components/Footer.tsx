@@ -52,7 +52,7 @@ export default function Footer() {
                 height={100}
                 className="mx-auto md:mx-0"
                 priority
-                unoptimized
+                quality={75}
               />
             </Link>
 

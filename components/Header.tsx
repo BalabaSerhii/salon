@@ -152,7 +152,7 @@ export default function Header() {
             width={100}
             height={50}
             priority={true}
-            unoptimized={true}
+            quality={75}
             className="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform hover:scale-105 duration-300"
           />
         </Link>

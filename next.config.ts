@@ -1,17 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
+    formats: ["image/webp", "image/avif"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
-        port: "",
-        pathname: "/**",
       },
     ],
   },
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
+  compress: true,
 
   async redirects() {
     return [
@@ -26,7 +30,6 @@ const nextConfig: NextConfig = {
         destination: "https://www.balabastudio.de/:path*",
         permanent: true,
       },
-      // Дополнительно: перенаправление с http на https
       {
         source: "/:path*",
         has: [
@@ -48,7 +51,9 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  env: {},
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 export default nextConfig;
