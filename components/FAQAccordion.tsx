@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, Variants  } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 const faqItems = [
   {
@@ -243,7 +243,7 @@ export default function FAQAccordion() {
                     }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 ml-14 border-t border-gray-100 pt-4">
+                    <div className="px-6 pb-5 ml-14 border-gray-100 pt-4">
                       <motion.div
                         className="w-12 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mb-4"
                         initial={{ width: 0 }}

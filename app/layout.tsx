@@ -7,6 +7,7 @@ import ButtonWA from "@/components/ButtonWA";
 import { Toaster } from "@/components/ui/sonner";
 import { StructuredData } from "./lib/structured-data";
 import CookiebotLoader from "@/components/CookiebotLoader";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -64,7 +65,7 @@ export default function RootLayout({
         <div className="mt-3">
           <Header />
         </div>
-        <main className="flex-grow">{children}</main>
+        <main className="grow">{children}</main>
         {/* === Floating WhatsApp Button === */}
         <div className="fixed bottom-6 right-6 z-50 ">
           <div className="transform hover:scale-110 transition-transform duration-300">
@@ -78,4 +79,3 @@ export default function RootLayout({
     </html>
   );
 }
-
