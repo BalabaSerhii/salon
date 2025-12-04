@@ -101,8 +101,7 @@ export default function BenefitsSection() {
             transition={{ delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Entdecken Sie die vielfältigen gesundheitlichen Vorteile
-            professioneller Massagetherapie
+            Entdecken Sie die vielfältigen Vorteile professioneller Massagen
           </motion.p>
         </motion.header>
 
