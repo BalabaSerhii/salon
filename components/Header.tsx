@@ -298,7 +298,7 @@ export default function Header() {
 
                 {/* Социальные иконки и CTA */}
                 <div className="border-t border-gray-200 pt-4 mt-4">
-                  <p className="text-sm text-gray-500 mb-3 px-2">
+                  <p className="text-sm text-gray-500 mb-3 px-2 text-center">
                     Folgen Sie uns
                   </p>
                   <ul className="flex justify-center gap-4 mb-4">
