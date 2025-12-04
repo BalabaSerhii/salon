@@ -2,9 +2,10 @@
 
 import { benefits } from "../app/lib/benefists-data";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 // Анимация для контейнера
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -16,7 +17,7 @@ const containerVariants = {
 };
 
 // Анимация для элементов
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -31,7 +32,7 @@ const itemVariants = {
 };
 
 // Анимация для ховера карточек
-const cardHoverVariants = {
+const cardHoverVariants: Variants = {
   hover: {
     y: -8,
     scale: 1.02,
@@ -45,7 +46,7 @@ const cardHoverVariants = {
 };
 
 // Анимация для иконок
-const iconVariants = {
+const iconVariants: Variants = {
   hidden: { rotate: -90, opacity: 0, scale: 0.5 },
   visible: {
     rotate: 0,
@@ -86,7 +87,7 @@ export default function BenefitsSection() {
           </motion.h2>
 
           <motion.div
-            className="w-20 h-1 bg-gradient-to-r from-[#62733f] to-green-600 mx-auto rounded-full mb-6"
+            className="w-20 h-1 bg-linear-to-r from-[#62733f] to-green-600 mx-auto rounded-full mb-6"
             initial={{ width: 0 }}
             whileInView={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -122,7 +123,7 @@ export default function BenefitsSection() {
               whileHover="hover"
             >
               <motion.article
-                className="h-full flex flex-col gap-4 bg-gradient-to-br from-green-50 to-white rounded-xl p-6 border border-green-100 hover:shadow-lg transition-all duration-300 focus-within:shadow-lg items-center text-center"
+                className="relative h-full flex flex-col gap-4 bg-linear-to-r from-green-50 to-white rounded-xl p-6 border border-green-100 hover:shadow-lg transition-all duration-300 focus-within:shadow-lg items-center text-center"
                 variants={cardHoverVariants}
                 whileHover="hover"
                 initial="hidden"
@@ -168,7 +169,7 @@ export default function BenefitsSection() {
 
                 {/* Декоративный элемент при ховере */}
                 <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#62733f] to-green-600 rounded-b-xl opacity-0"
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-[#62733f] to-green-600 rounded-b-xl opacity-0"
                   initial={{ opacity: 0, scaleX: 0 }}
                   whileHover={{ opacity: 1, scaleX: 1 }}
                   transition={{ duration: 0.3 }}
