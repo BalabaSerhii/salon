@@ -7,8 +7,11 @@ import ButtonWA from "@/components/ButtonWA";
 import { Toaster } from "@/components/ui/sonner";
 import { StructuredData } from "./lib/structured-data";
 import CookiebotLoader from "@/components/CookiebotLoader";
+<<<<<<< HEAD
 import { GoogleAnalyticsWithCookiebot } from "@/components/GoogleAnalytics";
 
+=======
+>>>>>>> parent of e52794e (гуггл аналитика)
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -57,7 +60,10 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
+<<<<<<< HEAD
         <GoogleAnalyticsWithCookiebot />
+=======
+>>>>>>> parent of e52794e (гуггл аналитика)
         <link rel="canonical" href="https://www.balabastudio.de/" />
         <StructuredData />
       </head>
@@ -81,3 +87,4 @@ export default function RootLayout({
     </html>
   );
 }
+
