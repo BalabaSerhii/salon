@@ -16,7 +16,7 @@ Dieser Gutschein enthält nur den Betrag, z. B. 60 €, den der oder die Bes
 ### 2️⃣ Leistungs-Gutschein – konkrete Anwendung als Geschenk
 
 Hier steht direkt auf dem Gutschein, welche Anwendung verschenkt wird, z. B.  
-🧘 *„Ganzkörpermassage – 60 Minuten“*.  
+🧘 „Ganzkörpermassage – 60 Minuten“.  
 
 
 ## Warum Kund:innen aus der ganzen Wetterau unsere Gutscheine lieben
@@ -38,7 +38,7 @@ Schenke etwas Besonderes – echte Wohlfühlzeit im Balaba Studio!
 
 ---
 
-📍 Hol dir deinen Gutschein direkt bei uns im Studio in der **Hermstraße 37, Glauburg-Stockheim** oder frage beim nächsten Termin danach.
+📍 Hol dir deinen Gutschein direkt bei uns im Studio in der Hermstraße 37, Glauburg-Stockheim oder frage beim nächsten Termin danach.
 
 
 `,
