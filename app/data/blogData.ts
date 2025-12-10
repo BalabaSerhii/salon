@@ -2,6 +2,67 @@ import { BlogPost } from "../lib/blog";
 
 export const blogPosts: BlogPost[] = [
 {
+    id: "massage-gutscheine-balaba",
+    title: "Geschenkgutscheine aus dem Balaba Studio: Entspannung verschenken leicht gemacht",
+    excerpt: "Du suchst das perfekte Geschenk? Unsere Massage-Gutscheine aus Glauburg-Stockheim sorgen für pure Freude – flexibel oder als feste Anwendung wählbar.",
+    content: `## 🎁 Die perfekte Geschenkidee für jeden Anlass
+
+Du weißt nicht, was du zum Geburtstag, Jubiläum oder einfach als kleine Aufmerksamkeit verschenken sollst? Im Balaba Studio in Glauburg-Stockheim kannst du jetzt zwei verschiedene Arten von Geschenkgutscheinen erwerben – für deine Liebsten, Freunde oder Kolleg:innen.
+
+### 1️⃣ Wert-Gutschein – volle Flexibilität für den Beschenkten
+
+Dieser Gutschein enthält nur den Betrag, z. B. 60 €, den der oder die Beschenkte frei bei uns einlösen kann. Ob Massage, Pressotherapie oder Hautpflege – die Entscheidung liegt ganz bei der beschenkten Person. Wird eine höherpreisige Anwendung gewählt, kann der Differenzbetrag unkompliziert vor Ort bezahlt werden.
+
+### 2️⃣ Leistungs-Gutschein – konkrete Anwendung als Geschenk
+
+Hier steht direkt auf dem Gutschein, welche Anwendung verschenkt wird, z. B.  
+🧘 *„Ganzkörpermassage – 60 Minuten“*.  
+
+
+## Warum Kund:innen aus der ganzen Wetterau unsere Gutscheine lieben
+
+Unsere Gäste aus Büdingen, Nidda, Altenstadt und ganz Wetterau verschenken regelmäßig unsere Gutscheine – und das aus gutem Grund:
+
+- Hochwertige Einwegmaterialien wie frische Aromaöle, Massagelotionen, Einwegunterlagen und persönliche Decken
+- Entspannender Tee und kleine Leckereien nach jeder Anwendung
+- Individuelle Betreuung, hygienische Umgebung und stilvolles Ambiente
+
+## Wichtige Hinweise zu unseren Gutscheinen
+
+- Gutscheine sind nicht gegen Bargeld einlösbar
+- Restbeträge bleiben erhalten und können beim nächsten Besuch genutzt werden
+- Rabatte und Aktionen gelten nicht auf Gutscheine  
+  Beispiel: Bei einem Gutschein über 30 €, eingelöst während einer -10 % Aktion, bleibt der volle Wert bestehen – es wird kein Rabatt abgezogen
+
+Schenke etwas Besonderes – echte Wohlfühlzeit im Balaba Studio!
+
+---
+
+📍 Hol dir deinen Gutschein direkt bei uns im Studio in der **Hermstraße 37, Glauburg-Stockheim** oder frage beim nächsten Termin danach.
+
+
+`,
+    imageUrl: "/Gutschein2.webp",
+    readTime: "3 Min Lesezeit",
+    category: "Geschenkideen",
+    publishDate: "10.12.2025",
+    author: "Serhii Balaba",
+    tags: [
+        "Massage Gutschein",
+        "Geschenkidee Wetterau",
+        "Massage Glauburg",
+        "Massage Büdingen",
+        "Massage Nidda",
+        "Wellness Gutschein",
+        "Pressotherapie Wetterau",
+        "Ganzkörpermassage Geschenk",
+        "Wellness Stockheim",
+        "Massage Altenstadt",
+        "Massage Florstadt",
+        "Massage Ranstadt"
+    ],
+},
+{
     id: "entspannungsmassage-vorteile-region",
     title: "Entspannungsmassage in Glauburg: Wohlfühl-Momente für Bewohner aus Büdingen, Nidda und Umgebung",
     excerpt: "Wie regelmäßige Massagen im Balaba Studio nicht nur Stress reduzieren, sondern auch das Wohlbefinden für Menschen aus der gesamten Wetterau steigern können.",
