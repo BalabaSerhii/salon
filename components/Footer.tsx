@@ -195,7 +195,11 @@ export default function Footer() {
             © {year} Balaba Studio – Alle Rechte vorbehalten.
           </p>
           <p className="text-gray-600 text-sm">
-            „Website erstellt von Balaba Digital“ ✅
+            Website erstellt von{" "}
+            <a href="https://balabadigital.de/">
+              <span className="text-red-600">B</span>alaba{" "}
+              <span className="text-red-600">D</span>igital
+            </a>
           </p>
           <div className="flex justify-center gap-6 pt-2">
             <Link
