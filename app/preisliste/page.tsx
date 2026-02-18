@@ -330,6 +330,7 @@ export default function PriceList() {
                 "Termine nur nach vorheriger Vereinbarung",
                 "Professionelle Massage in Glauburg-Stockheim",
                 "Privatzahlung - keine Krankenkassenabrechnung",
+                "Die Zahlung erfolgt bitte nur in bar. Eine Quittung wird selbstverständlich ausgestellt",
               ].map((item, index) => (
                 <motion.li
                   key={index}
