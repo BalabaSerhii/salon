@@ -99,27 +99,27 @@ export const priceCategories: PriceCategory[] = [
   },
   {
     id: "spezialmassagen",
-    title: "Spezialmassagen",
+    title: "Ganzkörpermassage",
     description: "Besondere Massagearten für individuelle Bedürfnisse",
     services: [
-      {
-        id: "special-1",
-        name: "Anti-Cellulite-Massage Beine & Gesäß",
-        duration: "40 Min",
-        price: "50 €",
-      },
-      {
-        id: "special-2",
-        name: "Ganzkörpermassage",
-        duration: "60 Min",
-        price: "60 €",
-      },
-      {
-        id: "special-3",
-        name: "Ganzkörpermassage",
-        duration: "90 Min",
-        price: "90 €",
-      },
+      // {
+      //   id: "special-1",
+      //   name: "Anti-Cellulite-Massage Beine & Gesäß",
+      //   duration: "40 Min",
+      //   price: "50 €",
+      // },
+      // {
+      //   id: "special-2",
+      //   name: "Ganzkörpermassage",
+      //   duration: "60 Min",
+      //   price: "60 €",
+      // },
+      // {
+      //   id: "special-3",
+      //   name: "Ganzkörpermassage",
+      //   duration: "90 Min",
+      //   price: "90 €",
+      // },
       {
         id: "special-4",
         name: "Aroma-Entspannungsmassage (Ganzkörper)",
@@ -136,7 +136,7 @@ export const priceCategories: PriceCategory[] = [
         id: "special-6",
         name: "Aroma-Entspannungsmassage (Ganzkörper)",
         duration: "90 Min",
-        price: "90 €",
+        price: "95 €",
       },
       {
         id: "special-7",
