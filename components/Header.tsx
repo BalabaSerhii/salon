@@ -19,6 +19,7 @@ const navLinks = [
   { href: "/about", label: "Über uns" },
   { href: "/contacts", label: "Kontakt" },
   { href: "/blog", label: "Blog" },
+  { href: "/firmenkunden", label: "Firmenkunden", isNew: true },
 ];
 
 const socialLinks = [
@@ -95,7 +96,7 @@ export default function Header() {
 
   useEffect(() => {
     const floatingButton = document.querySelector(
-      ".fixed.bottom-6.right-6"
+      ".fixed.bottom-6.right-6",
     ) as HTMLElement | null;
 
     if (isMenuOpen) {
@@ -114,10 +115,8 @@ export default function Header() {
 
   return (
     <>
-      {/* Spacer для фиксированного хедера */}
       <div className="h-16 md:h-20 lg:h-24" />
 
-      {/* Основной хедер */}
       <motion.header
         className={`fixed top-0 left-0 right-0 
           flex justify-between items-center
@@ -132,15 +131,14 @@ export default function Header() {
             !isAtTop && isVisible
               ? "bg-[#f8f7f4]/95 backdrop-blur-sm shadow-sm"
               : isAtTop
-              ? "bg-[#f8f7f4] shadow-none"
-              : ""
+                ? "bg-[#f8f7f4] shadow-none"
+                : ""
           }`}
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         role="banner"
       >
-        {/* Логотип */}
         <Link
           href="/"
           className="z-50 flex-shrink-0"
@@ -157,43 +155,53 @@ export default function Header() {
           />
         </Link>
 
-        {/* Десктопная навигация */}
         <nav
           className="hidden md:block"
           role="navigation"
           aria-label="Hauptnavigation"
         >
           <ul className="flex gap-4 lg:gap-6 xl:gap-8 text-gray-500">
-            {navLinks.map((link) => {
-              const linkPath = normalizePath(link.href);
-              const isActive =
-                linkPath === currentPath ||
-                (linkPath !== "/" && currentPath.startsWith(linkPath));
-              return (
-                <li key={link.href} className="relative">
-                  <Link
-                    href={link.href}
-                    className={`transition-colors text-sm lg:text-base ${
-                      isActive
-                        ? "text-green-800"
-                        : "text-gray-700 hover:text-green-800"
-                    }`}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    {link.label}
-                  </Link>
-                  <div
-                    className={`absolute -bottom-1 left-1/2 h-1 w-1 bg-green-600 rounded-full -translate-x-1/2 transition-all duration-300 ${
-                      isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                    }`}
-                  />
-                </li>
-              );
-            })}
+           {navLinks.map((link) => {
+  const linkPath = normalizePath(link.href);
+  const isActive =
+    linkPath === currentPath ||
+    (linkPath !== "/" && currentPath.startsWith(linkPath));
+  return (
+    <li key={link.href} className="relative">
+      <Link
+        href={link.href}
+        className={`transition-colors text-sm lg:text-base flex items-center ${
+          isActive
+            ? "text-green-800"
+            : "text-gray-700 hover:text-green-800"
+        }`}
+        aria-current={isActive ? "page" : undefined}
+      >
+        {link.label}
+        
+        {/* Бейдж "New" для десктопа */}
+        {link.isNew && (
+          <motion.span
+            initial={{ scale: 0 }}
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="absolute -top-3 -right-2 bg-red-500 text-white text-[9px] px-1 rounded-sm font-bold leading-tight"
+          >
+            New
+          </motion.span>
+        )}
+      </Link>
+      <div
+        className={`absolute -bottom-1 left-1/2 h-1 w-1 bg-green-600 rounded-full -translate-x-1/2 transition-all duration-300 ${
+          isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
+        }`}
+      />
+    </li>
+  );
+})}
           </ul>
         </nav>
 
-        {/* Социальные иконки (только для планшетов и десктопов) */}
         <div className="hidden md:flex items-center">
           <ul className="flex gap-2 lg:gap-3 xl:gap-4">
             {socialLinks.map((s) => {
@@ -215,7 +223,6 @@ export default function Header() {
           </ul>
         </div>
 
-        {/* Кнопка меню для мобильных */}
         <button
           onClick={toggleMenu}
           className="md:hidden p-2 text-gray-500 hover:text-green-500 transition-colors z-50"
@@ -227,11 +234,9 @@ export default function Header() {
         </button>
       </motion.header>
 
-      {/* Мобильное меню */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Затемнение фона */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -240,7 +245,6 @@ export default function Header() {
               onClick={closeMenu}
             />
 
-            {/* Боковое меню */}
             <motion.aside
               id="mobile-menu"
               role="dialog"
@@ -251,7 +255,6 @@ export default function Header() {
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-lg border-l border-gray-200 md:hidden z-50 overflow-y-auto"
             >
-              {/* Кнопка закрытия */}
               <div className="absolute top-4 right-4 z-50">
                 <button
                   onClick={closeMenu}
@@ -263,7 +266,6 @@ export default function Header() {
               </div>
 
               <div className="flex flex-col h-full pt-20 pb-6 px-4">
-                {/* Навигация */}
                 <nav className="flex-1" aria-label="Mobile Navigation">
                   <ul className="space-y-2">
                     {navLinks.map((link, index) => {
@@ -279,24 +281,44 @@ export default function Header() {
                           transition={{ delay: index * 0.08 }}
                         >
                           <Link
-                            href={link.href}
-                            onClick={closeMenu}
-                            className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
-                              isActive
-                                ? "text-green-600 bg-green-50" // Убрал font-semibold
-                                : "text-gray-500 hover:text-green-500 hover:bg-gray-50"
-                            }`}
-                            aria-current={isActive ? "page" : undefined}
-                          >
-                            {link.label}
-                          </Link>
+  href={link.href}
+  onClick={closeMenu}
+  className={`flex items-center justify-between px-4 py-3 rounded-lg transition-colors ${
+    isActive
+      ? "text-green-600 bg-green-50"
+      : "text-gray-500 hover:text-green-500 hover:bg-gray-50"
+  }`}
+  aria-current={isActive ? "page" : undefined}
+>
+  <div className="flex items-center gap-3">
+    <span className="text-base font-medium">{link.label}</span>
+    
+    {link.isNew && (
+      <motion.span
+        animate={{ 
+          scale: [1, 1.1, 1],
+          backgroundColor: ["#dc2626", "#ef4444", "#dc2626"] 
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 1.5 
+        }}
+        className="text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tight shadow-sm"
+      >
+        New
+      </motion.span>
+    )}
+  </div>
+  <svg className="w-4 h-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+  </svg>
+</Link>
                         </motion.li>
                       );
                     })}
                   </ul>
                 </nav>
 
-                {/* Социальные иконки и CTA */}
                 <div className="border-t border-gray-200 pt-4 mt-4">
                   <p className="text-sm text-gray-500 mb-3 px-2 text-center">
                     Folgen Sie uns

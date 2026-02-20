@@ -8,7 +8,6 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 import { motion, Variants } from "framer-motion";
 import FAQAccordion from "@/components/FAQAccordion";
 
-// Варианты анимаций для повторного использования
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
