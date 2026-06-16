@@ -257,7 +257,7 @@ Ihr Balaba Studio Team aus Glauburg-Stockheim empfiehlt idealerweise jede Woche 
     content: `Im Balaba Studio in 63695 Glauburg-Stockheim bieten wir moderne Pressotherapie-Behandlungen an, die sich perfekt für die Reduzierung von Wassereinlagerungen und Cellulite eignen. Unsere apparative Lymphdrainage ist eine innovative Behandlungsmethode, die sich der Drucklufttechnologie bedient, um das Lymphsystem zu aktivieren. Die Pressotherapie ist im Grunde eine apparative Lymphdrainage-Massage. Während der Behandlung werden spezielle Manschetten mit Luft gefüllt, die einen kontrollierten, sanften Druck auf den Körper ausüben und so den Lymphfluss sowie die Blutzirkulation gezielt anregen können.
 
 Wie funktioniert die Pressotherapie im Balaba Studio Glauburg
-Während der Behandlung in unserer Praxis in der Herrnstraße 37 werden spezielle Manschetten um Arme, Beine oder den Bauch gelegt. Diese werden präzise mit Luft gefüllt, die einen sanften, wellenförmigen und rhythmischen Druck auf das Gewebe ausübt.
+Während der Behandlung in unserer Studio in der Herrnstraße 37 werden spezielle Manschetten um Arme, Beine oder den Bauch gelegt. Diese werden präzise mit Luft gefüllt, die einen sanften, wellenförmigen und rhythmischen Druck auf das Gewebe ausübt.
 
 Dieser mechanische Ablauf sorgt für folgende Effekte:
 
@@ -375,7 +375,7 @@ Verbringen Sie täglich mindestens 30 Minuten im Tageslicht, um Ihren circadiane
 Moderate Bewegung am Tag fördert den Tiefschlaf, aber vermeiden Sie intensive Workouts kurz vor dem Schlafengehen.
 
 7. Entspannungsmassagen im Balaba Studio Glauburg
-Regelmäßige Massagen in unserer Praxis in Stockheim reduzieren Stress und Muskelverspannungen, die den Schlaf beeinträchtigen können. Vereinbaren Sie Ihren Termin für besseren Schlaf!`,
+Regelmäßige Massagen in unserer Studio in Stockheim reduzieren Stress und Muskelverspannungen, die den Schlaf beeinträchtigen können. Vereinbaren Sie Ihren Termin für besseren Schlaf!`,
     imageUrl:
       "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     readTime: "6 Min lesezeit",
@@ -434,7 +434,7 @@ Zusätzliche Tipps vom Balaba Studio Team:
 - Ergonomische Sitzposition einnehmen
 - Monitor auf Augenhöhe positionieren
 - Alle 45 Minuten aufstehen und bewegen
-- Regelmäßige Massagen in unserer Praxis in Glauburg-Stockheim zur Lösung tiefer Verspannungen
+- Regelmäßige Massagen in unserer Studio in Glauburg-Stockheim zur Lösung tiefer Verspannungen
 
 Besuchen Sie uns in der Hermstrasse 37 für eine professionelle Nackenmassage!`,
     imageUrl:
@@ -470,7 +470,7 @@ Essen Sie 1-2 Stunden vor der Massage eine leichte Mahlzeit. Ein voller Magen ka
 Eine kurze Dusche vor der Massage öffnet die Poren und bereitet die Haut vor. Vermeiden Sie jedoch stark parfümierte Produkte.
 
 #Bequeme Kleidung
-Tragen Sie lockere, bequeme Kleidung zum Termin in unserer Praxis in der Hermstrasse 37. So können Sie sich leicht umziehen und fühlen sich nach der Massage wohl.
+Tragen Sie lockere, bequeme Kleidung zum Termin in unserer Studio in der Hermstrasse 37. So können Sie sich leicht umziehen und fühlen sich nach der Massage wohl.
 
 #Kommunikation
 Überlegen Sie sich vorher, welche Bereiche besondere Aufmerksamkeit benötigen. Teilen Sie Ihrem Masseur im Balaba Studio Glauburg mit:
@@ -585,7 +585,7 @@ Bei anhaltenden Verspannungen besuchen Sie uns im Balaba Studio Glauburg-Stockhe
       "Entdecken Sie die synergetische Wirkung von Massage und Aromatherapie für ganzheitliches Wohlbefinden.",
     content: `Aroma-Massagen kombinieren die wohltuende Wirkung der Berührung mit der heilenden Kraft ätherischer Öle. Im Balaba Studio in Glauburg-Stockheim bieten wir diese besondere Form der Massage an, die ein multisensorisches Erlebnis bietet, das Körper und Geist in Einklang bringt.
 
-Die Wirkung ätherischer Öle in unserer Praxis:
+Die Wirkung ätherischer Öle in unserer Studio:
 
 #Lavendel
 - Beruhigend und entspannend
@@ -648,7 +648,7 @@ Regeneration beschleunigen mit Balaba Studio Massagen
 - Verbesserte Nährstoffversorgung der Muskeln
 
 Verletzungsprävention durch regelmäßige Massagen
-Regelmäßige Massagen in unserer Praxis in Glauburg helfen:
+Regelmäßige Massagen in unserer Studio in Glauburg helfen:
 - Muskelungleichgewichte auszugleichen
 - Beweglichkeit zu erhalten
 - Verspannungen frühzeitig zu erkennen
@@ -752,7 +752,7 @@ Wichtige Hinweise vom Balaba Studio Team:
 - Immer sanft beginnen
 - Auf Schmerzsignale achten
 - Nicht auf verletzte oder entzündete Stellen massieren
-- Bei anhaltenden Beschwerden professionelle Hilfe in unserer Praxis in Glauburg-Stockheim suchen
+- Bei anhaltenden Beschwerden professionelle Hilfe in unserer Studio in Glauburg-Stockheim suchen
 
 Für tiefgreifende Verspannungen empfehlen wir eine professionelle Massage im Balaba Studio!`,
     imageUrl:
