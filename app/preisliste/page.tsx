@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import { priceCategories } from "../data/prices";
 import { motion, Variants } from "motion/react";
 
-
 // Единые стили для всех кнопок
 const buttonClasses =
   "bg-[#f8f7f4] text-[#64615a] text-center py-2 px-4 rounded-lg font-semibold border-2 border-[#2d983f] transition-all duration-300 hover:bg-[#2d983f] hover:text-white hover:border-[#247a32] focus:outline-none focus:ring-2 focus:ring-[#2d983f] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-w-[120px] text-sm";
@@ -56,11 +55,19 @@ export default function PriceList() {
         : serviceName;
 
       const text = encodeURIComponent(
-        `Hallo! Ich möchte einen Termin für "${serviceText}" buchen. Können Sie mir bitte verfügbare Termine mitteilen?`
+        `Hallo Serhii, 
+ich möchte einen Termin für "${serviceText}" buchen.
+
+Ich kann zu dieser Zeit kommen:
+
+Datum: [⠀]
+Uhrzeit: [⠀]
+
+LG`,
       );
       return `https://wa.me/${whatsappNumber}?text=${text}`;
     },
-    [whatsappNumber]
+    [whatsappNumber],
   );
 
   const handleBookingClick = useCallback((serviceId: string) => {
