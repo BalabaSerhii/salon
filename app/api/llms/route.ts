@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { priceCategories, priceListMetadata } from '@/app/data/priceData'; // ваш шлях до даних
+import { priceCategories, priceListMetadata } from '@/app/data/prices'; // ваш шлях до даних
 
 export async function GET() {
   const baseUrl = 'https://www.balabastudio.de';

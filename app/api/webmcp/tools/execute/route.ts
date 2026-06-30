@@ -1,6 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { priceCategories } from '@/app/data/priceData';
-import { blogPosts } from '@/app/data/blogData'; // якщо є
+import { priceCategories } from '@/app/data/prices';
+
+// Визначте тип BlogPost, якщо він не експортується з blogData
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt?: string;
+  date?: string;
+  content?: string;
+}
+
+// Імпортуйте blogPosts з перевіркою на існування
+let blogPosts: BlogPost[] = [];
+try {
+  const blogData = await import('@/app/data/blogData');
+  blogPosts = blogData.blogPosts || [];
+} catch (e) {
+  console.log('blogData not found, using empty array');
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,11 +48,7 @@ export async function POST(req: NextRequest) {
       }
 
       case 'book_appointment': {
-        // Якщо у вас є API для надсилання листа – викличте його тут
-        // Або просто імітуйте успіх:
         console.log('Booking request:', args);
-        // Тут ви можете використати вашу існуючу логіку з /api/appointments
-        // Наприклад, викликати fetch на внутрішній API
         return NextResponse.json({
           result: {
             status: 'success',
@@ -48,9 +61,9 @@ export async function POST(req: NextRequest) {
         const limit = args?.limit || 5;
         const posts = (blogPosts || []).slice(0, limit).map((post) => ({
           id: post.id,
-          title: post.title,
-          excerpt: post.excerpt,
-          date: post.date,
+          title: post.title || 'Blog Post',
+          excerpt: post.excerpt || '',
+          date: post.date || new Date().toISOString().split('T')[0],
           link: `https://www.balabastudio.de/blog/${post.id}`,
         }));
         return NextResponse.json({ result: posts });
