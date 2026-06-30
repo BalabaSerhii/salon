@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Запретить технические папки
+# Заборонені технічні папки
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
@@ -9,20 +9,22 @@ Disallow: /_next/
 Disallow: /404
 Disallow: /500
 
-# Разрешить важные разделы
+# Дозволити важливі розділи
 Allow: /blog/
 Allow: /blog/*
-Allow: /city/         
-Allow: /city/*        
+Allow: /city/
+Allow: /city/*
 
-# Основные sitemaps
+Allow: /llms.txt
+
+# Sitemaps
 Sitemap: https://www.balabastudio.de/sitemap.xml
 Sitemap: https://www.balabastudio.de/sitemap-images.xml
 
-# Скорость сканирования
+# Швидкість сканування
 Crawl-delay: 0.5
 
-# Особые правила для роботов
+# Спеціальні правила для Google
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0.1

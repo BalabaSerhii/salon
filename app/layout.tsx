@@ -46,6 +46,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  other: {
+    "webmcp:version": "1.0",
+    "webmcp:tools": "/api/webmcp/tools",
+    "webmcp:execute": "/api/webmcp/execute",
+  },
 };
 
 export default function RootLayout({

@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
   compress: true,
 
   experimental: {
-    optimizeCss: true, 
+    optimizeCss: true,
   },
 
   async redirects() {
@@ -53,6 +53,15 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/llms.txt",
+        destination: "/api/llms",
+      },
+    ]; 
   },
 };
 

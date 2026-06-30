@@ -20,6 +20,7 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import MapSection from "@/components/MapSection";
+
 interface Service {
   id: string;
   name: string;
@@ -28,21 +29,25 @@ interface Service {
   duration: string;
   firstTimeOffer?: string;
 }
+
 interface ServiceCategory {
   id: string;
   name: string;
   description: string;
   services: Service[];
 }
+
 interface TimeSlot {
   time: string;
   display: string;
   available: boolean;
 }
+
 interface DateSelection {
   date: string;
   display: string;
 }
+
 const serviceCategories: ServiceCategory[] = [
   {
     id: "lymphdrainage",
@@ -258,6 +263,7 @@ interface ApiResponse {
   message?: string;
   previewUrl?: string;
 }
+
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState<"form" | "contacts">("form");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -274,6 +280,7 @@ export default function ContactPage() {
     message: "",
     type: "success",
   });
+
   const {
     register,
     handleSubmit,
@@ -289,12 +296,14 @@ export default function ContactPage() {
       comment: "",
     },
   });
+
   const selectedServiceId = watch("serviceId");
+
   useState(() => {
     if (selectedServiceId) {
       for (const category of serviceCategories) {
         const service = category.services.find(
-          (s) => s.id === selectedServiceId
+          (s) => s.id === selectedServiceId,
         );
         if (service) {
           setSelectedService(service);
@@ -305,6 +314,7 @@ export default function ContactPage() {
       setSelectedService(null);
     }
   });
+
   const showToast = (message: string, type: "success" | "error") => {
     setToastNotification({
       isVisible: true,
@@ -312,12 +322,14 @@ export default function ContactPage() {
       type,
     });
   };
+
   const hideToast = () => {
     setToastNotification((prev) => ({
       ...prev,
       isVisible: false,
     }));
   };
+
   const generateAvailableDates = (): DateSelection[] => {
     const dates: DateSelection[] = [];
     const today = new Date();
@@ -338,6 +350,7 @@ export default function ContactPage() {
     }
     return dates;
   };
+
   const generateTimeSlots = useCallback((): TimeSlot[] => {
     const slots: TimeSlot[] = [];
     const now = new Date();
@@ -359,8 +372,10 @@ export default function ContactPage() {
     }
     return slots;
   }, [selectedDate]);
+
   const availableDates = useMemo(() => generateAvailableDates(), []);
   const timeSlots = useMemo(() => generateTimeSlots(), [generateTimeSlots]);
+
   const handleServiceChange = (serviceId: string) => {
     setValue("serviceId", serviceId);
     for (const category of serviceCategories) {
@@ -371,18 +386,21 @@ export default function ContactPage() {
       }
     }
   };
+
   const handleDateSelect = (date: string) => {
     setSelectedDate(date);
     setSelectedTime("");
     setValue("datetime", `${date}T${selectedTime}`, { shouldValidate: true });
     setShowDatePicker(false);
   };
+
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
     if (selectedDate) {
       setValue("datetime", `${selectedDate}T${time}`, { shouldValidate: true });
     }
   };
+
   async function onSubmit(data: AppointmentFormValues) {
     try {
       let selectedServiceData = null;
@@ -393,6 +411,7 @@ export default function ContactPage() {
           break;
         }
       }
+
       const emailData = {
         ...data,
         serviceName: selectedServiceData?.name || "Unbekannter Service",
@@ -409,11 +428,13 @@ export default function ContactPage() {
               })} um ${selectedTime} Uhr`
             : "Nicht angegeben",
       };
+
       const res = await fetch("/api/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(emailData),
       });
+
       const contentType = res.headers.get("content-type") || "";
       let body: ApiResponse | string;
       if (contentType.includes("application/json")) {
@@ -421,14 +442,16 @@ export default function ContactPage() {
       } else {
         body = await res.text();
         throw new Error(
-          "Server returned non-JSON response: " + body.slice(0, 300)
+          "Server returned non-JSON response: " + body.slice(0, 300),
         );
       }
+
       if (!res.ok)
         throw new Error((body as ApiResponse)?.message || "Server error");
+
       showToast(
         "Terminanfrage erfolgreich gesendet! Wir melden uns in Kürze bei Ihnen.",
-        "success"
+        "success",
       );
       reset();
       setSelectedService(null);
@@ -450,10 +473,10 @@ export default function ContactPage() {
       showToast(userFriendlyMessage, "error");
     }
   }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-4 sm:py-8">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8">
-        {}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
             Kontakt & Terminvereinbarung
@@ -463,12 +486,9 @@ export default function ContactPage() {
             uns darauf, Ihnen zu mehr Entspannung zu verhelfen
           </p>
         </div>
-        {}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {}
           <div className="lg:col-span-2">
-            {}
             <div
               id="mobile-navigation"
               className={`lg:hidden transition-all duration-300 ${
@@ -504,8 +524,8 @@ export default function ContactPage() {
                 </button>
               </div>
             </div>
-            {}
-            <div className=" lg:flex justify-center mb-8">
+
+            <div className="lg:flex justify-center mb-8">
               <div className="bg-white rounded-xl p-2 shadow-lg border border-green-100 flex justify-center">
                 <button
                   onClick={() => setActiveTab("form")}
@@ -529,6 +549,7 @@ export default function ContactPage() {
                 </button>
               </div>
             </div>
+
             {activeTab === "form" ? (
               <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
@@ -538,11 +559,14 @@ export default function ContactPage() {
                   Füllen Sie das Formular aus und wir melden uns innerhalb von
                   24 Stunden bei Ihnen
                 </p>
+
+                {/* WebMCP анотація форми */}
                 <form
                   onSubmit={handleSubmit(onSubmit)}
+                  data-webmcp-form="book-appointment"
                   className="space-y-6 sm:space-y-8"
                 >
-                  {}
+                  {/* Поле вибору послуги */}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-4">
                       Gewünschte Behandlung *
@@ -551,6 +575,7 @@ export default function ContactPage() {
                       <select
                         {...register("serviceId")}
                         onChange={(e) => handleServiceChange(e.target.value)}
+                        data-webmcp-field="serviceId"
                         className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all appearance-none bg-white cursor-pointer"
                       >
                         <option value="">
@@ -598,13 +623,14 @@ export default function ContactPage() {
                       </div>
                     )}
                   </div>
-                  {}
+
+                  {/* Дата та час */}
                   <div className="space-y-6">
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-4">
                         Bevorzugtes Datum & Uhrzeit *
                       </label>
-                      {}
+
                       <div className="mb-6">
                         <label className="block text-sm font-medium text-gray-700 mb-3">
                           Datum auswählen *
@@ -632,7 +658,7 @@ export default function ContactPage() {
                                       day: "2-digit",
                                       month: "long",
                                       year: "numeric",
-                                    }
+                                    },
                                   )
                                 : "Datum auswählen"}
                             </span>
@@ -652,7 +678,7 @@ export default function ContactPage() {
                               />
                             </svg>
                           </button>
-                          {}
+
                           {showDatePicker && (
                             <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl z-10 max-h-80 overflow-y-auto">
                               <div className="p-4">
@@ -682,13 +708,13 @@ export default function ContactPage() {
                           )}
                         </div>
                       </div>
-                      {}
+
                       {selectedDate && (
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-3">
                             Uhrzeit auswählen *
                           </label>
-                          {}
+
                           <div className="md:hidden">
                             <div className="flex space-x-3 pb-4 overflow-x-auto scrollbar-hide">
                               {timeSlots.map((slot) => (
@@ -704,8 +730,8 @@ export default function ContactPage() {
                                     selectedTime === slot.time
                                       ? "bg-green-500 text-white shadow-md transform scale-105"
                                       : slot.available
-                                      ? "bg-white border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 text-gray-700"
-                                      : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
+                                        ? "bg-white border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 text-gray-700"
+                                        : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
                                   }`}
                                 >
                                   <span className="text-sm font-medium">
@@ -724,7 +750,7 @@ export default function ContactPage() {
                               →
                             </p>
                           </div>
-                          {}
+
                           <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-3">
                             {timeSlots.map((slot) => (
                               <button
@@ -738,8 +764,8 @@ export default function ContactPage() {
                                   selectedTime === slot.time
                                     ? "bg-green-500 text-white shadow-md transform scale-105"
                                     : slot.available
-                                    ? "bg-white border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 text-gray-700"
-                                    : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
+                                      ? "bg-white border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 text-gray-700"
+                                      : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
                                 }`}
                               >
                                 {slot.display}
@@ -753,12 +779,20 @@ export default function ContactPage() {
                           </div>
                         </div>
                       )}
-                      <input type="hidden" {...register("datetime")} />
+
+                      {/* Приховане поле для datetime з WebMCP анотацією */}
+                      <input
+                        type="hidden"
+                        {...register("datetime")}
+                        data-webmcp-field="datetime"
+                      />
+
                       {errors.datetime && (
                         <p className="text-red-600 text-sm mt-3 font-medium bg-red-50 p-3 rounded-lg border border-red-200">
                           {errors.datetime.message}
                         </p>
                       )}
+
                       {selectedDate && selectedTime && (
                         <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                           <div className="flex items-center justify-between">
@@ -774,7 +808,7 @@ export default function ContactPage() {
                                     day: "2-digit",
                                     month: "long",
                                     year: "numeric",
-                                  }
+                                  },
                                 )}{" "}
                                 um {selectedTime} Uhr
                               </p>
@@ -797,7 +831,8 @@ export default function ContactPage() {
                       )}
                     </div>
                   </div>
-                  {}
+
+                  {/* Ім'я та телефон */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-lg font-semibold text-gray-800 mb-3">
@@ -806,6 +841,7 @@ export default function ContactPage() {
                       <input
                         {...register("name")}
                         type="text"
+                        data-webmcp-field="name"
                         className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all"
                         placeholder="Vor- und Nachname"
                       />
@@ -822,8 +858,9 @@ export default function ContactPage() {
                       <input
                         {...register("phone")}
                         type="tel"
+                        data-webmcp-field="phone"
                         placeholder="+49 151 1234567"
-                        className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all   "
+                        className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all"
                       />
                       {errors.phone && (
                         <p className="text-red-600 text-sm mt-2 font-medium">
@@ -832,7 +869,8 @@ export default function ContactPage() {
                       )}
                     </div>
                   </div>
-                  {}
+
+                  {/* Email */}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-3">
                       E-Mail Adresse
@@ -840,6 +878,7 @@ export default function ContactPage() {
                     <input
                       {...register("email")}
                       type="email"
+                      data-webmcp-field="email"
                       className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all"
                       placeholder="ihre@email.de"
                     />
@@ -849,12 +888,14 @@ export default function ContactPage() {
                       </p>
                     )}
                   </div>
-                  {}
+
+                  {/* WhatsApp чекбокс */}
                   <div className="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
                     <input
                       id="whatsapp"
                       type="checkbox"
                       {...register("whatsapp")}
+                      data-webmcp-field="whatsapp"
                       className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
                     />
                     <label
@@ -864,7 +905,8 @@ export default function ContactPage() {
                       Ich bevorzuge Kommunikation per WhatsApp
                     </label>
                   </div>
-                  {}
+
+                  {/* Коментар */}
                   <div>
                     <label className="block text-lg font-semibold text-gray-800 mb-3">
                       Besondere Wünsche oder Anmerkungen
@@ -872,6 +914,7 @@ export default function ContactPage() {
                     <textarea
                       {...register("comment")}
                       rows={4}
+                      data-webmcp-field="comment"
                       className="w-full px-4 py-4 text-base border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-green-500 focus:border-green-500 transition-all resize-none"
                       placeholder="Haben Sie besondere Wünsche oder gesundheitliche Hinweise, die wir beachten sollten?"
                     />
@@ -881,13 +924,14 @@ export default function ContactPage() {
                       </p>
                     )}
                   </div>
-                  <p className="text-sm font-semibold text-red-800  bg-[#fef2f2] rounded-xl text-center">
+
+                  <p className="text-sm font-semibold text-red-800 bg-[#fef2f2] rounded-xl text-center p-3">
                     Wir schätzen Ihre persönlichen Daten und geben sie niemals
                     an Dritte weiter. Wir verwenden sie ausschließlich innerhalb
                     unseres Systems zur Kontaktaufnahme und zur Bearbeitung
                     Ihrer Anfrage
                   </p>
-                  {}
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -902,7 +946,7 @@ export default function ContactPage() {
                       "Termin anfragen"
                     )}
                   </button>
-                  {}
+
                   <p className="text-center text-sm text-gray-600">
                     Alternativ:{" "}
                     <a
@@ -1014,13 +1058,13 @@ export default function ContactPage() {
               </div>
             )}
           </div>
-          {}
+
+          {/* Бічна панель */}
           <div
             className={`space-y-6 transition-all duration-300 ${
               isMobileMenuOpen ? "block animate-slideIn" : "hidden lg:block"
             }`}
           >
-            {}
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">
                 Schnellkontakt
@@ -1044,7 +1088,7 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-            {}
+
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">
                 Folgen Sie uns
@@ -1070,14 +1114,14 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-            {}
+
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <MapSection />
             </div>
           </div>
         </div>
       </div>
-      {}
+
       <ToastNotification
         message={toastNotification.message}
         type={toastNotification.type}
@@ -1085,7 +1129,7 @@ export default function ContactPage() {
         onClose={hideToast}
         duration={4000}
       />
-      {}
+
       <style jsx>{`
         @keyframes fadeIn {
           from {
